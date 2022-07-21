@@ -44,6 +44,9 @@ fn main() {
     let iter = filename.split(".");
     let splitted: Vec<&str> = iter.collect();
     let namef = splitted[0];
+    if splitted[1] != "ryx" {
+        panic!("Wrong filetype! Please ensure that the file ends with \".ryx\"");
+    }
 
     // MANIFEST {
 

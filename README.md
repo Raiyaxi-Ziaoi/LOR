@@ -9,7 +9,7 @@ You must have the JVM and the Rust compiler installed.
 <br/>
 Compile the raiyaxic.rs file and then run from the terminal:<br/><br/>
 <i>raiyaxic.exe hello.ryx -a STD.STD</i><br/><br/>
-or<br/><br/>
+<div align="center">or</div><br/><br/>
 <i>./raiyaxic hello.ryx -a STD.STD</i><br/><br/>
 This will compile and run the included "hello.ryx" file. It will also compile into a .jar file.
 <br/><br/>

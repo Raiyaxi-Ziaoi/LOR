@@ -54,7 +54,7 @@ fn main() {
 
     // LIBRARIES {
 
-    let stdlib = read_to_string("STD/.std").expect("STD Library Missing");
+    let stdlib = read_to_string("STD/.out").expect("OUTPUT Library Missing");
     let mathlib = read_to_string("STD/.math").expect("MATH Library Missing");
     let inlib = read_to_string("STD/.input").expect("INPUT Library Missing");
 
@@ -135,7 +135,7 @@ fn main() {
     let tw = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = s.replace(";;;", "}").replace(":::", "{"),
+        code = s.replace("|>", "}").replace(">|", "{"),
         imports = imported,
         adit = aditlibs,
     );
@@ -194,9 +194,7 @@ fn main() {
             .output()
             .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
         if outputr.status.success() {
-            let s = String::from_utf8_lossy(&outputr.stdout);
-
-            println!("JAVA succeeded and stdout was:\n{}", s);
+            println!("JAVA succeeded");
         } else {
             let s = String::from_utf8_lossy(&outputr.stderr);
 

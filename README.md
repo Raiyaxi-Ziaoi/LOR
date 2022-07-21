@@ -18,3 +18,8 @@ This will compile and run the included "hello.ryx" file. It will also compile in
 Raiyaxi-Lang provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.
 <br/><br/>
 In future updates I hope that Raiyaxi-Lang will be a functional and object-oriented language with a focus on scientific computing.
+<br/><br/>
+
+#### Documentation
+
+Do raiyaxic.exe -h for help.<br/><br/>

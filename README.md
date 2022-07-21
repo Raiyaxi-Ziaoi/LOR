@@ -1,7 +1,7 @@
 # Raiyaxi-Lang
 
 <div align="center"><h2>
-My own programming language based on Java and with a "compiler made" in Rust<br/><br/>Made by Raiyaxi Ziaoi
+My own programming language based on Java and with a "compiler" made in Rust<br/><br/>Made by Raiyaxi Ziaoi
 </h2></div>
 <br/>
 Compile the main.rs file and then run from the terminal:<br/><br/>

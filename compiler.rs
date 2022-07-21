@@ -7,7 +7,7 @@ use std::path::Path;
 use std::process::Command;
 
 fn main() {
-    let arguments: Vec<String> = env::args().collect(); // Command Line Arguments
+    let arguments: Vec<String> = env::args().collect(); // COMMAND LINE ARGUMENTS
 
     let filename = &arguments[1];
     let arg: &String = &arguments[2];
@@ -39,11 +39,16 @@ fn main() {
 
     // }
 
-    // file.ext => file
+    // FILEEXT & FILENAME
 
     let iter = filename.split(".");
     let splitted: Vec<&str> = iter.collect();
     let namef = splitted[0];
+
+    let javaf = format!("{}.java", namef);
+    let classf = format!("{}.class", namef);
+    let jarf = format!("{}.jar", namef);
+
     if splitted[1] != "ryx" {
         panic!("Wrong filetype! Please ensure that the file ends with \".ryx\"");
     }
@@ -67,8 +72,7 @@ fn main() {
 
     // JAVA {
 
-    let j = format!("{}.java", namef);
-    let pathj = Path::new(&j);
+    let pathj = Path::new(&javaf);
     let displayj = pathj.display();
 
     let mut filew = match File::create(&pathj) {
@@ -76,8 +80,12 @@ fn main() {
         Ok(filew) => filew,
     };
 
+    // }
+
     let mut imported: String = "".to_owned();
     let mut aditlibs: String = "".to_owned();
+
+    // IMPORTS {
 
     for import in to_import {
         if import == "None" {
@@ -97,6 +105,10 @@ fn main() {
         }
     }
 
+    // }
+
+    // TRANSPARSING {
+
     let tw = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
@@ -113,17 +125,14 @@ fn main() {
 
     // COMPILATION {
 
-    let outputc = Command::new("javac") // Compile to .class
-        .arg(format!("{}.java", namef))
+    let outputc = Command::new("javac") // TO .class
+        .arg(javaf)
         .output()
         .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
 
-    let jar = format!("{f}.jar", f = namef);
-    let class = format!("{f}.class", f = namef);
-
     if outputc.status.success() {
-        let outputj = Command::new("jar") // Pack into .jar
-            .args(["cvfm", &jar, "Manifest.txt", &class])
+        let outputj = Command::new("jar") // TO .jar
+            .args(["cvfm", &jarf, "Manifest.txt", &classf])
             .output()
             .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
 
@@ -140,11 +149,9 @@ fn main() {
         println!("JAVAC failed and stderr was:\n{}", s);
     }
 
-    let namej = format!("{}", namef);
+    let cmd = format!("@echo off\njava {}\npause>nul\nexit", namef);
 
-    let cmd = format!("@echo off\njava {}\npause>nul\nexit", namej);
-
-    let cmd_path = Path::new("Command.cmd"); // Command.cmd
+    let cmd_path = Path::new("Command.cmd"); // CREATE Command.cmd
     let display_cmd = cmd_path.display();
 
     let mut file_c = match File::create(&cmd_path) {
@@ -157,7 +164,7 @@ fn main() {
         Ok(_) => println!("Successfully wrote to {}", display_cmd),
     }
 
-    let outputr = Command::new("cmd") // Start Command.cmd
+    let outputr = Command::new("cmd") // START Command.cmd
         .args(["/C", "start Command.cmd"])
         .output()
         .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
@@ -186,22 +193,13 @@ fn main() {
         remove_file(format!("{}.class", namef)).expect("Class delete failed");
     } else if arg == "-j" {
         remove_file(format!("{}.java", namef)).expect("Java delete failed");
-    } else if arg == "-mc" {
+    } else if arg == "-mc" || arg == "-cm" {
         remove_file("Manifest.txt").expect("Manifest delete failed");
         remove_file(format!("{}.class", namef)).expect("Class delete failed");
-    } else if arg == "-cj" {
+    } else if arg == "-cj" || arg == "-jc" {
         remove_file(format!("{}.class", namef)).expect("Class delete failed");
         remove_file(format!("{}.java", namef)).expect("Java delete failed");
-    } else if arg == "-jm" {
-        remove_file(format!("{}.java", namef)).expect("Java delete failed");
-        remove_file("Manifest.txt").expect("Manifest delete failed");
-    } else if arg == "-cm" {
-        remove_file("Manifest.txt").expect("Manifest delete failed");
-        remove_file(format!("{}.class", namef)).expect("Class delete failed");
-    } else if arg == "-jc" {
-        remove_file(format!("{}.class", namef)).expect("Class delete failed");
-        remove_file(format!("{}.java", namef)).expect("Java delete failed");
-    } else if arg == "-mj" {
+    } else if arg == "-jm" || arg == "-mj" {
         remove_file(format!("{}.java", namef)).expect("Java delete failed");
         remove_file("Manifest.txt").expect("Manifest delete failed");
     } else if arg == "-n" {

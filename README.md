@@ -6,7 +6,7 @@ My own programming language based on Java and with a "compiler made" in Rust<br/
 <br/>
 Compile the main.rs file and then run from the terminal:<br/><br/>
 <i>raiyaxic.exe hello.ryx -a STD.STD</i><br/><br/>
-or
+or<br/><br/>
 <i>./raiyaxic hello.ryx -a STD.STD</i><br/><br/>
 This will compile and run the included "hello.ryx" file. It will also compile into a .jar file.
 <br/><br/>

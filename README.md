@@ -4,6 +4,8 @@
 My own programming language based on Java and with a "compiler" made in Rust<br/><br/>Made by Raiyaxi Ziaoi
 </h2></div>
 <br/>
+You must have the JVM and the Rust compiler installed.
+<br/>
 Compile the raiyaxic.rs file and then run from the terminal:<br/><br/>
 <i>raiyaxic.exe hello.ryx -a STD.STD</i><br/><br/>
 or<br/><br/>

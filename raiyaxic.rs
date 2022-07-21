@@ -135,7 +135,7 @@ fn main() {
     let tw = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = s,
+        code = s.replace(";;;", "}").replace(":::", "{"),
         imports = imported,
         adit = aditlibs,
     );

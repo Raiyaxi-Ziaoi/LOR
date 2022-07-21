@@ -1,0 +1,112 @@
+
+private static String inputStr(String msg) {
+	try {
+	  System.in.available();
+	} catch (Exception e) {
+	  System.out.println("Input stream not available.");
+	  System.exit(1);
+	}
+	var sc = new Scanner(System.in);
+	System.out.println(msg);
+	String toRet = sc.nextLine();
+	sc.close();
+	return toRet;
+  }
+  
+  private static int inputInt(String msg) {
+	try {
+	  System.in.available();
+	} catch (Exception e) {
+	  System.out.println("Input stream not available.");
+	  System.exit(1);
+	}
+	var sc = new Scanner(System.in);
+	System.out.println(msg);
+	int toRet = sc.nextInt();
+	sc.close();
+	return toRet;
+  }
+  
+  private static float inputFloat(String msg) {
+	try {
+	  System.in.available();
+	} catch (Exception e) {
+	  System.out.println("Input stream not available.");
+	  System.exit(1);
+	}
+	var sc = new Scanner(System.in);
+	System.out.println(msg);
+	float toRet = sc.nextFloat();
+	sc.close();
+	return toRet;
+  }
+  
+  private static double inputDouble(String msg) {
+	try {
+	  System.in.available();
+	} catch (Exception e) {
+	  System.out.println("Input stream not available.");
+	  System.exit(1);
+	}
+	var sc = new Scanner(System.in);
+	System.out.println(msg);
+	double toRet = sc.nextDouble();
+	sc.close();
+	return toRet;
+  }
+  
+  private static long inputLong(String msg) {
+	try {
+	  System.in.available();
+	} catch (Exception e) {
+	  System.out.println("Input stream not available.");
+	  System.exit(1);
+	}
+	var sc = new Scanner(System.in);
+	System.out.println(msg);
+	long toRet = sc.nextLong();
+	sc.close();
+	return toRet;
+  }
+  
+  private static short inputShort(String msg) {
+	try {
+	  System.in.available();
+	} catch (Exception e) {
+	  System.out.println("Input stream not available.");
+	  System.exit(1);
+	}
+	var sc = new Scanner(System.in);
+	System.out.println(msg);
+	short toRet = sc.nextShort();
+	sc.close();
+	return toRet;
+  }
+  
+  private static boolean inputBoolean(String msg) {
+	try {
+	  System.in.available();
+	} catch (Exception e) {
+	  System.out.println("Input stream not available.");
+	  System.exit(1);
+	}
+	var sc = new Scanner(System.in);
+	System.out.println(msg);
+	boolean toRet = sc.nextBoolean();
+	sc.close();
+	return toRet;
+  }
+  
+  private static byte inputByte(String msg) {
+	try {
+	  System.in.available();
+	} catch (Exception e) {
+	  System.out.println("Input stream not available.");
+	  System.exit(1);
+	}
+	var sc = new Scanner(System.in);
+	System.out.println(msg);
+	byte toRet = sc.nextByte();
+	sc.close();
+	return toRet;
+  }

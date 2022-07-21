@@ -5,9 +5,7 @@ My own programming language based on Java and with a "compiler made" in Rust<br/
 </h2></div>
 <br/>
 Compile the compile.rs file and then run from the terminal:<br/><br/>
-<i>compile.exe -a hello.ryx</i><br/><br/>
-or<br/><br/>
-<i>./compile -a hello.ryx</i><br/><br/>
+<i>compile.exe hello.ryx -a STD.STD</i><br/><br/>
 This will compile and run the included "hello.ryx" file. It will also compile into a .jar file.
 <br/><br/>
 

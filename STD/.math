@@ -1,0 +1,11 @@
+
+private static double fsqrt(int n) {
+    double a = (double) n;
+    double x = 1;
+
+    for (int i = 0; i < n; i++) {
+        x = 0.5 * (x + a / x);
+    }
+
+    return x;
+}

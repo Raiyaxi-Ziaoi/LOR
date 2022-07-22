@@ -1,4 +1,4 @@
-# Lissomix / Raiyaxi
+# Raiyaxi / Lissomix
 
 <div align="center"><h2>
 <img src="https://i.imgur.com/Vul6DJF.png"></img><br/><br/>

@@ -8,7 +8,7 @@ My own programming language based on Java and with a transpiler made in Rust<br/
 <h3>
 LOR : Lissomix, Oven, Raiyaxi
 </h3> 
-<br><br/>
+<br>
 You must have the JVM and the Rust compiler installed.
 <br/>
 <br/>

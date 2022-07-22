@@ -1,0 +1,6 @@
+func();
+
+|> void func() >|
+    println(
+        "Hello World"
+    );

@@ -18,3 +18,9 @@ private static void println(String[] stra) {
 		System.out.println(str);
 	}
 }
+
+private static void nl(int times) {
+	for (int i = 0; i < times; i++) {
+		System.out.print("\n");
+	}
+}

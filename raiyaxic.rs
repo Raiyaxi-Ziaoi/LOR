@@ -64,7 +64,8 @@ fn main() {
 
     let iter = filename.split(".");
     let splitted: Vec<&str> = iter.collect();
-    let namef = splitted[0];
+    let endf: Vec<&str> = splitted[0].split("/").collect();
+    let namef = endf[endf.len() - 1];
 
     let javaf = format!("{}.java", namef);
     let classf = format!("{}.class", namef);
@@ -114,6 +115,8 @@ fn main() {
         } else if import == "STD.MATH" {
             let str = format!("{}", mathlib);
             aditlibs.push_str(&str);
+            let math = "import java.math.*;\nimport java.util.Random;";
+            imported.push_str(&math);
         } else if import == "STD.IN" {
             let str = format!("{}", inlib);
             aditlibs.push_str(&str);
@@ -135,7 +138,7 @@ fn main() {
     let tw = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = s.replace("|>", "}").replace(">|", "{"),
+        code = s.replace("|>", "}").replace(">|", "{").replace("void", "private static void"),
         imports = imported,
         adit = aditlibs,
     );

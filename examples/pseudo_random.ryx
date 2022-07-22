@@ -1,0 +1,18 @@
+random (
+    in_flo (
+        "Please enter offset:"
+    )
+);
+
+|> void random( float mult ) >|
+    nl(
+        1
+    );
+    println ("" +
+        ps_random (
+            in_lon (
+                "Please enter a seed:"
+            ),
+            mult
+        )
+    );

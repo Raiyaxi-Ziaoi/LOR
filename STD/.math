@@ -1,6 +1,6 @@
 
-private static double fsqrt(int n) {
-    double a = (double) n;
+private static double f_sqrt(double n) {
+    double a = n;
     double x = 1;
     for (int i = 0; i < n; i++) {
       x = 0.5 * (x + a / x);
@@ -8,7 +8,7 @@ private static double fsqrt(int n) {
     return x;
 }
 
-public static double Q_rsqrt(double number){
+public static double q_rsqrt(double number){
     double x = number;
     double xhalf = 0.5d * x;
     long i = Double.doubleToLongBits(x);
@@ -19,4 +19,12 @@ public static double Q_rsqrt(double number){
     }
     x *= number;
     return x;
+}
+
+private static double ps_random(long seed, float mult) {
+    Random generator = new Random();
+    generator.setSeed(seed);
+    double num = generator.nextDouble() * (mult);
+
+    return num;
 }

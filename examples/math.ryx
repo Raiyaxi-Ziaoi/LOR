@@ -1,0 +1,13 @@
+int num = in_int (
+    "Please enter a number:"
+);
+
+println ("" +
+    q_rsqrt (
+        (double) num
+    )
+    *
+    f_sqrt (
+        (double) num 
+    )
+);

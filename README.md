@@ -1,7 +1,7 @@
 # Lissomix / Raiyaxi
 
 <div align="center"><h2>
-<img src="https://i.imgur.com/Jl3A6Ux.png"></img><br/><br/>
+<img src="https://i.imgur.com/Vul6DJF.png"></img><br/><br/>
 My own programming language based on Java and with a transpiler made in Rust<br/><br/>Made by Raiyaxi Ziaoi
 </h2></div>
 <br/>

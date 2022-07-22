@@ -4,6 +4,8 @@ func (
     )
 );
 
+::: Funcs
+
 |> String string( String str ) >|
     ret str;
 

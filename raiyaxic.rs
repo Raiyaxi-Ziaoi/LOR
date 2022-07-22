@@ -134,13 +134,6 @@ fn main() {
                 let error = format!("Unable to read import: {}", import);
                 let importfile = read_to_string(import).expect(&error);
                 aditlibs.push_str(&importfile);
-                if splitted_import[0] == "input" {
-                    let scan = "import java.util.Scanner;";
-                    imported.push_str(&scan);
-                } else if splitted_import[0] == "math" {
-                    let math = "import java.math.*;\nimport java.util.Random;";
-                    imported.push_str(&math);
-                }
             } else {
                 panic!("Wrong file name! Imported file must end in \"ryx\"");
             }
@@ -154,7 +147,7 @@ fn main() {
     let tw = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = s.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return"),
+        code = s.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return").replace(":::", "//"),
         imports = imported,
         adit = aditlibs,
     );

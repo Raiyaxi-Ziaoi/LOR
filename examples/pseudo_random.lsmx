@@ -4,10 +4,13 @@ random (
     )
 );
 
+::: Funcs
+
 |> void random( float mult ) >|
     nl(
         1
     );
+
     println ("" +
         ps_random (
             in_lon (

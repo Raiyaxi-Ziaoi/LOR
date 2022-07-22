@@ -15,7 +15,7 @@ fn main() {
     if filename == "-v" || filename == "--version" {
         println!(
             "{}",
-            read_to_string("STD/.version").expect("Version Missing")
+            read_to_string("STD/version.ryx").expect("Version Missing")
         );
         std::process::abort();
     } else if filename == "-h" || filename == "--help" || filename == "-?" {

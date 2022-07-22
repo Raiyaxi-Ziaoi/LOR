@@ -5,9 +5,9 @@
 My own programming language based on Java and with a transpiler made in Rust<br/><br/>Made by Raiyaxi Ziaoi
 </h2></div>
 <br/>
-<h4>
+<h3>
 LOR : Lissomix, Oven, Raiyaxi
-</h4> 
+</h3> 
 <br><br/>
 You must have the JVM and the Rust compiler installed.
 <br/>

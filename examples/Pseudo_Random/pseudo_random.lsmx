@@ -1,21 +1,17 @@
-random (
-    in_flo (
-        "Please enter offset:"
+println ("" + 
+    random (
+        in_flo (
+            "Please enter offset:"
+        )
     )
 );
 
 ::: Funcs
 
-|> void random ( float mult ) >|
-    nl(
-        1
-    );
-
-    println ("" +
-        ps_random (
+|> double random ( float mult ) >|
+    ret ps_random (
             in_lon (
                 "Please enter a seed:"
             ),
             mult
-        )
-    );
+        );

@@ -54,9 +54,10 @@ fn main() {
 
     // LIBRARIES {
 
-    let outlib = read_to_string("STD/output.ryx").expect("OUTPUT Library Missing");
+    let outlib = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
     let mathlib = read_to_string("STD/math.ryx").expect("MATH Library Missing");
-    let inlib = read_to_string("STD/input.ryx").expect("INPUT Library Missing");
+    let inlib = read_to_string("STD/in.ryx").expect("INPUT Library Missing");
+    let stdlib = read_to_string("STD/std.ryx").expect("STD Library Missing");
 
     // }
 
@@ -124,6 +125,9 @@ fn main() {
             imported.push_str(&scan);
         } else if import == "STD.OUT" {
             let str = format!("{}", outlib);
+            aditlibs.push_str(&str);
+        } else if import == "STD.STD" {
+            let str = format!("{}", stdlib);
             aditlibs.push_str(&str);
         } else {
             let splitted_import: Vec<&str> = import.split(".").collect();

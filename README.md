@@ -13,7 +13,7 @@ Windows:<br/>
 <i>raiyaxic.exe -h</i><br/>
 <br/>Linux:<br/>
 <i>./raiyaxic -h</i><br/><br/>
-This will display a help screen.<br/>Then do:<br/><i>raiyaxi.exe examples/hello.lsmx -a STD.OUT</i><br/> or the equivalent for Linux to transpile and run the hello.lsmx file located in the examples folder.
+This will display a help screen.<br/><br/>Then do:<br/><i>raiyaxi.exe examples/hello.lsmx -a STD.OUT</i><br/> or the equivalent for Linux to transpile and run the "hello.lsmx" file located in the "examples" folder.
 <br/><br/>
 
 Lissomix-Raiyaxi provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.

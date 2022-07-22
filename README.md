@@ -8,11 +8,11 @@ My own programming language based on Java and with a transpiler made in Rust<br/
 <h4>
 LOR : Lissomix, Oven, Raiyaxi
 </h4> 
-<br/>
+<br><br/>
 You must have the JVM and the Rust compiler installed.
 <br/>
 <br/>
-Compile the lorc.rs file and then run from the terminal:<br/><br/>
+Compile the lorc.rs file and then run from the terminal:<br/><br/></b>
 Windows:<br/>
 <i>lorc.exe -h</i><br/>
 <br/>Linux:<br/>

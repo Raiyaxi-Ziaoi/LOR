@@ -18,5 +18,5 @@ This will display a help screen. Then follow the instructions to transpile the "
 
 Lissomix provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.
 <br/><br/>
-In future updates I hope that Lissomix will be a functional and object-oriented language with a focus on scientific computing.
+In future updates I hope that Raiyaxi will be a functional and object-oriented language with a focus on scientific computing.
 <br/><br/>

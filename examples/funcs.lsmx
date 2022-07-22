@@ -1,0 +1,13 @@
+func (
+    string (
+        "Hello World"
+    )
+);
+
+|> String string( String str ) >|
+    ret str;
+
+|> void func( String str ) >|
+    println(
+        str
+    );

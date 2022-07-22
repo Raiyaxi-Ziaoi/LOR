@@ -20,7 +20,7 @@ fn main() {
         std::process::abort();
     } else if filename == "-h" || filename == "--help" || filename == "-?" {
         println!("(./)raiyaxic(.exe) [Cleanup Mode] [Filename] [Libraries]");
-        println!("Cleanup modes: -a, -m, -c, -j, -n");
+        println!("Cleanup modes:");
         println!("-a : All");
         println!("-m : Manifest");
         println!("-j : .java");
@@ -54,9 +54,9 @@ fn main() {
 
     // LIBRARIES {
 
-    let stdlib = read_to_string("STD/.out").expect("OUTPUT Library Missing");
-    let mathlib = read_to_string("STD/.math").expect("MATH Library Missing");
-    let inlib = read_to_string("STD/.input").expect("INPUT Library Missing");
+    let stdlib = read_to_string("STD/output.ryx").expect("OUTPUT Library Missing");
+    let mathlib = read_to_string("STD/math.ryx").expect("MATH Library Missing");
+    let inlib = read_to_string("STD/input.ryx").expect("INPUT Library Missing");
 
     // }
 
@@ -71,8 +71,8 @@ fn main() {
     let classf = format!("{}.class", namef);
     let jarf = format!("{}.jar", namef);
 
-    if splitted[1] != "ryx" {
-        panic!("Wrong filetype! Please ensure that the file ends with \".ryx\"");
+    if splitted[1] != ".lsmx" || splitted[1] != ".ryx" {
+        panic!("Wrong filetype! Please ensure that the file ends with \".ryx\" or \".lsmx\"");
     }
 
     // MANIFEST {
@@ -138,7 +138,7 @@ fn main() {
     let tw = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = s.replace("|>", "}").replace(">|", "{").replace("void", "private static void"),
+        code = s.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return"),
         imports = imported,
         adit = aditlibs,
     );

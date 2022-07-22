@@ -6,10 +6,10 @@ func (
 
 ::: Funcs
 
-|> String string( String str ) >|
+|> String string ( String str ) >|
     ret str;
 
-|> void func( String str ) >|
+|> void func ( String str ) >|
     println(
         str
     );

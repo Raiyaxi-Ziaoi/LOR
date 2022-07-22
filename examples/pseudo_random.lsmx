@@ -6,7 +6,7 @@ random (
 
 ::: Funcs
 
-|> void random( float mult ) >|
+|> void random ( float mult ) >|
     nl(
         1
     );

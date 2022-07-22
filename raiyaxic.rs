@@ -147,7 +147,7 @@ fn main() {
     let tw = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = s.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return").replace(":::", "//"),
+        code = s.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return").replace(":::", "//").replace("const", "final"),
         imports = imported,
         adit = aditlibs,
     );

@@ -1,4 +1,4 @@
-# Raiyaxi / Lissomix
+# Lissomix-Raiyaxi
 
 <div align="center"><h2>
 <img src="https://i.imgur.com/Vul6DJF.png"></img><br/><br/>
@@ -13,10 +13,10 @@ Windows:<br/>
 <i>raiyaxic.exe -h</i><br/>
 <br/>Linux:<br/>
 <i>./raiyaxic -h</i><br/><br/>
-This will display a help screen. Then follow the instructions to transpile the "examples/hello.lsmx" file.
+This will display a help screen.<br/>Then do: <i>raiyaxi.exe examples/hello.lsmx -a STD.OUT</i> or the equivalent for Linux to transpile and run the hello.lsmx file located in the examples folder.
 <br/><br/>
 
-Lissomix provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.
+Lissomix-Raiyaxi provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.
 <br/><br/>
-In future updates I hope that Raiyaxi will be a functional and object-oriented language with a focus on scientific computing.
+In future updates I hope that it will be a functional and object-oriented language with a focus on scientific computing.
 <br/><br/>

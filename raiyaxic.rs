@@ -15,11 +15,11 @@ fn main() {
     if filename == "-v" || filename == "--version" {
         println!(
             "{}",
-            read_to_string("STD/version.ryx").expect("Version Missing")
+            read_to_string("STD/.version").expect("Version Missing")
         );
         std::process::abort();
     } else if filename == "-h" || filename == "--help" || filename == "-?" {
-        println!("(./)raiyaxic(.exe) [Cleanup Mode] [Filename] [Libraries]");
+        println!("(./)raiyaxic(.exe) [Filename] [Cleanup Mode] [Libraries...]");
         println!("Cleanup modes:");
         println!("-a : All");
         println!("-m : Manifest");
@@ -54,7 +54,7 @@ fn main() {
 
     // LIBRARIES {
 
-    let stdlib = read_to_string("STD/output.ryx").expect("OUTPUT Library Missing");
+    let outlib = read_to_string("STD/output.ryx").expect("OUTPUT Library Missing");
     let mathlib = read_to_string("STD/math.ryx").expect("MATH Library Missing");
     let inlib = read_to_string("STD/input.ryx").expect("INPUT Library Missing");
 
@@ -71,8 +71,8 @@ fn main() {
     let classf = format!("{}.class", namef);
     let jarf = format!("{}.jar", namef);
 
-    if splitted[1] != ".lsmx" || splitted[1] != ".ryx" {
-        panic!("Wrong filetype! Please ensure that the file ends with \".ryx\" or \".lsmx\"");
+    if splitted[1] != "lsmx" {
+        panic!("Wrong filetype! Please ensure that the file ends with \".lsmx\"");
     }
 
     // MANIFEST {
@@ -122,12 +122,28 @@ fn main() {
             aditlibs.push_str(&str);
             let scan = "import java.util.Scanner;";
             imported.push_str(&scan);
-        } else if import == "STD.STD" {
-            let str = format!("{}", stdlib);
+        } else if import == "STD.OUT" {
+            let str = format!("{}", outlib);
             aditlibs.push_str(&str);
         } else {
-            let str = format!("import {};", import);
-            imported.push_str(&str);
+            let splitted_import: Vec<&str> = import.split(".").collect();
+            if splitted_import[0] == "java" {
+                let str = format!("import {};", import);
+                imported.push_str(&str);
+            } else if splitted_import[1] == "ryx" {
+                let error = format!("Unable to read import: {}", import);
+                let importfile = read_to_string(import).expect(&error);
+                aditlibs.push_str(&importfile);
+                if splitted_import[0] == "input" {
+                    let scan = "import java.util.Scanner;";
+                    imported.push_str(&scan);
+                } else if splitted_import[0] == "math" {
+                    let math = "import java.math.*;\nimport java.util.Random;";
+                    imported.push_str(&math);
+                }
+            } else {
+                panic!("Wrong file name! Imported file must end in \"ryx\"");
+            }
         }
     }
 

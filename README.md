@@ -2,9 +2,9 @@
 
 <div align="center"><h2>
 <img src="https://i.imgur.com/N1TyUPG.png"></img><br/><br/>
-My own programming language based on Java and with a transpiler made in Rust<br/><br/><a href="#">
+My own programming language based on Java and with a transpiler made in Rust<br/><br/><br/><br/><a href="#">
     <img src="https://i.imgur.com/HZ7gMtm.png" align="right" width="25%" />
-</a>Made by Raiyaxi Ziaoi<br/><br/>
+</a>Made by Raiyaxi Ziaoi
 </h2></div>
 <br/>
 <div align="center"><h3>

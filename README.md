@@ -16,10 +16,19 @@ You must have the JVM and the Rust compiler installed.
 <br/>
 Compile the lorc.rs file and then run from the terminal:<br/><br/></b>
 Windows:<br/>
-<i>lorc.exe -h</i><br/>
+```cmd
+lorc.exe -h
+```
+<br/>
 <br/>Linux:<br/>
-<i>./lorc -h</i><br/><br/>
-This will display a help screen.<br/><br/>Then do:<br/><i>lorc.exe -a examples/Hello/hello.lsmx examples/Hello/config.vns</i><br/> or the equivalent for Linux to transpile and run the "hello.lsmx" file located in the "examples/Hello" folder.
+```cmd
+./lorc -h
+```<br/><br/>
+This will display a help screen.<br/><br/>Then do:<br/>
+```cmd
+lorc.exe -a examples/Hello/hello.lsmx examples/Hello/config.vns
+```
+<br/> or the equivalent for Linux to transpile and run the "hello.lsmx" file located in the "examples/Hello" folder.
 <br/><br/>
 
 LOR provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.

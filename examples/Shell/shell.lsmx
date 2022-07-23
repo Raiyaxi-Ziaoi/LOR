@@ -1,5 +1,5 @@
 new_self!
 
-__self__.invokeCMD (
+__self__.invokeShell (
     "cmd /C echo Hello World"
 );

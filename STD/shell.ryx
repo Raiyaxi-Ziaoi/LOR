@@ -1,4 +1,4 @@
-private void invokeCMD(String command) {
+private void invokeShell(String command) {
     try {
         //log(command);
         Process process = Runtime.getRuntime().exec(command);

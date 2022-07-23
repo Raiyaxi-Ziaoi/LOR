@@ -94,7 +94,7 @@ fn main() -> io::Result<()> {
     let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
     let sqrtlib: String = read_to_string("STD/sqrts.ryx").expect("SQRT Library Missing");
     let inlib: String = read_to_string("STD/in.ryx").expect("INPUT Library Missing");
-    let cmdlib: String = read_to_string("STD/cmd.ryx").expect("CMD Library Missing");
+    let shelllib: String = read_to_string("STD/shell.ryx").expect("CMD Library Missing");
     let randomlib: String = read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
 
     // }
@@ -163,8 +163,8 @@ fn main() -> io::Result<()> {
         } else if import == "STD.OUT" {
             let str: String = format!("{}", outlib);
             aditlibs.push_str(&str);
-        } else if import == "STD.CMD" {
-            let str: String = format!("{}", cmdlib);
+        } else if import == "STD.SHELL" {
+            let str: String = format!("{}", shelllib);
             aditlibs.push_str(&str);
         } else {
             let splitted_import: Vec<&str> = import.split(".").collect();

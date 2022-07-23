@@ -16,15 +16,18 @@ You must have the JVM and the Rust compiler installed.
 <br/>
 Compile the lorc.rs file and then run from the terminal:<br/><br/></b>
 Windows:<br/>
+
 ```cmd
 lorc.exe -h
 ```
-<br/>
+
 <br/>Linux:<br/>
+
 ```cmd
 ./lorc -h
-```<br/><br/>
+```
 This will display a help screen.<br/><br/>Then do:<br/>
+
 ```cmd
 lorc.exe -a examples/Hello/hello.lsmx examples/Hello/config.vns
 ```

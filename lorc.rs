@@ -189,7 +189,7 @@ fn main() -> io::Result<()> {
     let to_write: String = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = file_conents.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return").replace(":::", "//").replace("const", "final").replace("new_self!", &self_dund),
+        code = file_conents.replace("func int", "|> private static int ").replace("func String", "|> private static String ").replace("func double", "|> private static double ").replace("func float", "|> private static float ")..replace("func byte", "|> private static byte ").replace("func long", "|> private static long ").replace("func short", "|> private static short ").replace("func char", "|> private static char ").replace("func void", "|> private static void ").replace("|>", "}").replace(":=", "{").replace("ret","return").replace(":::", "//").replace("const", "final").replace("new_self!", &self_dund),
         imports = imported,
         adit = aditlibs,
     );

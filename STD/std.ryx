@@ -1,6 +1,6 @@
 private void invokeCMD(String command) {
     try {
-        log(command);
+        //log(command);
         Process process = Runtime.getRuntime().exec(command);
         logOutput(process.getInputStream(), "");
         logOutput(process.getErrorStream(), "Error: ");
@@ -25,5 +25,5 @@ private void logOutput(InputStream inputStream, String prefix) {
 private static SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss:SSS");
 
 private synchronized void log(String message) {
-    System.out.println(format.format(new Date()) + ": " + message);
+    System.out.println(message);
 }

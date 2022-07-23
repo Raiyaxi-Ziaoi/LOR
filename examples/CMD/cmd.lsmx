@@ -1,5 +1,5 @@
 var m = new cmd();
 
 m.invokeCMD(
-    "cmd /C echo \"Hello World\""
+    "cmd /C echo Hello World"
 );

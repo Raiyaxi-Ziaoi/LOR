@@ -51,8 +51,8 @@ fn main() -> io::Result<()> {
     let config_path: &Path = Path::new(import_path);
     let splitted_config: Vec<&str> = import_path.split(".").collect();
 
-    if splitted_config[1] != "vns" {
-        panic!("Wrong filetype! Please ensure that the file ends with \".vns\"");
+    if splitted_config[1] != "vn" {
+        panic!("Wrong filetype! Please ensure that the file ends with \".vn\"");
     }
 
     let display_config = config_path.display();

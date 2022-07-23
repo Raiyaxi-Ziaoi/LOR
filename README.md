@@ -4,12 +4,12 @@
 <img src="https://i.imgur.com/N1TyUPG.png"></img><br/><br/>
 My own programming language based on Java and with a transpiler made in Rust<a href="#">
     <img src="https://i.imgur.com/HZ7gMtm.png" align="right" width="25%" />
-</a>Made<br/><br/><br/><br/> by Raiyaxi Ziaoi
+</a><br/><br/><br/><br/>Made by Raiyaxi Ziaoi
 </h2></div>
 <br/>
-<div align="center"><h3>
+<div align="center"><h2>
 LOR : Lissomix, Oven, Raiyaxi
-</h3></div>
+</h2></div>
 <br/>
 You must have the JVM and the Rust compiler installed.
 <br/>

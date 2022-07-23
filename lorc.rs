@@ -92,9 +92,10 @@ fn main() -> io::Result<()> {
     // LIBRARIES {
 
     let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
-    let mathlib: String = read_to_string("STD/math.ryx").expect("MATH Library Missing");
+    let sqrtlib: String = read_to_string("STD/sqrt.ryx").expect("SQRT Library Missing");
     let inlib: String = read_to_string("STD/in.ryx").expect("INPUT Library Missing");
-    let stdlib: String = read_to_string("STD/std.ryx").expect("STD Library Missing");
+    let cmdlib: String = read_to_string("STD/cmd.ryx").expect("CMD Library Missing");
+    let randomlib: String = read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
 
     // }
 
@@ -150,8 +151,11 @@ fn main() -> io::Result<()> {
     for import in to_import {
         if skip {
             break;
-        } else if import == "STD.MATH" {
-            let str: String = format!("{}", mathlib);
+        } else if import == "STD.SQRT" {
+            let str: String = format!("{}", sqrtlib);
+            aditlibs.push_str(&str);
+        } else if import == "STD.RANDOM" {
+            let str: String = format!("{}", randomlib);
             aditlibs.push_str(&str);
         } else if import == "STD.IN" {
             let str: String = format!("{}", inlib);
@@ -159,8 +163,8 @@ fn main() -> io::Result<()> {
         } else if import == "STD.OUT" {
             let str: String = format!("{}", outlib);
             aditlibs.push_str(&str);
-        } else if import == "STD.STD" {
-            let str: String = format!("{}", stdlib);
+        } else if import == "STD.CMD" {
+            let str: String = format!("{}", cmdlib);
             aditlibs.push_str(&str);
         } else {
             let splitted_import: Vec<&str> = import.split(".").collect();
@@ -184,7 +188,7 @@ fn main() -> io::Result<()> {
     let to_write: String = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = file_conents.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return").replace(":::", "//").replace("const", "final"),
+        code = file_conents.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return").replace(":::", "//").replace("const", "final").replace("new_self!", format!("var __self__ = new {}();"), namef),
         imports = imported,
         adit = aditlibs,
     );

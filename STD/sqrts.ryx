@@ -20,11 +20,3 @@ public static double q_rsqrt(double number){
     x *= number;
     return x;
 }
-
-private static double ps_random(long seed, float mult) {
-    Random generator = new Random();
-    generator.setSeed(seed);
-    double num = generator.nextDouble() * (mult);
-
-    return num;
-}

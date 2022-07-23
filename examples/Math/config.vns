@@ -1,5 +1,5 @@
 STD.OUT
 STD.IN
-STD.MATH
+STD.SQRT
 java.util.Scanner
 java.util.Random

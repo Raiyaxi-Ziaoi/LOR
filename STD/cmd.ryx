@@ -22,8 +22,6 @@ private void logOutput(InputStream inputStream, String prefix) {
     }).start();
 }
 
-private static SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss:SSS");
-
 private synchronized void log(String message) {
     System.out.println(message);
 }

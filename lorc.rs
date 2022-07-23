@@ -92,7 +92,7 @@ fn main() -> io::Result<()> {
     // LIBRARIES {
 
     let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
-    let sqrtlib: String = read_to_string("STD/sqrt.ryx").expect("SQRT Library Missing");
+    let sqrtlib: String = read_to_string("STD/sqrts.ryx").expect("SQRT Library Missing");
     let inlib: String = read_to_string("STD/in.ryx").expect("INPUT Library Missing");
     let cmdlib: String = read_to_string("STD/cmd.ryx").expect("CMD Library Missing");
     let randomlib: String = read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
@@ -184,11 +184,12 @@ fn main() -> io::Result<()> {
     // }
 
     // TRANSPARSING {
+    let self_dund = format!("var __self__ = new {}();", namef);
 
     let to_write: String = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = file_conents.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return").replace(":::", "//").replace("const", "final").replace("new_self!", format!("var __self__ = new {}();"), namef),
+        code = file_conents.replace("|> int", "|> private static int").replace("|> String", "|> private static String").replace("|> double", "|> private static double").replace("|> float", "|> private static float").replace("|> float", "|> private static float").replace("|> byte", "|> private static byte").replace("|> long", "|> private static long").replace("|> short", "|> private static short").replace("|> char", "|> private static char").replace("|>", "}").replace(">|", "{").replace("void", "private static void").replace("ret","return").replace(":::", "//").replace("const", "final").replace("new_self!", &self_dund),
         imports = imported,
         adit = aditlibs,
     );

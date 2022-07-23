@@ -1,5 +1,5 @@
-var m = new cmd();
+new_self!
 
-m.invokeCMD(
+__self__.invokeCMD (
     "cmd /C echo Hello World"
 );

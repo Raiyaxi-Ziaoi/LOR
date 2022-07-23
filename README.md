@@ -16,7 +16,7 @@ LOR : Lissomix, Oven, Raiyaxi
 You must have the JVM and the Rust compiler installed.
 <br/>
 <br/>
-Compile the lorc.rs file and then run from the terminal:<br/><br/></b>
+Compile the lorc.rs file and then run from the terminal:<br/><br/>
 Windows:<br/>
 
 ```cmd
@@ -29,7 +29,7 @@ lorc.exe -h
 ./lorc -h
 ```
 
-This will display a help screen.<br/><br/>Then do:<br/>
+This will display a help screen.<br/><br/>Then do:
 
 <br/>Windows:<br/>
 

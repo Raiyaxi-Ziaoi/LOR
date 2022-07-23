@@ -1,0 +1,6 @@
+
+private static void invokeCMD(String cmd) {
+    try {
+        Process child = Runtime.getRuntime().exec(cmd);
+    } catch (Exception e) {}
+}

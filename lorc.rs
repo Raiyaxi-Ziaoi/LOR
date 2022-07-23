@@ -18,17 +18,17 @@ fn file_to_vec(filename: String) -> io::Result<Vec<String>> {
 
 fn main() -> io::Result<()> {
     let command_line_arguments: Vec<String> = env::args().collect(); // COMMAND LINE ARGUMENTS
-
-    let source_file: &String = &command_line_arguments[2];
+    let cleanup_mode: &String = &command_line_arguments[1];
+    let mut skip: bool = false;
 
     // OTHER ARGS {
-    if source_file == "-v" || source_file == "--version" {
+    if cleanup_mode == "-v" || cleanup_mode == "--version" {
         println!(
             "{}",
             read_to_string("STD/.version").expect("Version Missing")
         );
         std::process::abort();
-    } else if source_file == "-h" || source_file == "--help" || source_file == "-?" {
+    } else if cleanup_mode == "-h" || cleanup_mode == "--help" || cleanup_mode == "-?" {
         println!("(./)lorc(.exe) [Cleanup mode] [File path] [Config file path]");
         println!("Cleanup modes:");
         println!("-a : All");
@@ -38,11 +38,14 @@ fn main() -> io::Result<()> {
         println!("-n : None");
         std::process::abort();
     }
-
     // }
 
-    let cleanup_mode: &String = &command_line_arguments[1];
+    let source_file: &String = &command_line_arguments[2];
     let import_path: &String = &command_line_arguments[3];
+
+    if import_path == "None" {
+        skip = true;
+    }
 
     // IMPORTS {
     let config_path: &Path = Path::new(import_path);
@@ -145,15 +148,15 @@ fn main() -> io::Result<()> {
     // IMPORTS {
 
     for import in to_import {
-        if import == "None" {
+        if skip {
             break;
         } else if import == "STD.MATH" {
             let str: String = format!("{}", mathlib);
             aditlibs.push_str(&str);
-        } else if import == "STD.INPUT" {
+        } else if import == "STD.IN" {
             let str: String = format!("{}", inlib);
             aditlibs.push_str(&str);
-        } else if import == "STD.OUTPUT" {
+        } else if import == "STD.OUT" {
             let str: String = format!("{}", outlib);
             aditlibs.push_str(&str);
         } else if import == "STD.STD" {

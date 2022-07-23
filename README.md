@@ -1,10 +1,12 @@
 # LOR
 
 <div align="center"><h2>
-<img src="https://i.imgur.com/HZ7gMtm.png"></img><br/><br/>
 <img src="https://i.imgur.com/N1TyUPG.png"></img><br/><br/>
 My own programming language based on Java and with a transpiler made in Rust<br/><br/>Made by Raiyaxi Ziaoi
 </h2></div>
+<a href="#">
+    <img src="https://i.imgur.com/HZ7gMtm.png" align="right" width="25%" />
+</a>
 <br/>
 <div align="center"><h3>
 LOR : Lissomix, Oven, Raiyaxi

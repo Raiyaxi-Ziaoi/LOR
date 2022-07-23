@@ -31,11 +31,19 @@ lorc.exe -h
 
 This will display a help screen.<br/><br/>Then do:<br/>
 
+<br/>Windows:<br/>
+
 ```cmd
 lorc.exe -a examples/Hello/hello.lsmx examples/Hello/config.vn
 ```
 
-<br/> or the equivalent for Linux to transpile and run the "hello.lsmx" file located in the "examples/Hello" folder.
+<br/>Linux:<br/>
+
+```cmd
+./lorc -a examples/Hello/hello.lsmx examples/Hello/config.vn
+```
+
+<br/> This will transpile and run the "hello.lsmx" file located in the "examples/Hello" folder.
 <br/><br/>
 
 LOR provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.

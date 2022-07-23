@@ -32,7 +32,7 @@ lorc.exe -h
 This will display a help screen.<br/><br/>Then do:<br/>
 
 ```cmd
-lorc.exe -a examples/Hello/hello.lsmx examples/Hello/config.vns
+lorc.exe -a examples/Hello/hello.lsmx examples/Hello/config.vn
 ```
 
 <br/> or the equivalent for Linux to transpile and run the "hello.lsmx" file located in the "examples/Hello" folder.

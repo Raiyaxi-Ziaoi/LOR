@@ -29,13 +29,7 @@ fn main() -> io::Result<()> {
         );
         std::process::abort();
     } else if cleanup_mode == "-h" || cleanup_mode == "--help" || cleanup_mode == "-?" {
-        println!("(./)lorc(.exe) [Cleanup mode] [File path] [Config file path]");
-        println!("Cleanup modes:");
-        println!("-a : All");
-        println!("-m : Manifest");
-        println!("-j : .java");
-        println!("-c : .class");
-        println!("-n : None");
+        println!("(./)lorc(.exe) [Cleanup mode] [File path] [Config file path]\nCleanup modes:\n-a : All\n-m : Manifest\n-j : .java\n-c : .class\n-n : None");
         std::process::abort();
     }
     // }
@@ -85,18 +79,6 @@ fn main() -> io::Result<()> {
         Err(why) => panic!("Could not read {}: {}", display_source, why),
         Ok(_) => println!(""),
     }
-
-    // }
-
-    // LIBRARIES {
-
-    let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
-    let sqrtlib: String = read_to_string("STD/sqrts.ryx").expect("SQRT Library Missing");
-    let inlib: String = read_to_string("STD/in.ryx").expect("INPUT Library Missing");
-    let shelllib: String = read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
-    let randomlib: String = read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
-    let waitlib: String = read_to_string("STD/wait.ryx").expect("WAIT Library Missing");
-    let caselib: String = read_to_string("STD/case.ryx").expect("CASE Library Missing");
 
     // }
 
@@ -152,24 +134,34 @@ fn main() -> io::Result<()> {
     if !skip {
         for import in to_import {
             if import == "STD.SQRT" {
+                let sqrtlib: String =
+                    read_to_string("STD/sqrts.ryx").expect("SQRT Library Missing");
                 let str: String = format!("{}", sqrtlib);
                 aditlibs.push_str(&str);
             } else if import == "STD.RANDOM" {
+                let randomlib: String =
+                    read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
                 let str: String = format!("{}", randomlib);
                 aditlibs.push_str(&str);
             } else if import == "STD.IN" {
+                let inlib: String = read_to_string("STD/in.ryx").expect("INPUT Library Missing");
                 let str: String = format!("{}", inlib);
                 aditlibs.push_str(&str);
             } else if import == "STD.CASE" {
+                let caselib: String = read_to_string("STD/case.ryx").expect("CASE Library Missing");
                 let str: String = format!("{}", caselib);
                 aditlibs.push_str(&str);
             } else if import == "STD.WAIT" {
+                let waitlib: String = read_to_string("STD/wait.ryx").expect("WAIT Library Missing");
                 let str: String = format!("{}", waitlib);
                 aditlibs.push_str(&str);
             } else if import == "STD.OUT" {
+                let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
                 let str: String = format!("{}", outlib);
                 aditlibs.push_str(&str);
             } else if import == "STD.SHELL" {
+                let shelllib: String =
+                    read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
                 let str: String = format!("{}", shelllib);
                 aditlibs.push_str(&str);
             } else {

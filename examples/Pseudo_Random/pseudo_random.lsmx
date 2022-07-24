@@ -8,9 +8,10 @@ println ("" +
 
 ::: Funcs
 
-func double random ( float mult ) :=
+_fn double random ( float mult ) :=
     ret ps_random (
             in_lon (
                 "Please enter a seed:"
             ), mult
         );
+=:

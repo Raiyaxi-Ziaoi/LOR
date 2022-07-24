@@ -1,0 +1,14 @@
+int num = in_int (
+    "Please enter a number:"
+);
+if ( num % 2 == 0 ) {
+    println (
+        "Number is even."
+    );
+    exit!
+} else {
+    println (
+        "Number is odd."
+    );
+    exit!
+}

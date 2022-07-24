@@ -43,11 +43,10 @@ fn main() -> io::Result<()> {
     let source_file: &String = &command_line_arguments[2];
     let import_path: &String = &command_line_arguments[3];
 
+    // IMPORTS {
     if import_path == "None" {
         skip = true;
     }
-
-    // IMPORTS {
     let config_path: &Path = Path::new(import_path);
     let splitted_config: Vec<&str> = import_path.split(".").collect();
 
@@ -94,8 +93,10 @@ fn main() -> io::Result<()> {
     let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
     let sqrtlib: String = read_to_string("STD/sqrts.ryx").expect("SQRT Library Missing");
     let inlib: String = read_to_string("STD/in.ryx").expect("INPUT Library Missing");
-    let shelllib: String = read_to_string("STD/shell.ryx").expect("CMD Library Missing");
+    let shelllib: String = read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
     let randomlib: String = read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
+    let waitlib: String = read_to_string("STD/wait.ryx").expect("WAIT Library Missing");
+    let caselib: String = read_to_string("STD/case.ryx").expect("CASE Library Missing");
 
     // }
 
@@ -148,35 +149,43 @@ fn main() -> io::Result<()> {
 
     // IMPORTS {
 
-    for import in to_import {
-        if skip {
-            break;
-        } else if import == "STD.SQRT" {
-            let str: String = format!("{}", sqrtlib);
-            aditlibs.push_str(&str);
-        } else if import == "STD.RANDOM" {
-            let str: String = format!("{}", randomlib);
-            aditlibs.push_str(&str);
-        } else if import == "STD.IN" {
-            let str: String = format!("{}", inlib);
-            aditlibs.push_str(&str);
-        } else if import == "STD.OUT" {
-            let str: String = format!("{}", outlib);
-            aditlibs.push_str(&str);
-        } else if import == "STD.SHELL" {
-            let str: String = format!("{}", shelllib);
-            aditlibs.push_str(&str);
-        } else {
-            let splitted_import: Vec<&str> = import.split(".").collect();
-            if splitted_import[0] == "java" {
-                let str: String = format!("import {};", import);
-                imported.push_str(&str);
-            } else if splitted_import[1] == "ryx" {
-                let error: String = format!("Unable to read import: {}", import);
-                let importfile: String = read_to_string(import).expect(&error);
-                aditlibs.push_str(&importfile);
+    if !skip {
+        for import in to_import {
+            if import == "STD.SQRT" {
+                let str: String = format!("{}", sqrtlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.RANDOM" {
+                let str: String = format!("{}", randomlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.IN" {
+                let str: String = format!("{}", inlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.CASE" {
+                let str: String = format!("{}", caselib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.WAIT" {
+                let str: String = format!("{}", waitlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.OUT" {
+                let str: String = format!("{}", outlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.SHELL" {
+                let str: String = format!("{}", shelllib);
+                aditlibs.push_str(&str);
             } else {
-                panic!("Wrong file name! Imported file must end in \".ryx\" or be a Java import.");
+                let splitted_import: Vec<&str> = import.split(".").collect();
+                if splitted_import[0] == "java" {
+                    let str: String = format!("import {};", import);
+                    imported.push_str(&str);
+                } else if splitted_import[1] == "ryx" {
+                    let error: String = format!("Unable to read import: {}", import);
+                    let importfile: String = read_to_string(import).expect(&error);
+                    aditlibs.push_str(&importfile);
+                } else {
+                    panic!(
+                        "Wrong file name! Imported file must end in \".ryx\" or be a Java import."
+                    );
+                }
             }
         }
     }
@@ -189,7 +198,19 @@ fn main() -> io::Result<()> {
     let to_write: String = format!(
         "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
         name = namef,
-        code = file_conents.replace("func int", "} private static int ").replace("func String", "} private static String ").replace("func double", "} private static double ").replace("func float", "} private static float ")..replace("func byte", "} private static byte ").replace("func long", "} private static long ").replace("func short", "} private static short ").replace("func char", "} private static char ").replace("func void", "} private static void ").replace(":=", "{").replace("ret","return").replace(":::", "//").replace("const", "final").replace("new_self!", &self_dund),
+        code = file_conents
+        .replace("_fn", "} private static ")
+        .replace(":=", "{")
+        .replace("=:", "")
+        .replace("ret","return")
+        .replace("bool","boolean")
+        .replace("_match","switch")
+        .replace("elif","else if")
+        .replace(":::", "//")
+        .replace("_const", "final")
+        .replace("new_self!", &self_dund)
+        .replace("exit!", "System.exit(0);")
+        .replace("abort!", "System.exit(1);"),
         imports = imported,
         adit = aditlibs,
     );

@@ -1,0 +1,8 @@
+
+private static String lower(String str) {
+    return str.toLowerCase();
+}
+
+private static String upper(String str) {
+    return str.toUpperCase();
+}

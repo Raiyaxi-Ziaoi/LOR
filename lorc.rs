@@ -329,6 +329,8 @@ fn main() -> io::Result<()> {
         remove_file(javaf).expect("Java delete failed");
         remove_file("Manifest.txt").expect("Manifest delete failed");
     } else if cleanup_mode == "-n" {
+    } else {
+        panic!("Invalid cleanup mode!");
     }
 
     Ok(())

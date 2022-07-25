@@ -151,8 +151,9 @@ fn main() -> io::Result<()> {
                 let caselib: String = read_to_string("STD/case.ryx").expect("CASE Library Missing");
                 let str: String = format!("{}", caselib);
                 aditlibs.push_str(&str);
-            } else if import == "STD.WAIT" {
-                let waitlib: String = read_to_string("STD/wait.ryx").expect("WAIT Library Missing");
+            } else if import == "STD.SLEEP" {
+                let waitlib: String =
+                    read_to_string("STD/sleep.ryx").expect("SLEEP Library Missing");
                 let str: String = format!("{}", waitlib);
                 aditlibs.push_str(&str);
             } else if import == "STD.OUT" {

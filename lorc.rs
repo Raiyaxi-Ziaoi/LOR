@@ -143,8 +143,44 @@ fn main() -> io::Result<()> {
                     read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
                 let str: String = format!("{}", randomlib);
                 aditlibs.push_str(&str);
-            } else if import == "STD.IN" {
-                let inlib: String = read_to_string("STD/in.ryx").expect("INPUT Library Missing");
+            } else if import == "STD.IN.STR" {
+                let inlib: String =
+                    read_to_string("STD/in_str.ryx").expect("INPUT_STRING Library Missing");
+                let str: String = format!("{}", inlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.IN.INT" {
+                let inlib: String =
+                    read_to_string("STD/in_int.ryx").expect("INPUT_INTEGER Library Missing");
+                let str: String = format!("{}", inlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.IN.FLO" {
+                let inlib: String =
+                    read_to_string("STD/in_flo.ryx").expect("INPUT_FLOAT Library Missing");
+                let str: String = format!("{}", inlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.IN.BYT" {
+                let inlib: String =
+                    read_to_string("STD/in_byt.ryx").expect("INPUT_BYTE Library Missing");
+                let str: String = format!("{}", inlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.IN.SHO" {
+                let inlib: String =
+                    read_to_string("STD/in_sho.ryx").expect("INPUT_SHORT Library Missing");
+                let str: String = format!("{}", inlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.IN.BOO" {
+                let inlib: String =
+                    read_to_string("STD/in_boo.ryx").expect("INPUT_BOOLEAN Library Missing");
+                let str: String = format!("{}", inlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.IN.DOU" {
+                let inlib: String =
+                    read_to_string("STD/in_dou.ryx").expect("INPUT_DOUBLE Library Missing");
+                let str: String = format!("{}", inlib);
+                aditlibs.push_str(&str);
+            } else if import == "STD.IN.LON" {
+                let inlib: String =
+                    read_to_string("STD/in_lon.ryx").expect("INPUT_LONG Library Missing");
                 let str: String = format!("{}", inlib);
                 aditlibs.push_str(&str);
             } else if import == "STD.CASE" {

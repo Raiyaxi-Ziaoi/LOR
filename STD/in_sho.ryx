@@ -1,0 +1,13 @@
+
+private static short in_sho(String msg) {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    System.out.println(msg);
+    short toRet = sc.nextShort();
+    return toRet;
+}

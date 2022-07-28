@@ -1,0 +1,13 @@
+
+private static float in_flo(String msg) {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    System.out.println(msg);
+    float toRet = sc.nextFloat();
+    return toRet;
+}

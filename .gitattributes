@@ -1,5 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-*.lsmx linguist-language=LOR-Source
-*.vn linguist-language=LOR-Config
-*.ryx linguist-language=LOR-Library
+*.lsmx linguist-language=LOR
+*.vn linguist-language=LOR
+*.ryx linguist-language=LOR

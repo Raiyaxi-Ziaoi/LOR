@@ -4,7 +4,7 @@ println ("Match: " +
             "Please enter a string: "
         ),
         in_str (
-            "Please enter a pattern: "
-        ),
+            "\nPlease enter a pattern: "
+        )
     )
 );

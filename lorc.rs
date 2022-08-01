@@ -128,84 +128,77 @@ fn main() -> io::Result<()> {
 
     let mut imported: String = "".to_owned();
     let mut aditlibs: String = "".to_owned();
+    let mut libs: String = "".to_owned();
 
     // IMPORTS {
+
+    let mut uselmd: bool = false;
 
     if !skip {
         for import in to_import {
             if import == "STD.SQRT" {
                 let sqrtlib: String =
                     read_to_string("STD/sqrts.ryx").expect("SQRT Library Missing");
-                let str: String = format!("{}", sqrtlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&sqrtlib);
             } else if import == "STD.RANDOM" {
                 let randomlib: String =
                     read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
-                let str: String = format!("{}", randomlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&randomlib);
             } else if import == "STD.IN.STR" {
                 let inlib: String =
                     read_to_string("STD/in_str.ryx").expect("INPUT_STRING Library Missing");
-                let str: String = format!("{}", inlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&inlib);
             } else if import == "STD.IN.INT" {
                 let inlib: String =
                     read_to_string("STD/in_int.ryx").expect("INPUT_INTEGER Library Missing");
-                let str: String = format!("{}", inlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&inlib);
             } else if import == "STD.IN.FLO" {
                 let inlib: String =
                     read_to_string("STD/in_flo.ryx").expect("INPUT_FLOAT Library Missing");
-                let str: String = format!("{}", inlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&inlib);
             } else if import == "STD.IN.BYT" {
                 let inlib: String =
                     read_to_string("STD/in_byt.ryx").expect("INPUT_BYTE Library Missing");
-                let str: String = format!("{}", inlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&inlib);
             } else if import == "STD.IN.SHO" {
                 let inlib: String =
                     read_to_string("STD/in_sho.ryx").expect("INPUT_SHORT Library Missing");
-                let str: String = format!("{}", inlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&inlib);
             } else if import == "STD.IN.BOO" {
                 let inlib: String =
                     read_to_string("STD/in_boo.ryx").expect("INPUT_BOOLEAN Library Missing");
-                let str: String = format!("{}", inlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&inlib);
             } else if import == "STD.IN.DOU" {
                 let inlib: String =
                     read_to_string("STD/in_dou.ryx").expect("INPUT_DOUBLE Library Missing");
-                let str: String = format!("{}", inlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&inlib);
             } else if import == "STD.IN.LON" {
                 let inlib: String =
                     read_to_string("STD/in_lon.ryx").expect("INPUT_LONG Library Missing");
-                let str: String = format!("{}", inlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&inlib);
             } else if import == "STD.CASE" {
                 let caselib: String = read_to_string("STD/case.ryx").expect("CASE Library Missing");
-                let str: String = format!("{}", caselib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&caselib);
             } else if import == "STD.SLEEP" {
                 let waitlib: String =
                     read_to_string("STD/sleep.ryx").expect("SLEEP Library Missing");
-                let str: String = format!("{}", waitlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&waitlib);
             } else if import == "STD.OUT" {
                 let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
-                let str: String = format!("{}", outlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&outlib);
             } else if import == "STD.REGEX" {
                 let rgxlib: String =
                     read_to_string("STD/regex.ryx").expect("REGEX Library Missing");
-                let str: String = format!("{}", rgxlib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&rgxlib);
+            } else if import == "STD.LAMBDA" {
+                uselmd = true;
+                let lmdlib: String =
+                    read_to_string("STD/lambda.ryx").expect("LAMBDA Library Missing");
+                libs.push_str(&lmdlib);
             } else if import == "STD.SHELL" {
                 let shelllib: String =
                     read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
-                let str: String = format!("{}", shelllib);
-                aditlibs.push_str(&str);
+                aditlibs.push_str(&shelllib);
             } else {
                 let splitted_import: Vec<&str> = import.split(".").collect();
                 if splitted_import[0] == "java" {
@@ -230,23 +223,23 @@ fn main() -> io::Result<()> {
     let self_dund = format!("var __self__ = new {}();", namef);
 
     let to_write: String = format!(
-        "{imports}\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{{code}}}\n}}",
+        "{imports}\n{libraries}\n\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{\n{code}\n}}\n\n}}",
         name = namef,
         code = file_conents
-        .replace("_fn", "} private static ")
-        .replace("{=", "{")
-        .replace("=}", "")
-        .replace("ret","return")
-        .replace("bool","boolean")
-        .replace("_match","switch")
-        .replace("elif","else if")
-        .replace(":::", "//")
-        .replace("_const", "final")
-        .replace("new_self!", &self_dund)
-        .replace("exit!", "System.exit(0);")
-        .replace("abort!", "System.exit(1);"),
+            .replace("_fn", "} private static ")
+            .replace("=>", "{")
+            .replace("ret ", "return ")
+            .replace("bool ", "boolean ")
+            .replace("_match ", "switch ")
+            .replace("elif", "else if")
+            .replace(":::", "//")
+            .replace("const ", "final ")
+            .replace("new_self!", &self_dund)
+            .replace("exit!", "System.exit(0);")
+            .replace("abort!", "System.exit(1);"),
         imports = imported,
         adit = aditlibs,
+        libraries = libs,
     );
     match java_write.write_all(to_write.as_bytes()) {
         Err(why) => panic!("Could not write to {}: {}", display_source, why),
@@ -373,6 +366,11 @@ fn main() -> io::Result<()> {
     } else if cleanup_mode == "-n" {
     } else {
         panic!("Invalid cleanup mode!");
+    }
+
+    if uselmd {
+        remove_file("Void.class").expect("VOID delete failed");
+        remove_file("Function.class").expect("FUNCTION delete failed");
     }
 
     Ok(())

@@ -6,12 +6,10 @@ func (
 
 ::: Funcs
 
-_fn String ( String str ) {=
+_fn String ( String str ) =>
     ret str;
-=}
 
-_fn void func ( String str ) {=
+_fn void func ( String str ) =>
     println(
         str
     );
-=}

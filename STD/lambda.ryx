@@ -1,0 +1,7 @@
+interface Function {
+	public Object call();
+}
+
+interface Void {
+	public void call();
+}

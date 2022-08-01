@@ -1,0 +1,10 @@
+println ("Match: " +
+    regex (
+        in_str (
+            "Please enter a string: "
+        ),
+        in_str (
+            "Please enter a pattern: "
+        ),
+    )
+);

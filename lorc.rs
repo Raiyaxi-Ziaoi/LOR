@@ -196,6 +196,11 @@ fn main() -> io::Result<()> {
                 let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
                 let str: String = format!("{}", outlib);
                 aditlibs.push_str(&str);
+            } else if import == "STD.REGEX" {
+                let rgxlib: String =
+                    read_to_string("STD/regex.ryx").expect("REGEX Library Missing");
+                let str: String = format!("{}", rgxlib);
+                aditlibs.push_str(&str);
             } else if import == "STD.SHELL" {
                 let shelllib: String =
                     read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
@@ -229,8 +234,8 @@ fn main() -> io::Result<()> {
         name = namef,
         code = file_conents
         .replace("_fn", "} private static ")
-        .replace(":=", "{")
-        .replace("=:", "")
+        .replace("{=", "{")
+        .replace("=}", "")
         .replace("ret","return")
         .replace("bool","boolean")
         .replace("_match","switch")

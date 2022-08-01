@@ -1,0 +1,6 @@
+
+public static boolean regex(String str, String regex) {
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = patern.matcher(str);
+    return matcher.find();
+}

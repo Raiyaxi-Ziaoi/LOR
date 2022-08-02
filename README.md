@@ -50,3 +50,5 @@ LOR provides a more concise syntax compared to Java but is still usable by Java 
 <br/><br/>
 In future updates I hope that it will be a functional language with a focus on scientific computing.
 <br/><br/>
+<a href="raiyaxi-ziaoi.github.io/docs.html">Documentation</a>
+<br/><br/>

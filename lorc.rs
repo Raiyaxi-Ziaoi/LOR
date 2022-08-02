@@ -74,8 +74,8 @@ fn main() -> io::Result<()> {
         Ok(file_source) => file_source,
     };
 
-    let mut file_conents: String = String::new();
-    match file_source.read_to_string(&mut file_conents) {
+    let mut file_contents: String = String::new();
+    match file_source.read_to_string(&mut file_contents) {
         Err(why) => panic!("Could not read {}: {}", display_source, why),
         Ok(_) => println!(""),
     }
@@ -126,11 +126,12 @@ fn main() -> io::Result<()> {
 
     // }
 
+    // IMPORTS {
+
     let mut imported: String = "".to_owned();
     let mut aditlibs: String = "".to_owned();
     let mut libs: String = "".to_owned();
-
-    // IMPORTS {
+    let mut ext: String = "".to_owned();
 
     let mut uselmd: bool = false;
 
@@ -208,9 +209,13 @@ fn main() -> io::Result<()> {
                     let error: String = format!("Unable to read import: {}", import);
                     let importfile: String = read_to_string(import).expect(&error);
                     aditlibs.push_str(&importfile);
+                } else if splitted_import[1] == "lsmx" {
+                    let error: String = format!("Unable to read import: {}", import);
+                    let importfile: String = read_to_string(import).expect(&error);
+                    ext.push_str(&importfile);
                 } else {
                     panic!(
-                        "Wrong file name! Imported file must end in \".ryx\" or be a Java import."
+                        "Wrong file name! Imported file must end in \".ryx\", \".lsmx\", be a Java import or be part of the LOR library."
                     );
                 }
             }
@@ -220,14 +225,15 @@ fn main() -> io::Result<()> {
     // }
 
     // TRANSPARSING {
+
     let self_dund = format!("var __self__ = new {}();", namef);
 
     let to_write: String = format!(
-        "{imports}\n{libraries}\n\npublic class {name} {{\n{adit}\npublic static void main(String[] args){{\n{code}\n}}\n\n}}",
+        "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{code}\n\n\n}}",
         name = namef,
-        code = file_conents
-            .replace("_fn", "} private static ")
-            .replace("=>", "{")
+        code = file_contents
+            .replace("_fn main()", "public static void main(String[] args)")
+            .replace("_fn", "private static")
             .replace("ret ", "return ")
             .replace("bool ", "boolean ")
             .replace("_match ", "switch ")
@@ -236,7 +242,10 @@ fn main() -> io::Result<()> {
             .replace("const ", "final ")
             .replace("new_self!", &self_dund)
             .replace("exit!", "System.exit(0);")
-            .replace("abort!", "System.exit(1);"),
+            .replace("abort!", "System.exit(1);")
+            .replace("_class", "} class")
+            .replace("=>", "{")
+            .replace("_construct", "public"),
         imports = imported,
         adit = aditlibs,
         libraries = libs,

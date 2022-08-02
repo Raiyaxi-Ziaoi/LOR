@@ -1,15 +1,18 @@
-int number = in_int (
-    "Please enter a number: "
-);
 
-Function func = () -> {
-        String str = "";
-        for (int i = 1; i <= number; i++) str = (i != number) ? str.concat(i + "\n") : str.concat("" + i);
-        ret str;
-};
+_fn main() { 
+    Function func = () -> {
+            String str = "";
+            int number = in_int (
+                "Please enter a number: "
+            );
 
-println ("\n" +
-    func
-    .call()
-    .toString()
-);
+            for (int i = 1; i <= number; i++) str = (i != number) ? str.concat(i + "\n") : str.concat("" + i);
+            ret str;
+    };
+
+    println ("\n" +
+        func
+        .call()
+        .toString()
+    );
+}

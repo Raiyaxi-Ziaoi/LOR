@@ -1,10 +1,12 @@
-println ("Match: " +
-    regex (
-        in_str (
-            "Please enter a string: "
-        ),
-        in_str (
-            "\nPlease enter a pattern: "
+_fn main() {
+    println ("Match: " +
+        regex (
+            in_str (
+                "Please enter a string: "
+            ),
+            in_str (
+                "\nPlease enter a pattern: "
+            )
         )
-    )
-);
+    );
+}

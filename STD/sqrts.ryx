@@ -18,5 +18,5 @@ public static double q_rsqrt(double number){
         x = x * (1.5d - xhalf * x * x);
     }
     x *= number;
-    return x;
+    return x / 10;
 }

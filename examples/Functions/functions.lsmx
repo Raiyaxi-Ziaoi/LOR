@@ -1,0 +1,20 @@
+
+_fn main() {
+    func (
+        string (
+            "Hello World"
+        )
+    );
+}
+
+::: Functions
+
+_fn String string ( String str ) {
+    ret str;
+}
+
+_fn void func ( String str ) {
+    println(
+        str
+    );
+}

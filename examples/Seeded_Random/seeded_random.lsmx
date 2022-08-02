@@ -1,16 +1,19 @@
-println ("" + 
-    random (
-        in_flo (
-            "Please enter offset:"
+_fn main() {
+    println ("" + 
+        random (
+            in_flo (
+                "Please enter offset:"
+            )
         )
-    )
-);
+    );
+}
 
-::: Funcs
+::: Functions
 
-_fn double random ( float mult ) =>
+_fn double random ( float mult ) {
     ret ps_random (
-            in_lon (
-                "Please enter a seed:"
-            ), mult
-        );
+        in_lon (
+            "Please enter a seed:"
+        ), mult
+    );
+}

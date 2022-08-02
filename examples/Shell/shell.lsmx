@@ -1,5 +1,7 @@
-new_self!
+_fn main() {
+    new_self!
 
-__self__.invokeShell (
-    "cmd /C echo Hello World"
-);
+    __self__.invokeShell (
+        "cmd /C echo Hello World"
+    );
+}

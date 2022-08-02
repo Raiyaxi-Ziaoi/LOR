@@ -1,13 +1,13 @@
-int num = in_int (
-    "Please enter a number:"
-);
+_fn main() {
+    int num = in_int (
+        "Please enter a number:"
+    );
 
-nl(
-    1
-);
+    nl(1);
 
-println ("" +
-    q_rsqrt (
-        (double) num
-    )
-);
+    println ("" +
+        q_rsqrt (
+            (double) num
+        )
+    );
+}

@@ -60,12 +60,12 @@ fn main() -> io::Result<()> {
 
         // SOURCE {
 
-        let formatted_source_path = format!("{}/hello.lsmx", source_file);
+        let formatted_source_path = format!("{}/main.lsmx", source_file);
 
         let path_source: &Path = Path::new(&formatted_source_path);
         let display_source = path_source.display();
 
-        let mut file_source: File = match File::create(format!("{}/hello.lsmx", source_file)) {
+        let mut file_source: File = match File::create(format!("{}/main.lsmx", source_file)) {
             Err(why) => panic!("Could not create {}: {}", display_source, why),
             Ok(file_source) => file_source,
         };
@@ -100,12 +100,12 @@ fn main() -> io::Result<()> {
 
         // SOURCE {
 
-        let formatted_source_path = format!("{}/hello.lsmx", source_file);
+        let formatted_source_path = format!("{}/main.lsmx", source_file);
 
         let path_source: &Path = Path::new(&formatted_source_path);
         let display_source = path_source.display();
 
-        let _file_source: File = match File::create(format!("{}/hello.lsmx", source_file)) {
+        let _file_source: File = match File::create(format!("{}/main.lsmx", source_file)) {
             Err(why) => panic!("Could not create {}: {}", display_source, why),
             Ok(_file_source) => _file_source,
         };

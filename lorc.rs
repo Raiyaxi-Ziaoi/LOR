@@ -77,6 +77,41 @@ fn main() -> io::Result<()> {
         }
         std::process::abort();
         // }
+    } else if cleanup_mode == "-innit-default"
+        || cleanup_mode == "-init-default"
+        || cleanup_mode == "-innit-def"
+        || cleanup_mode == "-init-def"
+        || cleanup_mode == "-i-d"
+    {
+        fs::create_dir(source_file)?;
+
+        let formatted_config_path = format!("{}/config.vn", source_file);
+
+        // CONFIG {
+        let path_config: &Path = Path::new(&formatted_config_path);
+        let display_config = path_config.display();
+
+        let _file_config: File = match File::create(format!("{}/config.vn", source_file)) {
+            Err(why) => panic!("Could not create {}: {}", display_config, why),
+            Ok(_file_config) => _file_config,
+        };
+
+        // }
+
+        // SOURCE {
+
+        let formatted_source_path = format!("{}/hello.lsmx", source_file);
+
+        let path_source: &Path = Path::new(&formatted_source_path);
+        let display_source = path_source.display();
+
+        let _file_source: File = match File::create(format!("{}/hello.lsmx", source_file)) {
+            Err(why) => panic!("Could not create {}: {}", display_source, why),
+            Ok(_file_source) => _file_source,
+        };
+
+        std::process::abort();
+        // }
     }
     // }
 

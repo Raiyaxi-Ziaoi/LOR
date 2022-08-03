@@ -19,6 +19,7 @@ fn file_to_vec(filename: String) -> io::Result<Vec<String>> {
 fn main() -> io::Result<()> {
     let command_line_arguments: Vec<String> = env::args().collect(); // COMMAND LINE ARGUMENTS
     let cleanup_mode: &String = &command_line_arguments[1];
+
     let mut skip: bool = false;
 
     // OTHER ARGS {
@@ -32,9 +33,53 @@ fn main() -> io::Result<()> {
         println!("(./)lorc(.exe) [Cleanup mode] [File path] [Config file path]\nCleanup modes:\n-a : All\n-m : Manifest\n-j : .java\n-c : .class\n-n : None");
         std::process::abort();
     }
-    // }
 
     let source_file: &String = &command_line_arguments[2];
+
+    if cleanup_mode == "-innit" || cleanup_mode == "-init" || cleanup_mode == "-i" {
+        fs::create_dir(source_file)?;
+
+        let formatted_config_path = format!("{}/config.vn", source_file);
+
+        // CONFIG {
+        let path_config: &Path = Path::new(&formatted_config_path);
+        let display_config = path_config.display();
+
+        let mut file_config: File = match File::create(format!("{}/config.vn", source_file)) {
+            Err(why) => panic!("Could not create {}: {}", display_config, why),
+            Ok(file_config) => file_config,
+        };
+
+        let config: String = "STD.OUT".to_string();
+        match file_config.write_all(config.as_bytes()) {
+            Err(why) => panic!("Could not write to {}: {}", display_config, why),
+            Ok(_) => println!("Successfully wrote to {}", display_config),
+        }
+
+        // }
+
+        // SOURCE {
+
+        let formatted_source_path = format!("{}/hello.lsmx", source_file);
+
+        let path_source: &Path = Path::new(&formatted_source_path);
+        let display_source = path_source.display();
+
+        let mut file_source: File = match File::create(format!("{}/hello.lsmx", source_file)) {
+            Err(why) => panic!("Could not create {}: {}", display_source, why),
+            Ok(file_source) => file_source,
+        };
+
+        let source: String = "_fn main() {\n    println(\"Hello World\");\n}".to_string();
+        match file_source.write_all(source.as_bytes()) {
+            Err(why) => panic!("Could not write to {}: {}", display_source, why),
+            Ok(_) => println!("Successfully wrote to {}", display_source),
+        }
+        std::process::abort();
+        // }
+    }
+    // }
+
     let import_path: &String = &command_line_arguments[3];
 
     // IMPORTS {

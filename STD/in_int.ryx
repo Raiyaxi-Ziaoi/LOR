@@ -11,3 +11,15 @@ private static int in_int(String msg) {
     int toRet = sc.nextInt();
     return toRet;
 }
+
+private static int in_int() {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    int toRet = sc.nextInt();
+    return toRet;
+}

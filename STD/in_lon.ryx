@@ -11,3 +11,15 @@ private static long in_lon(String msg) {
     long toRet = sc.nextLong();
     return toRet;
 }
+
+private static long in_lon() {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    long toRet = sc.nextLong();
+    return toRet;
+}

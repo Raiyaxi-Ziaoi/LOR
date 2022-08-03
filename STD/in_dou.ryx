@@ -11,3 +11,15 @@ private static double in_dou(String msg) {
     double toRet = sc.nextDouble();
     return toRet;
 }
+
+private static double in_dou() {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    double toRet = sc.nextDouble();
+    return toRet;
+}

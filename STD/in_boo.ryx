@@ -11,3 +11,16 @@ private static boolean in_boo(String msg) {
     boolean toRet = sc.nextBoolean();
     return toRet;
 }
+
+private static boolean in_boo() {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    System.out.println(msg);
+    boolean toRet = sc.nextBoolean();
+    return toRet;
+}

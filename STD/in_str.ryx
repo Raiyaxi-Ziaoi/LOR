@@ -11,3 +11,15 @@ private static String in_str(String msg) {
     String toRet = sc.nextLine();
     return toRet;
 }
+
+private static String in_str() {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    String toRet = sc.nextLine();
+    return toRet;
+}

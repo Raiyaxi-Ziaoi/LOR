@@ -1,0 +1,14 @@
+_fn main() {
+    create (
+        "C:\\Files\\Projects\\GitHub\\LOR\\Test\\test.txt"
+    );
+    write (
+        "C:\\Files\\Projects\\GitHub\\LOR\\Test\\test.txt",
+        "Hello World"
+    );
+    print (
+        read (
+            "C:\\Files\\Projects\\GitHub\\LOR\\Test\\test.txt"
+        )
+    );
+}

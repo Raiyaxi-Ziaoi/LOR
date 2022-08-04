@@ -45,12 +45,46 @@ fn main() -> io::Result<()> {
         let path_config: &Path = Path::new(&formatted_config_path);
         let display_config = path_config.display();
 
-        let mut file_config: File = match File::create(format!("{}/config.vn", source_file)) {
+        let _file_config: File = match File::create(format!("{}/config.vn", source_file)) {
             Err(why) => panic!("Could not create {}: {}", display_config, why),
             Ok(file_config) => file_config,
         };
 
+        // }
+
+        // SOURCE {
+
+        let formatted_source_path = format!("{}/main.lsmx", source_file);
+
+        let path_source: &Path = Path::new(&formatted_source_path);
+        let display_source = path_source.display();
+
+        let _file_source: File = match File::create(format!("{}/main.lsmx", source_file)) {
+            Err(why) => panic!("Could not create {}: {}", display_source, why),
+            Ok(file_source) => file_source,
+        };
+
+        std::process::abort();
+        // }
+    } else if cleanup_mode == "-innit_default"
+        || cleanup_mode == "-init_default"
+        || cleanup_mode == "-id"
+    {
+        fs::create_dir(source_file)?;
+
+        let formatted_config_path = format!("{}/config.vn", source_file);
+
+        // CONFIG {
+        let path_config: &Path = Path::new(&formatted_config_path);
+        let display_config = path_config.display();
+
+        let mut file_config: File = match File::create(format!("{}/config.vn", source_file)) {
+            Err(why) => panic!("Could not create {}: {}", display_config, why),
+            Ok(_file_config) => _file_config,
+        };
+        
         let config: String = "STD.OUT".to_string();
+
         match file_config.write_all(config.as_bytes()) {
             Err(why) => panic!("Could not write to {}: {}", display_config, why),
             Ok(_) => println!("Successfully wrote to {}", display_config),
@@ -67,48 +101,15 @@ fn main() -> io::Result<()> {
 
         let mut file_source: File = match File::create(format!("{}/main.lsmx", source_file)) {
             Err(why) => panic!("Could not create {}: {}", display_source, why),
-            Ok(file_source) => file_source,
+            Ok(_file_source) => _file_source,
         };
 
         let source: String = "_fn main() {\n    println(\"Hello World\");\n}".to_string();
+
         match file_source.write_all(source.as_bytes()) {
             Err(why) => panic!("Could not write to {}: {}", display_source, why),
             Ok(_) => println!("Successfully wrote to {}", display_source),
         }
-        std::process::abort();
-        // }
-    } else if cleanup_mode == "-innit-default"
-        || cleanup_mode == "-init-default"
-        || cleanup_mode == "-innit-def"
-        || cleanup_mode == "-init-def"
-        || cleanup_mode == "-i-d"
-    {
-        fs::create_dir(source_file)?;
-
-        let formatted_config_path = format!("{}/config.vn", source_file);
-
-        // CONFIG {
-        let path_config: &Path = Path::new(&formatted_config_path);
-        let display_config = path_config.display();
-
-        let _file_config: File = match File::create(format!("{}/config.vn", source_file)) {
-            Err(why) => panic!("Could not create {}: {}", display_config, why),
-            Ok(_file_config) => _file_config,
-        };
-
-        // }
-
-        // SOURCE {
-
-        let formatted_source_path = format!("{}/main.lsmx", source_file);
-
-        let path_source: &Path = Path::new(&formatted_source_path);
-        let display_source = path_source.display();
-
-        let _file_source: File = match File::create(format!("{}/main.lsmx", source_file)) {
-            Err(why) => panic!("Could not create {}: {}", display_source, why),
-            Ok(_file_source) => _file_source,
-        };
 
         std::process::abort();
         // }
@@ -217,87 +218,97 @@ fn main() -> io::Result<()> {
 
     if !skip {
         for import in to_import {
-            if import == "STD.SQRT" {
-                let sqrtlib: String =
-                    read_to_string("STD/sqrts.ryx").expect("SQRT Library Missing");
-                aditlibs.push_str(&sqrtlib);
-            } else if import == "STD.RANDOM" {
-                let randomlib: String =
-                    read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
-                aditlibs.push_str(&randomlib);
-            } else if import == "STD.IN.STR" {
-                let inlib: String =
-                    read_to_string("STD/in_str.ryx").expect("INPUT_STRING Library Missing");
-                aditlibs.push_str(&inlib);
-            } else if import == "STD.IN.INT" {
-                let inlib: String =
-                    read_to_string("STD/in_int.ryx").expect("INPUT_INTEGER Library Missing");
-                aditlibs.push_str(&inlib);
-            } else if import == "STD.IN.FLO" {
-                let inlib: String =
-                    read_to_string("STD/in_flo.ryx").expect("INPUT_FLOAT Library Missing");
-                aditlibs.push_str(&inlib);
-            } else if import == "STD.IN.BYT" {
-                let inlib: String =
-                    read_to_string("STD/in_byt.ryx").expect("INPUT_BYTE Library Missing");
-                aditlibs.push_str(&inlib);
-            } else if import == "STD.IN.SHO" {
-                let inlib: String =
-                    read_to_string("STD/in_sho.ryx").expect("INPUT_SHORT Library Missing");
-                aditlibs.push_str(&inlib);
-            } else if import == "STD.IN.BOO" {
-                let inlib: String =
-                    read_to_string("STD/in_boo.ryx").expect("INPUT_BOOLEAN Library Missing");
-                aditlibs.push_str(&inlib);
-            } else if import == "STD.IN.DOU" {
-                let inlib: String =
-                    read_to_string("STD/in_dou.ryx").expect("INPUT_DOUBLE Library Missing");
-                aditlibs.push_str(&inlib);
-            } else if import == "STD.IN.LON" {
-                let inlib: String =
-                    read_to_string("STD/in_lon.ryx").expect("INPUT_LONG Library Missing");
-                aditlibs.push_str(&inlib);
-            } else if import == "STD.CASE" {
-                let caselib: String = read_to_string("STD/case.ryx").expect("CASE Library Missing");
-                aditlibs.push_str(&caselib);
-            } else if import == "STD.SLEEP" {
-                let waitlib: String =
-                    read_to_string("STD/sleep.ryx").expect("SLEEP Library Missing");
-                aditlibs.push_str(&waitlib);
-            } else if import == "STD.OUT" {
-                let outlib: String = read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
-                aditlibs.push_str(&outlib);
-            } else if import == "STD.REGEX" {
-                let rgxlib: String =
-                    read_to_string("STD/regex.ryx").expect("REGEX Library Missing");
-                aditlibs.push_str(&rgxlib);
-            } else if import == "STD.LAMBDA" {
-                uselmd = true;
-                let lmdlib: String =
-                    read_to_string("STD/lambda.ryx").expect("LAMBDA Library Missing");
-                libs.push_str(&lmdlib);
-            } else if import == "STD.SHELL" {
-                let shelllib: String =
-                    read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
-                aditlibs.push_str(&shelllib);
-            } else {
-                let splitted_import: Vec<&str> = import.split(".").collect();
-                if splitted_import[0] == "java" {
-                    let str: String = format!("import {};", import);
-                    imported.push_str(&str);
-                } else if splitted_import[1] == "ryx" {
-                    let error: String = format!("Unable to read import: {}", import);
-                    let importfile: String = read_to_string(import).expect(&error);
-                    aditlibs.push_str(&importfile);
-                } else if splitted_import[1] == "lsmx" {
-                    let error: String = format!("Unable to read import: {}", import);
-                    let importfile: String = read_to_string(import).expect(&error);
-                    ext.push_str(&importfile);
+            if import.len() > 5 {
+                if import == "STD.SQRT" {
+                    let sqrtlib: String =
+                        read_to_string("STD/sqrts.ryx").expect("SQRT Library Missing");
+                    aditlibs.push_str(&sqrtlib);
+                } else if import == "STD.RANDOM" {
+                    let randomlib: String =
+                        read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
+                    aditlibs.push_str(&randomlib);
+                } else if import == "STD.IN.STR" {
+                    let inlib: String =
+                        read_to_string("STD/in_str.ryx").expect("INPUT_STRING Library Missing");
+                    aditlibs.push_str(&inlib);
+                } else if import == "STD.IN.INT" {
+                    let inlib: String =
+                        read_to_string("STD/in_int.ryx").expect("INPUT_INTEGER Library Missing");
+                    aditlibs.push_str(&inlib);
+                } else if import == "STD.IN.FLO" {
+                    let inlib: String =
+                        read_to_string("STD/in_flo.ryx").expect("INPUT_FLOAT Library Missing");
+                    aditlibs.push_str(&inlib);
+                } else if import == "STD.IN.BYT" {
+                    let inlib: String =
+                        read_to_string("STD/in_byt.ryx").expect("INPUT_BYTE Library Missing");
+                    aditlibs.push_str(&inlib);
+                } else if import == "STD.IN.SHO" {
+                    let inlib: String =
+                        read_to_string("STD/in_sho.ryx").expect("INPUT_SHORT Library Missing");
+                    aditlibs.push_str(&inlib);
+                } else if import == "STD.IN.BOO" {
+                    let inlib: String =
+                        read_to_string("STD/in_boo.ryx").expect("INPUT_BOOLEAN Library Missing");
+                    aditlibs.push_str(&inlib);
+                } else if import == "STD.IN.DOU" {
+                    let inlib: String =
+                        read_to_string("STD/in_dou.ryx").expect("INPUT_DOUBLE Library Missing");
+                    aditlibs.push_str(&inlib);
+                } else if import == "STD.IN.LON" {
+                    let inlib: String =
+                        read_to_string("STD/in_lon.ryx").expect("INPUT_LONG Library Missing");
+                    aditlibs.push_str(&inlib);
+                } else if import == "STD.CASE" {
+                    let caselib: String =
+                        read_to_string("STD/case.ryx").expect("CASE Library Missing");
+                    aditlibs.push_str(&caselib);
+                } else if import == "STD.SLEEP" {
+                    let waitlib: String =
+                        read_to_string("STD/sleep.ryx").expect("SLEEP Library Missing");
+                    aditlibs.push_str(&waitlib);
+                } else if import == "STD.OUT" {
+                    let outlib: String =
+                        read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");
+                    aditlibs.push_str(&outlib);
+                } else if import == "STD.REGEX" {
+                    let rgxlib: String =
+                        read_to_string("STD/regex.ryx").expect("REGEX Library Missing");
+                    aditlibs.push_str(&rgxlib);
+                } else if import == "STD.LAMBDA" {
+                    uselmd = true;
+                    let lmdlib: String =
+                        read_to_string("STD/lambda.ryx").expect("LAMBDA Library Missing");
+                    libs.push_str(&lmdlib);
+                } else if import == "STD.SHELL" {
+                    let shelllib: String =
+                        read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
+                    aditlibs.push_str(&shelllib);
+                } else if import == "STD.FILEIO" {
+                    let fileiolib: String =
+                        read_to_string("STD/fileio.ryx").expect("FILEIO Library Missing");
+                    aditlibs.push_str(&fileiolib);
                 } else {
-                    panic!(
-                        "Wrong file name! Imported file must end in \".ryx\", \".lsmx\", be a Java import or be part of the LOR library."
-                    );
+                    let splitted_import: Vec<&str> = import.split(".").collect();
+                    if splitted_import[0] == "java" {
+                        let str: String = format!("import {};", import);
+                        imported.push_str(&str);
+                    } else if splitted_import[1] == "ryx" {
+                        let error: String = format!("Unable to read import: {}", import);
+                        let importfile: String = read_to_string(import).expect(&error);
+                        aditlibs.push_str(&importfile);
+                    } else if splitted_import[1] == "lsmx" {
+                        let error: String = format!("Unable to read import: {}", import);
+                        let importfile: String = read_to_string(import).expect(&error);
+                        ext.push_str(&importfile);
+                    } else {
+                        panic!(
+                            "Wrong file name! Imported file must end in \".ryx\", \".lsmx\", be a Java import or be part of the LOR library."
+                        );
+                    }
                 }
+            } else {
+                continue;
             }
         }
     }

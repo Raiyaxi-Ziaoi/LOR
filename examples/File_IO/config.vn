@@ -1,8 +1,2 @@
 STD.OUT
 STD.FILEIO
-java.io.File;
-java.io.FileReader
-java.io.BufferedReader
-java.io.IOException
-java.nio.file.Files
-java.nio.file.Path

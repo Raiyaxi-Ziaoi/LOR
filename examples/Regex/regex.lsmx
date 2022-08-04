@@ -1,6 +1,6 @@
 _fn main() {
     println ("Match: " +
-        regex (
+        match (
             in_str (
                 "Please enter a string: "
             ),

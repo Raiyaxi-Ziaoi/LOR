@@ -82,7 +82,7 @@ fn main() -> io::Result<()> {
             Err(why) => panic!("Could not create {}: {}", display_config, why),
             Ok(_file_config) => _file_config,
         };
-        
+
         let config: String = "STD.OUT".to_string();
 
         match file_config.write_all(config.as_bytes()) {
@@ -215,6 +215,7 @@ fn main() -> io::Result<()> {
     let mut ext: String = "".to_owned();
 
     let mut uselmd: bool = false;
+    let mut usescan: bool = false;
 
     if !skip {
         for import in to_import {
@@ -227,38 +228,48 @@ fn main() -> io::Result<()> {
                     let randomlib: String =
                         read_to_string("STD/random.ryx").expect("RANDOM Library Missing");
                     aditlibs.push_str(&randomlib);
+                    let str: String = "import java.util.Random;".to_string();
+                    imported.push_str(&str);
                 } else if import == "STD.IN.STR" {
                     let inlib: String =
                         read_to_string("STD/in_str.ryx").expect("INPUT_STRING Library Missing");
                     aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "STD.IN.INT" {
                     let inlib: String =
                         read_to_string("STD/in_int.ryx").expect("INPUT_INTEGER Library Missing");
                     aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "STD.IN.FLO" {
                     let inlib: String =
                         read_to_string("STD/in_flo.ryx").expect("INPUT_FLOAT Library Missing");
                     aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "STD.IN.BYT" {
                     let inlib: String =
                         read_to_string("STD/in_byt.ryx").expect("INPUT_BYTE Library Missing");
                     aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "STD.IN.SHO" {
                     let inlib: String =
                         read_to_string("STD/in_sho.ryx").expect("INPUT_SHORT Library Missing");
                     aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "STD.IN.BOO" {
                     let inlib: String =
                         read_to_string("STD/in_boo.ryx").expect("INPUT_BOOLEAN Library Missing");
                     aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "STD.IN.DOU" {
                     let inlib: String =
                         read_to_string("STD/in_dou.ryx").expect("INPUT_DOUBLE Library Missing");
                     aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "STD.IN.LON" {
                     let inlib: String =
                         read_to_string("STD/in_lon.ryx").expect("INPUT_LONG Library Missing");
                     aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "STD.CASE" {
                     let caselib: String =
                         read_to_string("STD/case.ryx").expect("CASE Library Missing");
@@ -275,6 +286,10 @@ fn main() -> io::Result<()> {
                     let rgxlib: String =
                         read_to_string("STD/regex.ryx").expect("REGEX Library Missing");
                     aditlibs.push_str(&rgxlib);
+                    let str: String =
+                        "import java.util.regex.Matcher;import java.util.regex.Pattern;"
+                            .to_string();
+                    imported.push_str(&str);
                 } else if import == "STD.LAMBDA" {
                     uselmd = true;
                     let lmdlib: String =
@@ -284,10 +299,14 @@ fn main() -> io::Result<()> {
                     let shelllib: String =
                         read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
                     aditlibs.push_str(&shelllib);
+                    let str: String = "import java.lang.Process;import java.io.InputStream;import java.util.Scanner;import java.text.SimpleDateFormat;import java.util.Date;".to_string();
+                    imported.push_str(&str);
                 } else if import == "STD.FILEIO" {
                     let fileiolib: String =
                         read_to_string("STD/fileio.ryx").expect("FILEIO Library Missing");
                     aditlibs.push_str(&fileiolib);
+                    let str: String = "import java.io.File;import java.io.FileReader;import java.io.BufferedReader;import java.io.IOException;import java.nio.file.Files;import java.nio.file.Path;".to_string();
+                    imported.push_str(&str);
                 } else {
                     let splitted_import: Vec<&str> = import.split(".").collect();
                     if splitted_import[0] == "java" {
@@ -310,6 +329,10 @@ fn main() -> io::Result<()> {
             } else {
                 continue;
             }
+        }
+        if usescan {
+            let str: String = "import java.util.Scanner;".to_string();
+            imported.push_str(&str);
         }
     }
 

@@ -2,5 +2,3 @@ STD.OUT
 STD.IN.FLO
 STD.IN.LON
 STD.RANDOM
-java.util.Scanner
-java.util.Random

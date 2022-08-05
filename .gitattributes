@@ -1,5 +1,3 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-*.lsmx linguist-language=LOR
-*.vn linguist-language=LOR
-*.ryx linguist-language=LOR
+*.ryx linguist-language=Java

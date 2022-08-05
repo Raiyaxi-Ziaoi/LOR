@@ -26,3 +26,9 @@ private static void write(String filePath, String data) {
         Files.writeString(path, data);
     } catch (IOException e) { e.printStackTrace(); }
 }
+
+private static void append(String filePath, String data) {
+    String readData = read(filePath);
+    readData.concat("\n" + data);
+    write(filePath, readData);
+}

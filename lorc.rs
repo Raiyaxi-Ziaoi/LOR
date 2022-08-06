@@ -282,7 +282,7 @@ fn main() -> io::Result<()> {
                 } else if import == "STD.DATETIME" {
                     let datetimelib: String =
                         read_to_string("STD/datetime.ryx").expect("DATETIME Library Missing");
-                    aditlibs.push_str(&datetime);
+                    aditlibs.push_str(&datetimelib);
                     let str: String = "import java.text.DateFormat;import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;".to_string();
                     imported.push_str(&str);
                 } else if import == "STD.OUT" {

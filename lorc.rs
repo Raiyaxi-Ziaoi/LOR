@@ -215,6 +215,7 @@ fn main() -> io::Result<()> {
     let mut ext: String = "".to_owned();
 
     let mut uselmd: bool = false;
+    let mut usedsk: bool = false;
     let mut usescan: bool = false;
 
     if !skip {
@@ -295,6 +296,13 @@ fn main() -> io::Result<()> {
                     let lmdlib: String =
                         read_to_string("STD/lambda.ryx").expect("LAMBDA Library Missing");
                     libs.push_str(&lmdlib);
+                } else if import == "STD.DESK" {
+                    usedsk = true;
+                    let desklib: String =
+                        read_to_string("STD/desk.ryx").expect("DESK Library Missing");
+                    libs.push_str(&desklib);
+                    let str: String = "import java.util.ArrayList;import java.util.Arrays;import java.util.Collections;import java.util.List;".to_string();
+                    imported.push_str(&str);
                 } else if import == "STD.SHELL" {
                     let shelllib: String =
                         read_to_string("STD/shell.ryx").expect("SHELL Library Missing");
@@ -494,6 +502,10 @@ fn main() -> io::Result<()> {
     if uselmd {
         remove_file("Void.class").expect("VOID delete failed");
         remove_file("Function.class").expect("FUNCTION delete failed");
+    }
+
+    if usedsk {
+        remove_file("Desk.class").expect("DESK delete failed");
     }
 
     Ok(())

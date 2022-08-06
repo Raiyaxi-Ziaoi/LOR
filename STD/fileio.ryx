@@ -8,11 +8,11 @@ private static String read(String filePath) {
     return out;
 }
 
-private static void create(String filePath) {
+private static void create(String filePath, boolean err) {
     try {
         var file = new File(filePath);
         if (file.createNewFile()) {} else {
-            System.out.println(filePath + " already exists.");
+            if (err) { System.out.println(filePath + " already exists."); }
         }
     } catch (IOException e) {
         System.out.println(filePath + " could not be created.");

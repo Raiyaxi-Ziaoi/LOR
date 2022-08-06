@@ -374,6 +374,7 @@ fn main() -> io::Result<()> {
             .replace("abort!", "System.exit(1);")
             .replace("_class", "} class")
             .replace("=>", "{")
+            .replace("$.", "this.")
             .replace("_construct", "public"),
         imports = imported,
         adit = aditlibs,

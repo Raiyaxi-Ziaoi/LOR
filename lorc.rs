@@ -360,7 +360,7 @@ fn main() -> io::Result<()> {
         "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{code}\n\n\n}}",
         name = namef,
         code = file_contents
-            .replace("_fn main()", "public static void main(String[] args)")
+            .replace("fn main()", "public static void main(String[] args)")
             .replace("_fn ", "private static ")
             .replace("fn ", "public static ")
             .replace("ret ", "return ")

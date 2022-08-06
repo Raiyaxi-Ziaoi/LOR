@@ -28,7 +28,5 @@ private static void write(String filePath, String data) {
 }
 
 private static void append(String filePath, String data) {
-    String readData = read(filePath);
-    readData.concat("\n" + data);
-    write(filePath, readData);
+    Files.write(Paths.get(filePath), data.getBytes(), StandardOpenOption.APPEND);
 }

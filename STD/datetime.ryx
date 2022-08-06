@@ -1,0 +1,6 @@
+
+public static String datetime(String format) throws ParseException {
+    var dateFormat = new SimpleDateFormat(format);
+    var date = new Date();        
+    return dateFormat.format(date);
+}

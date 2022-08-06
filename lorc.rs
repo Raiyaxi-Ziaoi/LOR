@@ -279,6 +279,12 @@ fn main() -> io::Result<()> {
                     let waitlib: String =
                         read_to_string("STD/sleep.ryx").expect("SLEEP Library Missing");
                     aditlibs.push_str(&waitlib);
+                } else if import == "STD.DATETIME" {
+                    let datetimelib: String =
+                        read_to_string("STD/datetime.ryx").expect("DATETIME Library Missing");
+                    aditlibs.push_str(&datetime);
+                    let str: String = "import java.text.DateFormat;import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;".to_string();
+                    imported.push_str(&str);
                 } else if import == "STD.OUT" {
                     let outlib: String =
                         read_to_string("STD/out.ryx").expect("OUTPUT Library Missing");

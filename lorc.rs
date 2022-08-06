@@ -355,7 +355,8 @@ fn main() -> io::Result<()> {
         name = namef,
         code = file_contents
             .replace("_fn main()", "public static void main(String[] args)")
-            .replace("_fn", "private static")
+            .replace("_fn ", "private static ")
+            .replace("fn ", "public static ")
             .replace("ret ", "return ")
             .replace("bool ", "boolean ")
             .replace("_match ", "switch ")

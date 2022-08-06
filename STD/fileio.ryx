@@ -28,5 +28,9 @@ private static void write(String filePath, String data) {
 }
 
 private static void append(String filePath, String data) {
-    Files.write(Paths.get(filePath), data.getBytes(), StandardOpenOption.APPEND);
+    try {
+        Files.write(Paths.get(filePath), data.getBytes(), StandardOpenOption.APPEND);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 }

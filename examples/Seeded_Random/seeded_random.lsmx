@@ -1,4 +1,4 @@
-_fn main() {
+fn main() {
     println ("" + 
         random (
             in_flo (
@@ -8,7 +8,7 @@ _fn main() {
     );
 }
 
-::: Functions
+// Functions
 
 _fn double random ( float mult ) {
     ret ps_random (

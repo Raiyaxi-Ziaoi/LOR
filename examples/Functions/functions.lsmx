@@ -1,5 +1,5 @@
 
-_fn main() {
+fn main() {
     func (
         string (
             "Hello World"
@@ -7,7 +7,7 @@ _fn main() {
     );
 }
 
-::: Functions
+// Functions
 
 _fn String string ( String str ) {
     ret str;

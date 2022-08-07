@@ -1,4 +1,5 @@
-_fn main() {
+
+fn main() {
     new_self!
 
     __self__.invokeShell (

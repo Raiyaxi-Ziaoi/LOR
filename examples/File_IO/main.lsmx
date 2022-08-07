@@ -1,14 +1,14 @@
-_fn main() {
+fn main() {
     create (
-        "C:\\Files\\Projects\\GitHub\\LOR\\Test\\test.txt"
+        "helo.txt"
     );
     write (
-        "C:\\Files\\Projects\\GitHub\\LOR\\Test\\test.txt",
+        "hello.txt",
         "Hello World"
     );
     print (
         read (
-            "C:\\Files\\Projects\\GitHub\\LOR\\Test\\test.txt"
+            "hello.txt"
         )
     );
 }

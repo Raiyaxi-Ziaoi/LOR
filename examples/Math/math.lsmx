@@ -1,4 +1,4 @@
-_fn main() {
+fn main() {
     int num = in_int (
         "Please enter a number:"
     );

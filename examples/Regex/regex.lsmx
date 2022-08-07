@@ -1,4 +1,5 @@
-_fn main() {
+
+fn main() {
     println ("Match: " +
         match (
             in_str (

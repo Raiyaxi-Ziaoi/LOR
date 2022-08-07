@@ -1,5 +1,5 @@
 
-_fn main() { 
+fn main() { 
     Function func = () -> {
             String str = "";
             int number = in_int (

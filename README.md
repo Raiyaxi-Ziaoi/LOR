@@ -10,7 +10,7 @@ My own programming language based on Java and with a transpiler made in Rust<br/
 </h2></div>
 <br/>
 <div align="center"><h2>
-ALNOOR Contributers: EdwardElric (Can't thank enough), Lissomix (Co-founder, Same soul), Lewis (Based), Nizzi (Chad, IRL contributer), Oven (Co-founder, IRL contributer), Raiyaxi (Me lmao)<br/>
+ALNOOR Contributers: <br/>EdwardElric (Can't thank enough), <br/>Lissomix (Co-founder, Same soul), <br/>Lewis (Based), <br/>Nizzi (Chad, IRL contributer), <br/>Oven (Co-founder, IRL contributer), <br/>Raiyaxi (Me lmao)<br/>
 If you can't pronounce it, just pronounce it LENOR.
 </h2></div>
 <br/>

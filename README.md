@@ -5,7 +5,7 @@
 <div align="center"><h2>
 <img src="https://i.imgur.com/6YKWjdo.png"></img><br/><br/>
 My own programming language based on Java and with a transpiler made in Rust<br/><br/><a href="#">
-    <img src="https://i.imgur.com/SJyCJa5.png" width="50%"/>
+    <img src="https://i.imgur.com/p9RP9uK.png" width="50%"/>
 </a><br/><br/>Made by Raiyaxi Ziaoi
 </h2></div>
 <br/>

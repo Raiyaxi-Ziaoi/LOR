@@ -10,7 +10,7 @@ My own programming language based on Java and with a transpiler made in Rust<br/
 </h2></div>
 <br/>
 <div align="center"><h2>
-ALNOOR : Lissomix - Lewis, Nizzi, Oven, Raiyaxi<br/>
+ALNOOR : EdwardElric, Lissomix - Lewis, Nizzi, Oven, Raiyaxi<br/>
 If you can't pronounce it, just pronounce it LENOR.
 </h2></div>
 <br/>

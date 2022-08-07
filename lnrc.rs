@@ -317,7 +317,7 @@ fn main() -> io::Result<()> {
                     imported.push_str(&str);
                 } else if import == "CORE.FILEIO" {
                     let fileiolib: String =
-                        read_to_string("STD/fileio.ryx").expect("CORE.FILEIO Library Missing");
+                        read_to_string("CORE/fileio.ryx").expect("CORE.FILEIO Library Missing");
                     aditlibs.push_str(&fileiolib);
                     let str: String = "import java.io.File;import java.io.FileReader;import java.io.BufferedReader;import java.io.IOException;import java.nio.file.Files;import java.nio.file.Path;import java.nio.file.StandardOpenOption;import java.nio.file.Paths;".to_string();
                     imported.push_str(&str);

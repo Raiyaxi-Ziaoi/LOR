@@ -1,6 +1,6 @@
 <img src="https://i.imgur.com/lRzzpEU.png"></img>
 
-# LOR
+# ALNOOR / LENOR
 
 <div align="center"><h2>
 <img src="https://i.imgur.com/6YKWjdo.png"></img><br/><br/>
@@ -10,23 +10,24 @@ My own programming language based on Java and with a transpiler made in Rust<br/
 </h2></div>
 <br/>
 <div align="center"><h2>
-LOR : Lissomix, Oven, Raiyaxi
+ALNOOR : Lissomix - Lewis, Nizzi, Oven, Raiyaxi<br/>
+If you can't pronounce it, just pronounce it LENOR.
 </h2></div>
 <br/>
 You must have the JVM and the Rust compiler installed.
 <br/>
 <br/>
-Compile the lorc.rs file and then run from the terminal:<br/><br/>
+Compile the lnrc.rs file and then run from the terminal:<br/><br/>
 Windows:<br/>
 
 ```cmd
-lorc.exe -h
+lnrc.exe -h
 ```
 
 <br/>Linux:<br/>
 
 ```cmd
-./lorc -h
+./lnrc -h
 ```
 
 This will display a help screen.<br/><br/>Then do:
@@ -34,19 +35,19 @@ This will display a help screen.<br/><br/>Then do:
 <br/>Windows:<br/>
 
 ```cmd
-lorc.exe -a examples/Hello/hello.lsmx examples/Hello/config.vn
+lnrc.exe -a examples/Hello/hello.lsmx examples/Hello/config.vn
 ```
 
 <br/>Linux:<br/>
 
 ```cmd
-./lorc -a examples/Hello/hello.lsmx examples/Hello/config.vn
+./lnrc -a examples/Hello/hello.lsmx examples/Hello/config.vn
 ```
 
 <br/> This will transpile and run the "hello.lsmx" file located in the "examples/Hello" folder.
 <br/><br/>
 
-LOR provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.
+ALNOOR provides a more concise syntax compared to Java but is still usable by Java developers. Think of it like Kotlin to Java. The compiler can be freely edited and optimised by the user.
 <br/><br/>
 In future updates I hope that it will be a functional language with a focus on scientific computing.
 <br/><br/>

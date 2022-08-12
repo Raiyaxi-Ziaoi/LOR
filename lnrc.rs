@@ -323,7 +323,7 @@ fn main() -> io::Result<()> {
                     imported.push_str(&str);
                 } else {
                     let splitted_import: Vec<&str> = import.split(".").collect();
-                    if splitted_import[0] == "java" {
+                    if splitted_import[0] == "java" || splitted_import[0] == "javax" {
                         let str: String = format!("import {};", import);
                         imported.push_str(&str);
                     } else if splitted_import[1] == "ryx" {
@@ -336,7 +336,7 @@ fn main() -> io::Result<()> {
                         ext.push_str(&importfile);
                     } else {
                         panic!(
-                            "Wrong file name! Imported file must end in \".ryx\", \".lsmx\", be a Java import or be part of the LOR library."
+                            "Wrong file name! Imported file must end in \".ryx\", \".lsmx\", be a Java import or be part of the ALNOOR library."
                         );
                     }
                 }

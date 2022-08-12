@@ -8,5 +8,5 @@ private static boolean match(String str, String regex) {
 private static String replace(String str, String replace, String regex) {
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(str);
-    return m.replaceAll(replcae);
+    return m.replaceAll(replace);
 }

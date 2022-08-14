@@ -1,0 +1,33 @@
+
+_fn int start() {
+    Function<Object> function = (Object... in) l> {
+        if ((char)in[2] == '+') ret (int)in[0] + (int)in[1];
+        if ((char)in[2] == '-') ret (int)in[0] - (int)in[1];
+        if ((char)in[2] == '*') ret (int)in[0] * (int)in[1];
+        if ((char)in[2] == '/') ret (int)in[0] / (int)in[1];
+        ret "\nUnknown operation";
+    };
+
+    relay (
+        function.call (
+            new Object[] {
+                in_int (
+                    "Enter x: "
+                ),
+                in_int (
+                    "\nEnter y: "
+                ),
+                in_cha (
+                    "\nEnter operation: "
+                )
+            }
+        ).toString();
+    );
+    ret 0;
+}
+
+fn main() {
+    exit (
+        start()
+    );
+}

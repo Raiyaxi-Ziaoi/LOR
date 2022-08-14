@@ -1,0 +1,25 @@
+
+private static char in_cha(String msg) {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    System.out.println(msg);
+    char toRet = sc.next().charAt(0);
+    return toRet;
+}
+
+private static char in_cha() {
+    try {
+        System.in.available();
+    } catch (Exception e) {
+        System.out.println("Input stream not available.");
+        System.exit(1);
+    }
+    var sc = new Scanner(System.in);
+    char toRet = sc.next().charAt(0);
+    return toRet;
+}

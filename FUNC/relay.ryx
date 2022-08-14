@@ -1,0 +1,8 @@
+
+private static void relay(char c) {
+    System.out.print(c);
+}
+
+private static void relay(String str) {
+    System.out.print(str);
+}

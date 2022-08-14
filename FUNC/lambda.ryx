@@ -1,0 +1,9 @@
+interface Function<X>
+{
+    X call(X[] x);
+}
+
+
+interface Void {
+	public void call();
+}

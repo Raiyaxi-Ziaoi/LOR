@@ -261,6 +261,11 @@ fn main() -> io::Result<()> {
                         .expect("CORE.INPUT_BOOLEAN Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
+                } else if import == "CORE.IN.CHA" {
+                    let inlib: String = read_to_string("CORE/in_cha.ryx")
+                        .expect("CORE.INPUT_CHARACTER Library Missing");
+                    aditlibs.push_str(&inlib);
+                    usescan = true;
                 } else if import == "CORE.IN.DOU" {
                     let inlib: String = read_to_string("CORE/in_dou.ryx")
                         .expect("CORE.INPUT_DOUBLE Library Missing");
@@ -297,15 +302,15 @@ fn main() -> io::Result<()> {
                         "import java.util.regex.Matcher;import java.util.regex.Pattern;"
                             .to_string();
                     imported.push_str(&str);
-                } else if import == "CORE.LAMBDA" {
+                } else if import == "FUNC.LAMBDA" {
                     uselmd = true;
                     let lmdlib: String =
-                        read_to_string("CORE/lambda.ryx").expect("CORE.LAMBDA Library Missing");
+                        read_to_string("FUNC/lambda.ryx").expect("FUNC.LAMBDA Library Missing");
                     libs.push_str(&lmdlib);
-                } else if import == "CORE.DESK" {
+                } else if import == "STAT.DESK" {
                     usedsk = true;
                     let desklib: String =
-                        read_to_string("CORE/desk.ryx").expect("CORE.DESK Library Missing");
+                        read_to_string("STAT/desk.ryx").expect("STAT.DESK Library Missing");
                     libs.push_str(&desklib);
                     let str: String = "import java.util.ArrayList;import java.util.Arrays;import java.util.Collections;import java.util.List;".to_string();
                     imported.push_str(&str);
@@ -321,6 +326,14 @@ fn main() -> io::Result<()> {
                     aditlibs.push_str(&fileiolib);
                     let str: String = "import java.io.File;import java.io.FileReader;import java.io.BufferedReader;import java.io.IOException;import java.nio.file.Files;import java.nio.file.Path;import java.nio.file.StandardOpenOption;import java.nio.file.Paths;".to_string();
                     imported.push_str(&str);
+                } else if import == "CORE.HASH" {
+                    let hashlib: String =
+                        read_to_string("CORE/hash.ryx").expect("CORE.HASH Library Missing");
+                    aditlibs.push_str(&hashlib);
+                } else if import == "FUNC.RELAY" {
+                    let relaylib: String =
+                        read_to_string("FUNC/relay.ryx").expect("FUNC.RELAY Library Missing");
+                    aditlibs.push_str(&relaylib);
                 } else {
                     let splitted_import: Vec<&str> = import.split(".").collect();
                     if splitted_import[0] == "java" || splitted_import[0] == "javax" {
@@ -336,12 +349,10 @@ fn main() -> io::Result<()> {
                         ext.push_str(&importfile);
                     } else {
                         panic!(
-                            "Wrong file name! Imported file must end in \".ryx\", \".lsmx\", be a Java import or be part of the ALNOOR library."
+                            "Imported file must end in \".ryx\", \".lsmx\", be a Java import or be part of the ALNOOR library."
                         );
                     }
                 }
-            } else {
-                continue;
             }
         }
         if usescan {
@@ -354,7 +365,7 @@ fn main() -> io::Result<()> {
 
     // TRANSPARSING {
 
-    let self_dund = format!("var __self__ = new {}();", namef);
+    let self_dund = format!("var _self = new {}();", namef);
 
     let to_write: String = format!(
         "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{code}\n\n\n}}",
@@ -371,9 +382,11 @@ fn main() -> io::Result<()> {
             .replace("new_self!", &self_dund)
             .replace("exit!", "System.exit(0);")
             .replace("abort!", "System.exit(1);")
+            .replace("exit", "System.exit")
             .replace("_class", "} class")
             .replace("=>", "{")
             .replace("$.", "this.")
+            .replace("l>", "->")
             .replace("_construct", "public"),
         imports = imported,
         adit = aditlibs,

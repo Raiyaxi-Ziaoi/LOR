@@ -1,0 +1,4 @@
+
+private static int hash(Object o) {
+	return o.hashCode();
+}

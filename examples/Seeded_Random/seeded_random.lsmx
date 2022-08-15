@@ -1,5 +1,5 @@
 fn main() {
-    println ("" + 
+    println! ("" + 
         random (
             in_flo (
                 "Please enter offset:"

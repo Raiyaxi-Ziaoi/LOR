@@ -1,12 +1,12 @@
 fn main() {
     create (
-        "helo.txt"
+        "hello.txt"
     );
     write (
         "hello.txt",
         "Hello World"
     );
-    print (
+    print! (
         read (
             "hello.txt"
         )

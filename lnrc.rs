@@ -217,6 +217,7 @@ fn main() -> io::Result<()> {
     let mut uselmd: bool = false;
     let mut usedsk: bool = false;
     let mut usescan: bool = false;
+    let mut useequ: bool = false;
 
     if !skip {
         for import in to_import {
@@ -229,7 +230,7 @@ fn main() -> io::Result<()> {
                     let randomlib: String =
                         read_to_string("CORE/random.ryx").expect("CORE.RANDOM Library Missing");
                     aditlibs.push_str(&randomlib);
-                    let str: String = "import java.util.Random;".to_string();
+                    let str: String = "\nimport java.util.Random;".to_string();
                     imported.push_str(&str);
                 } else if import == "CORE.IN.STR" {
                     let inlib: String = read_to_string("CORE/in_str.ryx")
@@ -288,7 +289,7 @@ fn main() -> io::Result<()> {
                     let datetimelib: String =
                         read_to_string("CORE/datetime.ryx").expect("CORE.DATETIME Library Missing");
                     aditlibs.push_str(&datetimelib);
-                    let str: String = "import java.text.DateFormat;import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;".to_string();
+                    let str: String = "\nimport java.text.DateFormat;\nimport java.text.ParseException;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;".to_string();
                     imported.push_str(&str);
                 } else if import == "CORE.OUT" {
                     let outlib: String =
@@ -299,7 +300,7 @@ fn main() -> io::Result<()> {
                         read_to_string("CORE/regex.ryx").expect("CORE.REGEX Library Missing");
                     aditlibs.push_str(&rgxlib);
                     let str: String =
-                        "import java.util.regex.Matcher;import java.util.regex.Pattern;"
+                        "\nimport java.util.regex.Matcher;\nimport java.util.regex.Pattern;"
                             .to_string();
                     imported.push_str(&str);
                 } else if import == "FUNC.LAMBDA" {
@@ -312,19 +313,27 @@ fn main() -> io::Result<()> {
                     let desklib: String =
                         read_to_string("STAT/desk.ryx").expect("STAT.DESK Library Missing");
                     libs.push_str(&desklib);
-                    let str: String = "import java.util.ArrayList;import java.util.Arrays;import java.util.Collections;import java.util.List;".to_string();
+                    let str: String = "\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.List;".to_string();
                     imported.push_str(&str);
+                } else if import == "MATH.EQU" {
+                    let mathlib: String =
+                        read_to_string("MATH/equations.ryx").expect("MATH.EQU Library Missing");
+                    libs.push_str(&mathlib);
+                    let str: String =
+                        "\nimport java.util.ArrayList;\nimport java.util.HashMap;".to_string();
+                    imported.push_str(&str);
+                    useequ = true;
                 } else if import == "CORE.SHELL" {
                     let shelllib: String =
                         read_to_string("STD/shell.ryx").expect("CORE.SHELL Library Missing");
                     aditlibs.push_str(&shelllib);
-                    let str: String = "import java.lang.Process;import java.io.InputStream;import java.util.Scanner;import java.text.SimpleDateFormat;import java.util.Date;".to_string();
+                    let str: String = "\nimport java.lang.Process;\nimport java.io.InputStream;\nimport java.util.Scanner;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;".to_string();
                     imported.push_str(&str);
                 } else if import == "CORE.FILEIO" {
                     let fileiolib: String =
                         read_to_string("CORE/fileio.ryx").expect("CORE.FILEIO Library Missing");
                     aditlibs.push_str(&fileiolib);
-                    let str: String = "import java.io.File;import java.io.FileReader;import java.io.BufferedReader;import java.io.IOException;import java.nio.file.Files;import java.nio.file.Path;import java.nio.file.StandardOpenOption;import java.nio.file.Paths;".to_string();
+                    let str: String = "\nimport java.io.File;\nimport java.io.FileReader;\nimport java.io.BufferedReader;\nimport java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.nio.file.StandardOpenOption;\nimport java.nio.file.Paths;".to_string();
                     imported.push_str(&str);
                 } else if import == "CORE.HASH" {
                     let hashlib: String =
@@ -356,7 +365,7 @@ fn main() -> io::Result<()> {
             }
         }
         if usescan {
-            let str: String = "import java.util.Scanner;".to_string();
+            let str: String = "\nimport java.util.Scanner;".to_string();
             imported.push_str(&str);
         }
     }
@@ -387,6 +396,8 @@ fn main() -> io::Result<()> {
             .replace("=>", "{")
             .replace("$.", "this.")
             .replace("l>", "->")
+            .replace("print!", "System.out.print")
+            .replace("println!", "System.out.println")
             .replace("_construct", "public"),
         imports = imported,
         adit = aditlibs,
@@ -526,6 +537,12 @@ fn main() -> io::Result<()> {
 
     if usedsk {
         remove_file("Desk.class").expect("DESK delete failed");
+    }
+
+    if useequ {
+        remove_file("Equ.class").expect("Equ delete failed");
+        remove_file("Equ$MathFunction.class").expect("EquMathFunction delete failed");
+        remove_file("Equ$MathParsingExeption.class").expect("EquMathParsingExeption delete failed");
     }
 
     Ok(())

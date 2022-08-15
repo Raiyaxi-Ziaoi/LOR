@@ -1,6 +1,6 @@
 
 fn main() {
-    println ("Match: " +
+    println! ("Match: " +
         match (
             in_str (
                 "Please enter a string: "

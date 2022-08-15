@@ -1,12 +1,4 @@
 
-private static void print(String str) {
-	System.out.print(str);
-}
-
-private static void println(String str) {
-	System.out.println(str);
-}
-
 private static void print(String[] stra) {
 	for (String str: stra) {
 		System.out.print(str);

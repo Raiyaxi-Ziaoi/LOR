@@ -5,7 +5,7 @@ fn main() {
 
     nl(1);
 
-    println ("" +
+    println! ("" +
         q_rsqrt (
             (double) num
         )

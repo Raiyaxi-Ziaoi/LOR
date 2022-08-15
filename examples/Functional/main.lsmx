@@ -1,14 +1,14 @@
 
 _fn int start() {
     Function<Object> function = (Object... in) l> {
-        if ((char)in[2] == '+') ret (int)in[0] + (int)in[1];
-        if ((char)in[2] == '-') ret (int)in[0] - (int)in[1];
-        if ((char)in[2] == '*') ret (int)in[0] * (int)in[1];
-        if ((char)in[2] == '/') ret (int)in[0] / (int)in[1];
+        if ((char)in[2] == '+') ret "\n" + in[0] + " " + in[2] + " "  + in[1] + " = " + ((int)in[0] + (int)in[1]);
+        if ((char)in[2] == '-') ret "\n" + in[0] + " " + in[2] + " "  + in[1] + " = " + ((int)in[0] - (int)in[1]);
+        if ((char)in[2] == '*') ret "\n" + in[0] + " " + in[2] + " "  + in[1] + " = " + ((int)in[0] * (int)in[1]);
+        if ((char)in[2] == '/') ret "\n" + in[0] + " " + in[2] + " "  + in[1] + " = " + ((int)in[0] / (int)in[1]);
         ret "\nUnknown operation";
     };
 
-    relay (
+    relay ( 
         function.call (
             new Object[] {
                 in_int (
@@ -21,7 +21,7 @@ _fn int start() {
                     "\nEnter operation: "
                 )
             }
-        ).toString();
+        ).toString()
     );
     ret 0;
 }

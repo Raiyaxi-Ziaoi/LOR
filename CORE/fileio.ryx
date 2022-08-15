@@ -34,3 +34,8 @@ private static void append(String filePath, String data) {
         e.printStackTrace();
     }
 }
+
+private static void delete(String filePath) {
+    var file = new File(filePath); 
+    file.delete();
+}

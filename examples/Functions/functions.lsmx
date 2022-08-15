@@ -14,7 +14,7 @@ _fn String string ( String str ) {
 }
 
 _fn void func ( String str ) {
-    println(
+    println! (
         str
     );
 }

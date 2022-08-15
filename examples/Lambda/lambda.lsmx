@@ -10,7 +10,7 @@ fn main() {
             ret str;
     };
 
-    println ("\n" +
+    println! ("\n" +
         func
         .call()
         .toString()

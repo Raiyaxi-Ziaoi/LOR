@@ -1,0 +1,11 @@
+
+fn main() {
+    println! ( 
+        "\n" + 
+        new Equ().parse (
+            in_str (
+                "Please enter an equation: "
+            )
+        )
+    );
+}

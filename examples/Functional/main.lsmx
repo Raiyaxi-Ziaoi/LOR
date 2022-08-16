@@ -1,10 +1,10 @@
 
 _fn int start() {
     Function<Object> function = (Object... in) l> {
-        if ((char)in[2] == '+') ret "\n" + in[0] + " " + in[2] + " "  + in[1] + " = " + ((int)in[0] + (int)in[1]);
-        if ((char)in[2] == '-') ret "\n" + in[0] + " " + in[2] + " "  + in[1] + " = " + ((int)in[0] - (int)in[1]);
-        if ((char)in[2] == '*') ret "\n" + in[0] + " " + in[2] + " "  + in[1] + " = " + ((int)in[0] * (int)in[1]);
-        if ((char)in[2] == '/') ret "\n" + in[0] + " " + in[2] + " "  + in[1] + " = " + ((int)in[0] / (int)in[1]);
+        if ((char)in[2] == '+') ret format!("{0} {1} {2} = {3}", in[0], in[2], in[1], (int)in[0] + (int)in[1]);
+        else if ((char)in[2] == '-') ret format!("{0} {1} {2} = {3}", in[0], in[2], in[1], (int)in[0] - (int)in[1]);
+        else if ((char)in[2] == '*') ret format!("{0} {1} {2} = {3}", in[0], in[2], in[1], (int)in[0] * (int)in[1]);
+        else if ((char)in[2] == '/') ret format!("{0} {1} {2} = {3}", in[0], in[2], in[1], (int)in[0] / (int)in[1]);        
         ret "\nUnknown operation";
     };
 

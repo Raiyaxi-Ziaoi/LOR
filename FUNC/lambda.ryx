@@ -4,6 +4,7 @@ interface Function<X>
 }
 
 
-interface Void {
-	public void call();
+interface Void<X>
+{
+    void call(X[] x);
 }

@@ -1,0 +1,17 @@
+#def const int FIRST_ARG = 0; 
+
+_fn entry(String... args) {
+    relay (
+        args [
+            FIRST_ARG
+        ]
+    );
+}
+
+fn main() {
+    exit! (
+        entry (
+            args!
+        );
+    );
+}

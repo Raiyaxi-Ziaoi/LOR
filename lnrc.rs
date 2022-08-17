@@ -67,7 +67,7 @@ fn main() -> io::Result<()> {
         std::process::abort();
         // }
     } else if cleanup_mode == "-innit_default"
-        || cleanup_mode == "-init_default"
+        || cleanup_mode == "-init-default"
         || cleanup_mode == "-id"
     {
         fs::create_dir(source_file)?;

@@ -26,7 +26,7 @@ fn main() -> io::Result<()> {
     if cleanup_mode == "-v" || cleanup_mode == "--version" {
         println!(
             "{}",
-            read_to_string("CORE/.version").expect("Version Missing")
+            read_to_string("STD/CORE/.version").expect("Version Missing")
         );
         std::process::abort();
     } else if cleanup_mode == "-h" || cleanup_mode == "--help" || cleanup_mode == "-?" {
@@ -225,71 +225,71 @@ fn main() -> io::Result<()> {
                 if import == "None" {
                     break;
                 } else if import == "CORE > IN > STR" {
-                    let inlib: String = read_to_string("CORE/in_str.ryx")
+                    let inlib: String = read_to_string("STD/CORE/in_str.ryx")
                         .expect("CORE > INPUT > STRING Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > IN > INT" {
                     let inlib: String = read_to_string("CORE/in_int.ryx")
-                        .expect("CORE.INPUT_INTEGER Library Missing");
+                        .expect("CORE > INPUT > INTEGER Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > IN > FLO" {
-                    let inlib: String = read_to_string("CORE/in_flo.ryx")
+                    let inlib: String = read_to_string("STD/CORE/in_flo.ryx")
                         .expect("CORE > INPUT > FLOAT Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > IN > BYT" {
-                    let inlib: String = read_to_string("CORE/in_byt.ryx")
+                    let inlib: String = read_to_string("STD/CORE/in_byt.ryx")
                         .expect("CORE > INPUT > BYTE Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > IN > SHO" {
-                    let inlib: String = read_to_string("CORE/in_sho.ryx")
+                    let inlib: String = read_to_string("STD/CORE/in_sho.ryx")
                         .expect("CORE > INPUT > SHORT Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > IN > BOO" {
-                    let inlib: String = read_to_string("CORE/in_boo.ryx")
+                    let inlib: String = read_to_string("STD/CORE/in_boo.ryx")
                         .expect("CORE > INPUT > BOOL Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > IN > CHAR" {
-                    let inlib: String = read_to_string("CORE/in_cha.ryx")
+                    let inlib: String = read_to_string("STD/CORE/in_cha.ryx")
                         .expect("CORE > INPUT > CHAR Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > IN > DOU" {
-                    let inlib: String = read_to_string("CORE/in_dou.ryx")
+                    let inlib: String = read_to_string("STD/CORE/in_dou.ryx")
                         .expect("CORE > INPUT > DOUBLE Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > IN > LON" {
-                    let inlib: String = read_to_string("CORE/in_lon.ryx")
+                    let inlib: String = read_to_string("STD/CORE/in_lon.ryx")
                         .expect("CORE > INPUT > LONG Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "CORE > CASE" {
                     let caselib: String =
-                        read_to_string("CORE/case.ryx").expect("CORE > CASE Library Missing");
+                        read_to_string("STD/CORE/case.ryx").expect("CORE > CASE Library Missing");
                     aditlibs.push_str(&caselib);
                 } else if import == "CORE > SLEEP" {
                     let waitlib: String =
-                        read_to_string("CORE/sleep.ryx").expect("CORE > SLEEP Library Missing");
+                        read_to_string("STD/CORE/sleep.ryx").expect("CORE > SLEEP Library Missing");
                     aditlibs.push_str(&waitlib);
                 } else if import == "CORE > DATETIME" {
-                    let datetimelib: String = read_to_string("CORE/datetime.ryx")
+                    let datetimelib: String = read_to_string("STD/CORE/datetime.ryx")
                         .expect("CORE > DATETIME Library Missing");
                     aditlibs.push_str(&datetimelib);
                     let str: String = "\nimport java.text.DateFormat;\nimport java.text.ParseException;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;".to_string();
                     imported.push_str(&str);
                 } else if import == "CORE > OUT" {
                     let outlib: String =
-                        read_to_string("CORE/out.ryx").expect("CORE > OUTPUT Library Missing");
+                        read_to_string("STD/CORE/out.ryx").expect("CORE > OUTPUT Library Missing");
                     aditlibs.push_str(&outlib);
                 } else if import == "CORE > REGEX" {
                     let rgxlib: String =
-                        read_to_string("CORE/regex.ryx").expect("CORE > REGEX Library Missing");
+                        read_to_string("STD/CORE/regex.ryx").expect("CORE > REGEX Library Missing");
                     aditlibs.push_str(&rgxlib);
                     let str: String =
                         "\nimport java.util.regex.Matcher;\nimport java.util.regex.Pattern;"
@@ -302,37 +302,37 @@ fn main() -> io::Result<()> {
                     let str: String = "\nimport java.lang.Process;\nimport java.io.InputStream;\nimport java.util.Scanner;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;".to_string();
                     imported.push_str(&str);
                 } else if import == "CORE > FILEIO" {
-                    let fileiolib: String =
-                        read_to_string("CORE/fileio.ryx").expect("CORE > FILEIO Library Missing");
+                    let fileiolib: String = read_to_string("STD/CORE/fileio.ryx")
+                        .expect("CORE > FILEIO Library Missing");
                     aditlibs.push_str(&fileiolib);
                     let str: String = "\nimport java.io.File;\nimport java.io.FileReader;\nimport java.io.BufferedReader;\nimport java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.nio.file.StandardOpenOption;\nimport java.nio.file.Paths;".to_string();
                     imported.push_str(&str);
                 } else if import == "CORE > HASH" {
                     let hashlib: String =
-                        read_to_string("CORE/hash.ryx").expect("CORE > HASH Library Missing");
+                        read_to_string("STD/CORE/hash.ryx").expect("CORE > HASH Library Missing");
                     aditlibs.push_str(&hashlib);
                 } else if import == "CORE > FORMAT" {
                     let str: String = "\nimport java.text.MessageFormat;".to_string();
                     imported.push_str(&str);
                 } else if import == "FUNC > RELAY" {
                     let relaylib: String =
-                        read_to_string("FUNC/relay.ryx").expect("FUNC > RELAY Library Missing");
+                        read_to_string("STD/FUNC/relay.ryx").expect("FUNC > RELAY Library Missing");
                     aditlibs.push_str(&relaylib);
                 } else if import == "FUNC > LAMBDA" {
                     uselmd = true;
-                    let lmdlib: String =
-                        read_to_string("FUNC/lambda.ryx").expect("FUNC > LAMBDA Library Missing");
+                    let lmdlib: String = read_to_string("STD/FUNC/lambda.ryx")
+                        .expect("FUNC > LAMBDA Library Missing");
                     libs.push_str(&lmdlib);
                 } else if import == "STAT > DESK" {
                     usedsk = true;
                     let desklib: String =
-                        read_to_string("STAT/desk.ryx").expect("STAT > DESK Library Missing");
+                        read_to_string("STD/STAT/desk.ryx").expect("STAT > DESK Library Missing");
                     libs.push_str(&desklib);
                     let str: String = "\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.List;".to_string();
                     imported.push_str(&str);
                 } else if import == "MATH > EQU" {
                     let mathlib: String =
-                        read_to_string("MATH/equations.ryx").expect("MATH.EQU Library Missing");
+                        read_to_string("STD/MATH/equations.ryx").expect("MATH.EQU Library Missing");
                     libs.push_str(&mathlib);
                     let str: String =
                         "\nimport java.util.ArrayList;\nimport java.util.HashMap;".to_string();
@@ -340,11 +340,11 @@ fn main() -> io::Result<()> {
                     useequ = true;
                 } else if import == "MATH > SQRT" {
                     let sqrtlib: String =
-                        read_to_string("MATH/sqrts.ryx").expect("MATH > SQRT Library Missing");
+                        read_to_string("STD/MATH/sqrts.ryx").expect("MATH > SQRT Library Missing");
                     aditlibs.push_str(&sqrtlib);
                 } else if import == "MATH > RANDOM" {
-                    let randomlib: String =
-                        read_to_string("MATH/random.ryx").expect("MATH > RANDOM Library Missing");
+                    let randomlib: String = read_to_string("STD/MATH/random.ryx")
+                        .expect("MATH > RANDOM Library Missing");
                     aditlibs.push_str(&randomlib);
                     let str: String = "\nimport java.util.Random;".to_string();
                     imported.push_str(&str);
@@ -401,9 +401,11 @@ fn main() -> io::Result<()> {
             .replace("println!", "System.out.println")
             .replace("format!", "MessageFormat.format")
             .replace("args!", "args")
-            .replace("exit ", "System.exit ")
+            .replace("exit(", "System.exit(")
+            .replace("exit (", "System.exit (")
             .replace("_class", "} class")
             .replace("_construct", "public")
+            .replace("_catch", "catch(Exception e) { e.printStackTrace(); }")
             .replace("=>", "{")
             .replace("$.", "this.")
             .replace("l>", "->"),

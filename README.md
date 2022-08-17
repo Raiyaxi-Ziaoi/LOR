@@ -1,6 +1,6 @@
 <img src="https://i.imgur.com/lRzzpEU.png"></img>
 
-# ALNOOR / LENOR
+# ALNOOR
 
 <div align="center"><h2>
 <img src="https://i.imgur.com/6YKWjdo.png"></img><br/><br/>

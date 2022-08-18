@@ -218,6 +218,8 @@ fn main() -> io::Result<()> {
     let mut usedsk: bool = false;
     let mut usescan: bool = false;
     let mut useequ: bool = false;
+    let mut uselg: bool = false;
+    let mut usebg: bool = false;
 
     if !skip {
         for import in to_import {
@@ -329,6 +331,20 @@ fn main() -> io::Result<()> {
                         read_to_string("STD/STAT/desk.ryx").expect("STAT > DESK Library Missing");
                     libs.push_str(&desklib);
                     let str: String = "\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.List;".to_string();
+                    imported.push_str(&str);
+                } else if import == "STAT > LGRAPH" {
+                    uselg = true;
+                    let lglib: String = read_to_string("STD/STAT/lgraph.ryx")
+                        .expect("STAT > LGRAPH Library Missing");
+                    libs.push_str(&lglib);
+                    let str: String = "\nimport java.awt.BasicStroke;\nimport java.awt.Color;\nimport java.awt.Dimension;\nimport java.awt.Graphics;\nimport java.awt.Graphics2D;\nimport java.awt.Point;\nimport java.awt.RenderingHints;\nimport java.awt.Stroke;\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.Random;\nimport javax.swing.*;\nimport java.util.LinkedList;".to_string();
+                    imported.push_str(&str);
+                } else if import == "STAT > BGRAPH" {
+                    usebg = true;
+                    let bglib: String = read_to_string("STD/STAT/bgraph.ryx")
+                        .expect("STAT > BGRAPH Library Missing");
+                    libs.push_str(&bglib);
+                    let str: String = "\nimport java.awt.Color;\nimport java.awt.Dimension;\nimport java.awt.Font;\nimport java.awt.FontMetrics;\nimport java.awt.Graphics;\nimport javax.swing.JFrame;\nimport javax.swing.JPanel;".to_string();
                     imported.push_str(&str);
                 } else if import == "MATH > EQU" {
                     let mathlib: String =
@@ -553,6 +569,14 @@ fn main() -> io::Result<()> {
         remove_file("Equ.class").expect("Equ delete failed");
         remove_file("Equ$MathFunction.class").expect("EquMathFunction delete failed");
         remove_file("Equ$MathParsingExeption.class").expect("EquMathParsingExeption delete failed");
+    }
+
+    if uselg {
+        remove_file("LGraph.class").expect("LGraph delete failed");
+        remove_file("LGraph$1.class").expect("LGraph$1 delete failed");
+    }
+    if usebg {
+        remove_file("BGraph.class").expect("BGraph delete failed");
     }
 
     Ok(())

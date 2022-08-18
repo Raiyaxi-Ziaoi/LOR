@@ -1,0 +1,17 @@
+
+fn main() {
+    var points = new LinkedList<Integer>();
+
+    for (int i = 0; i < 10; i++) points.add(i + 1);
+
+    new LGraph (
+        points,         // Points
+        50,             // Max value displayed
+        500,            // Preferred width
+        500,            // Preffered height
+        10,             // Gap between borders 
+        Color.BLACK,    // Color of points and stroke
+        2,              // Size of stroke
+        10              // Size of points
+    ).display();
+}

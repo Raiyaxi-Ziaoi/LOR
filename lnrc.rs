@@ -391,7 +391,7 @@ fn main() -> io::Result<()> {
             .replace("ret ", "return ")
             .replace("bool ", "boolean ")
             .replace("_match ", "switch ")
-            .replace("elif", "else if")
+            .replace("elif ", "else if ")
             .replace("const ", "final ")
             .replace("#def ", "private static ")
             .replace("new_self!", &self_dund)
@@ -405,7 +405,7 @@ fn main() -> io::Result<()> {
             .replace("exit (", "System.exit (")
             .replace("_class", "} class")
             .replace("_construct", "public")
-            .replace("_catch", "catch(Exception e) { e.printStackTrace(); }")
+            .replace("_catch;", "catch(Exception e) { e.printStackTrace(); }")
             .replace("=>", "{")
             .replace("$.", "this.")
             .replace("l>", "->"),

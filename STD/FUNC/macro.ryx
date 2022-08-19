@@ -1,22 +1,22 @@
 
-interface IMacro
+interface MacroFunction
 {
-    void call(String[] tokens, String[] stack, String[] registers);
+    void call(String[] tokens, ArrayList<String> stack, ArrayList<String> registers);
 }
 
 class Macro {
 
     private String[] keywords;
-    private IMacro[] functions;
+    private MacroFunction[] functions;
 
-    public Macro(String[] keywords, IMacro[] functions) {  
+    public Macro(String[] keywords, MacroFunction[] functions) {  
         this.keywords = keywords;
         this.functions = functions; 
     }  
 
     public void parse(String[] program) {
-        String[] stack = new String[256];
-        String[] registers = new String[256];
+        ArrayList<String> stack = new ArrayList<String>();
+        ArrayList<String> registers = new ArrayList<String>();
 
         for (String line : program) {
             String[] tokens = line.split(", ");

@@ -331,8 +331,7 @@ fn main() -> io::Result<()> {
                     let mplib: String =
                         read_to_string("STD/FUNC/macro.ryx").expect("FUNC > MACRO Library Missing");
                     libs.push_str(&mplib);
-                    let str: String =
-                        "\nimport java.util.Arrays;\nimport java.lang.reflect.Array;".to_string();
+                    let str: String = "\nimport java.util.ArrayList;".to_string();
                     imported.push_str(&str);
                 } else if import == "STAT > DESK" {
                     usedsk = true;
@@ -590,7 +589,7 @@ fn main() -> io::Result<()> {
     }
 
     if usemp {
-        remove_file("IMacro.class").expect("IMacro delete failed");
+        remove_file("MacroFunction.class").expect("MacroFunction delete failed");
         remove_file("Macro.class").expect("Macro delete failed");
     }
 

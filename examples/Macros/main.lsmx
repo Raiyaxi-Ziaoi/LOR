@@ -1,11 +1,10 @@
-#def String[] keywords = {"HELLO"};
-#def String[] program = {"HELLO"};
-#def IMacro[] functions = new IMacro[1];
+#def String[] keywords = {"HELLOWORLD"};
+#def String[] program = {"HELLOWORLD"};
+#def MacroFunction[] functions = new MacroFunction[1];
 
 fn main() {
-
     functions[0] = (tokens, stack, registers) l> {
-        println!("Hello");
+        println!("Hello world!");
     };
 
     var macro = new Macro(keywords, functions);

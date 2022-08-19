@@ -220,6 +220,7 @@ fn main() -> io::Result<()> {
     let mut useequ: bool = false;
     let mut uselg: bool = false;
     let mut usebg: bool = false;
+    let mut usemp: bool = false;
 
     if !skip {
         for import in to_import {
@@ -325,6 +326,14 @@ fn main() -> io::Result<()> {
                     let lmdlib: String = read_to_string("STD/FUNC/lambda.ryx")
                         .expect("FUNC > LAMBDA Library Missing");
                     libs.push_str(&lmdlib);
+                } else if import == "FUNC > MACRO" {
+                    usemp = true;
+                    let mplib: String =
+                        read_to_string("STD/FUNC/macro.ryx").expect("FUNC > MACRO Library Missing");
+                    libs.push_str(&mplib);
+                    let str: String =
+                        "\nimport java.util.Arrays;\nimport java.lang.reflect.Array;".to_string();
+                    imported.push_str(&str);
                 } else if import == "STAT > DESK" {
                     usedsk = true;
                     let desklib: String =
@@ -575,8 +584,14 @@ fn main() -> io::Result<()> {
         remove_file("LGraph.class").expect("LGraph delete failed");
         remove_file("LGraph$1.class").expect("LGraph$1 delete failed");
     }
+
     if usebg {
         remove_file("BGraph.class").expect("BGraph delete failed");
+    }
+
+    if usemp {
+        remove_file("IMacro.class").expect("IMacro delete failed");
+        remove_file("Macro.class").expect("Macro delete failed");
     }
 
     Ok(())

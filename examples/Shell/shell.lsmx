@@ -2,7 +2,7 @@
 fn main() {
     new_self!
 
-    __self__.invokeShell (
+    _self.invokeShell (
         "cmd /C echo Hello World"
     );
 }

@@ -18,11 +18,15 @@ class Macro {
         ArrayList<String> stack = new ArrayList<String>();
         ArrayList<String> registers = new ArrayList<String>();
 
-        for (String line : program) {
-            String[] tokens = line.split(", ");
-            
+        for (int k = 0; k < program.length; k++) {
+            String[] tokens = program[k].split(", ");
+
+            for (int j = 0; j < tokens.length; j++) {
+                tokens[j] = tokens[j].trim().replace("\n", "").replace("\"", "");
+            }
+
             for (int i = 0; i < keywords.length; i++) {
-                if (tokens[0] == keywords[i]) {
+                if (tokens[0].trim().equals(keywords[i])) {
                     functions[i].call(tokens, stack, registers);
                 }
             }

@@ -425,8 +425,6 @@ fn main() -> io::Result<()> {
             .replace("println!", "System.out.println")
             .replace("format!", "MessageFormat.format")
             .replace("args!", "args")
-            .replace("exit(", "System.exit(")
-            .replace("exit (", "System.exit (")
             .replace("_class", "} class")
             .replace("_construct", "public")
             .replace("_catch;", "catch(Exception e) { e.printStackTrace(); }")

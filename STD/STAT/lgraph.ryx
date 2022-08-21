@@ -1,111 +1,29 @@
 
 class LGraph extends JPanel {
-    private static int MAX_SCORE;
-    private static int PREF_W;
-    private static int PREF_H;
-    private static int BORDER_GAP;
-    private static Color GRAPH_COLOR;
-    private static Color GRAPH_POINT_COLOR;
-    private static Stroke GRAPH_STROKE;
-    private static int GRAPH_POINT_WIDTH;
-    private static float size;
-    private static final int Y_HATCH_CNT = 10;
-    private static List < Integer > scores;
+    
+    private double[] points;
+    private int width, height;
+    private frame = new JFrame();
 
-    public LGraph(List <Integer> scores, int MAX_SCORE, int PREF_W, int PREF_H, int BORDER_GAP, Color colour, float size, int pointWidth) {
-        this.scores = scores;
-        this.MAX_SCORE = MAX_SCORE;
-        this.PREF_W = PREF_W;
-        this.PREF_H = PREF_H;
-        this.BORDER_GAP = BORDER_GAP;
-        this.GRAPH_COLOR = colour;
-        this.GRAPH_POINT_COLOR = colour;
-        this.GRAPH_STROKE = new BasicStroke(size);
-        this.size = size;
-        this.GRAPH_POINT_WIDTH = pointWidth;
+    public LGraph(double[] points, int width, int height) {
+        this.points = points;
+        this.width = width;
+        this.height = height;
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        double xScale = ((double) getWidth() - 2 * BORDER_GAP) / (scores.size() - 1);
-        double yScale = ((double) getHeight() - 2 * BORDER_GAP) / (MAX_SCORE - 1);
-
-        List < Point > graphPoints = new ArrayList < Point > ();
-        for (int i = 0; i < scores.size(); i++) {
-            int x1 = (int)(i * xScale + BORDER_GAP);
-            int y1 = (int)((MAX_SCORE - scores.get(i)) * yScale + BORDER_GAP);
-            graphPoints.add(new Point(x1, y1));
-        }
-
-        // create x and y axes 
-        g2.drawLine(BORDER_GAP, getHeight() - BORDER_GAP, BORDER_GAP, BORDER_GAP);
-        g2.drawLine(BORDER_GAP, getHeight() - BORDER_GAP, getWidth() - BORDER_GAP, getHeight() - BORDER_GAP);
-
-        // create hatch marks for y axis. 
-        for (int i = 0; i < Y_HATCH_CNT; i++) {
-            int x0 = BORDER_GAP;
-            int x1 = GRAPH_POINT_WIDTH + BORDER_GAP;
-            int y0 = getHeight() - (((i + 1) * (getHeight() - BORDER_GAP * 2)) / Y_HATCH_CNT + BORDER_GAP);
-            int y1 = y0;
-            g2.drawLine(x0, y0, x1, y1);
-        }
-
-        // and for x axis
-        for (int i = 0; i < scores.size() - 1; i++) {
-            int x0 = (i + 1) * (getWidth() - BORDER_GAP * 2) / (scores.size() - 1) + BORDER_GAP;
-            int x1 = x0;
-            int y0 = getHeight() - BORDER_GAP;
-            int y1 = y0 - GRAPH_POINT_WIDTH;
-            g2.drawLine(x0, y0, x1, y1);
-        }
-
-        Stroke oldStroke = g2.getStroke();
-        g2.setColor(GRAPH_COLOR);
-        g2.setStroke(GRAPH_STROKE);
-        for (int i = 0; i < graphPoints.size() - 1; i++) {
-            int x1 = graphPoints.get(i).x;
-            int y1 = graphPoints.get(i).y;
-            int x2 = graphPoints.get(i + 1).x;
-            int y2 = graphPoints.get(i + 1).y;
-            g2.drawLine(x1, y1, x2, y2);
-        }
-
-        g2.setStroke(oldStroke);
-        g2.setColor(GRAPH_POINT_COLOR);
-        for (int i = 0; i < graphPoints.size(); i++) {
-            int x = graphPoints.get(i).x - GRAPH_POINT_WIDTH / 2;
-            int y = graphPoints.get(i).y - GRAPH_POINT_WIDTH / 2;;
-            int ovalW = GRAPH_POINT_WIDTH;
-            int ovalH = GRAPH_POINT_WIDTH;
-            g2.fillOval(x, y, ovalW, ovalH);
-        }
+    public void paintComponent(Graphics g) {
+        for (double d : points) g.drawLine(points, points, points, points);
     }
-
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(PREF_W, PREF_H);
-    }
-
-    private static void createAndShowGui() {
-        LGraph mainPanel = new LGraph(scores, MAX_SCORE, PREF_W, PREF_H, BORDER_GAP, GRAPH_COLOR, size, GRAPH_POINT_WIDTH);
-
-        JFrame frame = new JFrame();
+    
+    public static void display() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
-        frame.pack();
-        frame.setLocationByPlatform(true);
+        frame.setBackground(Color.white);
+        frame.setSize(width, height);
+        frame.add(new LGraph(points, width, height));
         frame.setVisible(true);
     }
 
-    public static void display() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGui();
-            }
-        });
+    public static dispose() {
+        frame.dispose();
     }
 }

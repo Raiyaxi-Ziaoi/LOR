@@ -1,6 +1,5 @@
 
-interface MacroFunction
-{
+interface MacroFunction {
     void call(String[] tokens, ArrayList<String> stack, ArrayList<String> registers);
 }
 
@@ -8,17 +7,82 @@ class Macro {
 
     private String[] keywords;
     private MacroFunction[] functions;
+    private ArrayList<String> stack = new ArrayList<String>();
+    private ArrayList<String> registers = new ArrayList<String>();
+
+    private int k = 0;
 
     public Macro(String[] keywords, MacroFunction[] functions) {  
         this.keywords = keywords;
         this.functions = functions; 
     }  
 
-    public void parse(String[] program) {
-        ArrayList<String> stack = new ArrayList<String>();
-        ArrayList<String> registers = new ArrayList<String>();
+    public Macro() {
+        this.keywords = {"REG", "SET", "OUT", "EXT", "PSH", "ADD", "SUB", "MUL", "DIV", "STS", "JMP"};
+        this.functions = {
+            (tokens, stack, registers) -> {
+                registers.add("0");
+            },
+            (tokens, stack, registers) -> {
+                registers.set((int)tokens[1], tokens[2]);
+            },
+            (tokens, stack, registers) -> {
+                System.out.println(registers.get((int)tokens[1]));
+            },
+            (tokens, stack, registers) -> {
+                System.exit(0);
+            },
+            (tokens, stack, registers) -> {
+                stack.add(tokens[1]);
+            },
+            (tokens, stack, registers) -> {
+                stack.add((String)((int)stack[stack.size() - 1] + (int)stack[stack.size() - 2]));
+                stack.remove(stack.size() - 2);
+                stack.remove(stack.size() - 3);
+            },
+            (tokens, stack, registers) -> {
+                stack.add((String)((int)stack[stack.size() - 1] - (int)stack[stack.size() - 2]));
+                stack.remove(stack.size() - 2);
+                stack.remove(stack.size() - 3);
+            },
+            (tokens, stack, registers) -> {
+                stack.add((String)((int)stack[stack.size() - 1] * (int)stack[stack.size() - 2]));
+                stack.remove(stack.size() - 2);
+                stack.remove(stack.size() - 3);
+            },
+            (tokens, stack, registers) -> {
+                stack.add((String)((int)stack[stack.size() - 1] / (int)stack[stack.size() - 2]));
+                stack.remove(stack.size() - 2);
+                stack.remove(stack.size() - 3);
+            },
+            (tokens, stack, registers) -> {
+                registers.set((int)tokens[1], (String)stack.get(stack.size() - 1));
+                stack.remove(stack.size() - 1);
+            },
+            (tokens, stack, registers) -> {
+                k = (int)tokens[1];
+            }
+        };
+    }
 
-        for (int k = 0; k < program.length; k++) {
+    public ArrayList<String> getStack() {
+        return stack;
+    }
+
+    public ArrayList<String> getRegisters() {
+        return registers;
+    }
+
+    public void setStack(ArrayList<String> stack) {
+        this.stack = stack;
+    }
+
+    public void setRegisters(ArrayList<String> registers) {
+        this.registers = registers;
+    }
+
+    public void parse(String[] program) {
+        for (k = 0; k < program.length; k++) {
             String[] tokens = program[k].split(", ");
 
             for (int j = 0; j < tokens.length; j++) {
@@ -29,6 +93,20 @@ class Macro {
                 if (tokens[0].trim().equals(keywords[i])) {
                     functions[i].call(tokens, stack, registers);
                 }
+            }
+        }
+    }
+
+    public void inline(String line) {
+        String[] tokens = line.split(", ");
+
+        for (int j = 0; j < tokens.length; j++) {
+            tokens[j] = tokens[j].trim().replace("\n", "").replace("\"", "");
+        }
+
+        for (int i = 0; i < keywords.length; i++) {
+            if (tokens[0].trim().equals(keywords[i])) {
+                functions[i].call(tokens, stack, registers);
             }
         }
     }

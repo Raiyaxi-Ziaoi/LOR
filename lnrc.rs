@@ -353,7 +353,8 @@ fn main() -> io::Result<()> {
                     let lglib: String = read_to_string("STD/STAT/lgraph.ryx")
                         .expect("STAT > LGRAPH Library Missing");
                     libs.push_str(&lglib);
-                    let str: String = "\nimport java.awt.BasicStroke;\nimport java.awt.Color;\nimport java.awt.Dimension;\nimport java.awt.Graphics;\nimport java.awt.Graphics2D;\nimport java.awt.Point;\nimport java.awt.RenderingHints;\nimport java.awt.Stroke;\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.Random;\nimport javax.swing.*;\nimport java.util.LinkedList;".to_string();
+                    let str: String =
+                        "\nimport java.awt.Color;\nimport java.awt.Graphics;\nimport javax.swing.JFrame;\nimport javax.swing.JPanel;".to_string();
                     imported.push_str(&str);
                 } else if import == "STAT > BGRAPH" {
                     usebg = true;

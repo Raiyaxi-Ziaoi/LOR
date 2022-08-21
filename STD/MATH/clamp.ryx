@@ -1,0 +1,4 @@
+
+private static double clamp(double n, double min, double max) {
+    return (n >= max) ? max : (n <= min) ? min : n;
+}

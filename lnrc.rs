@@ -221,6 +221,7 @@ fn main() -> io::Result<()> {
     let mut uselg: bool = false;
     let mut usebg: bool = false;
     let mut usemp: bool = false;
+    let mut usepp: bool = false;
 
     if !skip {
         for import in to_import {
@@ -333,6 +334,13 @@ fn main() -> io::Result<()> {
                     libs.push_str(&mplib);
                     let str: String = "\nimport java.util.ArrayList;".to_string();
                     imported.push_str(&str);
+                } else if import == "FUNC > PIPE" {
+                    usepp = true;
+                    let pplib: String =
+                        read_to_string("STD/FUNC/pipe.ryx").expect("FUNC > PIPE Library Missing");
+                    libs.push_str(&pplib);
+                    let str: String = "\nimport java.util.function.BiFunction;\nimport java.util.function.Function;".to_string();
+                    imported.push_str(&str);
                 } else if import == "STAT > DESK" {
                     usedsk = true;
                     let desklib: String =
@@ -366,12 +374,20 @@ fn main() -> io::Result<()> {
                     let sqrtlib: String =
                         read_to_string("STD/MATH/sqrts.ryx").expect("MATH > SQRT Library Missing");
                     aditlibs.push_str(&sqrtlib);
+                } else if import == "MATH > COLOUR" {
+                    let colourlib: String = read_to_string("STD/MATH/colour.ryx")
+                        .expect("MATH > COLOUR Library Missing");
+                    aditlibs.push_str(&colourlib);
                 } else if import == "MATH > RANDOM" {
                     let randomlib: String = read_to_string("STD/MATH/random.ryx")
                         .expect("MATH > RANDOM Library Missing");
                     aditlibs.push_str(&randomlib);
                     let str: String = "\nimport java.util.Random;".to_string();
                     imported.push_str(&str);
+                } else if import == "MATH > CLAMP" {
+                    let clamplib: String =
+                        read_to_string("STD/MATH/clamp.ryx").expect("MATH > CLAMP Library Missing");
+                    aditlibs.push_str(&clamplib);
                 } else {
                     let splitted_import: Vec<&str> = import.split(".").collect();
                     if splitted_import[0] == "java" || splitted_import[0] == "javax" {
@@ -533,7 +549,7 @@ fn main() -> io::Result<()> {
 
     // }
 
-    // COMAND LINE ARGS
+    // COMAND LINE ARGS {}
 
     let javaf: String = format!("{}.java", namef);
     let classf: String = format!("{}.class", namef);
@@ -561,6 +577,10 @@ fn main() -> io::Result<()> {
     } else {
         panic!("Invalid cleanup mode!");
     }
+
+    // }
+
+    // Delete class files {
 
     if uselmd {
         remove_file("Void.class").expect("VOID delete failed");
@@ -590,6 +610,12 @@ fn main() -> io::Result<()> {
         remove_file("MacroFunction.class").expect("MacroFunction delete failed");
         remove_file("Macro.class").expect("Macro delete failed");
     }
+
+    if usepp {
+        remove_file("Pipe.class").expect("Pipe delete failed");
+    }
+
+    // }
 
     Ok(())
 }

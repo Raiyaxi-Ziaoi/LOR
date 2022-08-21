@@ -1,0 +1,48 @@
+
+class Pipe<A> {
+
+    @FunctionalInterface
+    public interface TriFunction<A, B, C, R> {
+
+        R apply(A a, B b, C c);
+
+    }
+
+    @FunctionalInterface
+    public interface QuadriFunction<A, B, C, D, R> {
+
+        R apply(A a, B b, C c, D d);
+
+    }
+
+    public final A a;
+
+    private Pipe(A a) {
+        this.a = a;
+    }
+
+    public static <A> Pipe<A> apply(A a) {
+        return new Pipe<A>(a);
+    }
+
+    public <R> Pipe<R> pipe(Function<A, R> f) {
+        return new Pipe<R>(f.apply(a));
+    }
+
+    public <R, B> Pipe<R> pipe(BiFunction<A, B, R> f, B b) {
+        return new Pipe<R>(f.apply(a, b));
+    }
+
+    public <R, B, C> Pipe<R> pipe(TriFunction<A, B, C, R> f, B b, C c) {
+        return new Pipe<R>(f.apply(a, b, c));
+    }
+
+    public <R, B, C, D> Pipe<R> pipe(QuadriFunction<A, B, C, D, R> f, B b, C c, D d) {
+        return new Pipe<R>(f.apply(a, b, c, d));
+    }
+
+    public A result() {
+        return a;
+    }
+
+}

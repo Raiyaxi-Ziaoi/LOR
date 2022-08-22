@@ -332,8 +332,10 @@ fn main() -> io::Result<()> {
                     let mplib: String =
                         read_to_string("STD/FUNC/macro.ryx").expect("FUNC > MACRO Library Missing");
                     libs.push_str(&mplib);
-                    let str: String = "\nimport java.util.ArrayList;".to_string();
+                    let str: String =
+                        "\nimport java.util.ArrayList;\nimport java.util.HashMap;".to_string();
                     imported.push_str(&str);
+                    usescan = true;
                 } else if import == "FUNC > PIPE" {
                     usepp = true;
                     let pplib: String =

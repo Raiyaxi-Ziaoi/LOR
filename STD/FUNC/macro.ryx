@@ -9,6 +9,7 @@ class Macro {
     private MacroFunction[] functions;
     private ArrayList<String> stack = new ArrayList<String>();
     private ArrayList<String> registers = new ArrayList<String>();
+	private HashMap<String, Integer> gotos = new HashMap<String, Integer>();
     private boolean closed = false;
 
     private int k = 0;
@@ -29,8 +30,12 @@ class Macro {
             "SUB", 
             "MUL", 
             "DIV", 
-            "STS", 
-            "JMP"
+            "STS",
+            "STR",
+            "JMP",
+			"RIF",
+			"SIF",
+            "INP"
         };
         this.functions = new MacroFunction[] {
             (tokens, stack, registers) -> {
@@ -73,7 +78,23 @@ class Macro {
                 stack.remove(stack.size() - 1);
             },
             (tokens, stack, registers) -> {
-                k = Integer.parseInt(tokens[1]);
+                stack.add(register.get(Integer.toString(token[1])))
+            },
+            (tokens, stack, registers) -> {
+                k = gotos.get(token[1]);
+            },
+			(tokens, stack, registers) -> {
+                if (registers.get(Integer.parseInt(token[1])) == "1") {
+					k = gotos.get(token[2]);
+				}
+            },
+			(tokens, stack, registers) -> {
+                if (stack.get(stack.size() - 1) == "1") {
+					k = gotos.get(token[2]);
+				}
+            },
+            (tokens, stack, registers) -> {
+                registers.add(new Scanner(System.in).nextLine());
             }
         };
     }
@@ -104,6 +125,16 @@ class Macro {
 
     public void parse(String[] program) {
         if (!closed) {
+			for (k = 0; k < program.length; k++) {
+                String[] tokens = program[k].split(", ");
+
+                for (int j = 0; j < tokens.length; j++) {
+                    tokens[j] = tokens[j].trim().replace("\n", "").replace("\"", "");
+                }
+				if (tokens[0].equals("MRK")) {
+					gotos.put(token[1], k);
+				}
+            }
             for (k = 0; k < program.length; k++) {
                 String[] tokens = program[k].split(", ");
 

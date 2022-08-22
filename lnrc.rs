@@ -391,6 +391,10 @@ fn main() -> io::Result<()> {
                     let clamplib: String =
                         read_to_string("STD/MATH/clamp.ryx").expect("MATH > CLAMP Library Missing");
                     aditlibs.push_str(&clamplib);
+                } else if import == "MATH > MATRIX" {
+                    let matrixlib: String = read_to_string("STD/MATH/matrix.ryx")
+                        .expect("MATH > MATRIX Library Missing");
+                    aditlibs.push_str(&matrixlib);
                 } else {
                     let splitted_import: Vec<&str> = import.split(".").collect();
                     if splitted_import[0] == "java" || splitted_import[0] == "javax" {

@@ -1,0 +1,14 @@
+
+private int[] arrayInit(int[] array, int length) {
+    if (array.length() == 0 || array == null) return array
+    int[] returnArray = new int[length];
+    for (int i = 0; i < length; i++) returnArray[i] = 0;
+    return returnArray;
+}
+
+private int[][] matrixInit(int[][] array, int length, int width) {
+    if (array.length() == 0 || array == null) return array
+    int[][] returnArray = new int[length][width];
+    for (int i = 0; i < length; i++) for (int k = 0; k < width; k++) returnArray[i][k] = 0;
+    return returnArray;
+}

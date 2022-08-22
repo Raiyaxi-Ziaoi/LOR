@@ -50,5 +50,5 @@ ALNOOR provides a more concise syntax compared to Java but is still usable by Ja
 <br/><br/>
 In future updates I hope that it will be a functional language with a focus on scientific computing.
 <br/><br/>
-<a href="https://raiyaxi-ziaoi.github.io/docs.html">Documentation</a>
+<a href="https://raiyaxi-ziaoi.github.io/ALNOOR/docs.html">Documentation</a>
 <br/><br/>

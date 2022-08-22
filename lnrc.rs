@@ -445,7 +445,9 @@ fn main() -> io::Result<()> {
             .replace("_class", "} class")
             .replace("_construct", "public")
             .replace("_catch;", "catch(Exception e) { e.printStackTrace(); }")
-            .replace("=>", "{")
+            .replace("|>", "pipe")
+            .replace("=]", "{")
+            .replace("[=", "}")
             .replace("$.", "this.")
             .replace("l>", "->"),
         imports = imported,

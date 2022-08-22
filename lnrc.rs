@@ -434,7 +434,7 @@ fn main() -> io::Result<()> {
             .replace("_match ", "switch ")
             .replace("elif ", "else if ")
             .replace("const ", "final ")
-            .replace("#def ", "private static ")
+            .replace("#define ", "private static ")
             .replace("new_self!", &self_dund)
             .replace("exit!", "System.exit(0);")
             .replace("abort!", "System.exit(1);")

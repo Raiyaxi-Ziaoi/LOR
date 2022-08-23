@@ -400,7 +400,7 @@ fn main() -> io::Result<()> {
                     if splitted_import[0] == "java" || splitted_import[0] == "javax" {
                         let str: String = format!("import {};", import);
                         imported.push_str(&str);
-                    } else if splitted_import[1] == "ryx" {
+                    } else if splitted_import[1] == "ryx" || splitted_import[1] == "java" {
                         let error: String = format!("Unable to read import: {}", import);
                         let importfile: String = read_to_string(import).expect(&error);
                         aditlibs.push_str(&importfile);
@@ -410,12 +410,15 @@ fn main() -> io::Result<()> {
                         ext.push_str(&importfile);
                     } else {
                         panic!(
-                            "Imported file must end in \".ryx\", \".lsmx\", be a Java import or be part of the ALNOOR library."
+                            "Imported file must end in \".ryx\", \".lsmx\", \".java\", be a Java import or be part of the ALNOOR library."
                         );
                     }
                 }
             }
+        } else {
+            println!("WARNING: Nolib enabled");
         }
+        
         if usescan {
             let str: String = "\nimport java.util.Scanner;".to_string();
             imported.push_str(&str);
@@ -424,14 +427,17 @@ fn main() -> io::Result<()> {
 
     // }
 
-    // TRANSPARSING {
+    // PREPROCESSING {
 
-    let self_dund = format!("var _self = new {}();", namef);
+    let mut use_pure = false;
+    let mut use_raw = false;
 
-    let to_write: String = format!(
-        "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{code}\n\n\n}}",
-        name = namef,
-        code = file_contents
+    
+    if file_contents.contains("#using raw") {
+        use_raw = true;
+        println!("WARNING: Using raw");
+    } else {
+        file_contents = file_contents
             .replace("fn main()", "public static void main(String[] args)")
             .replace("_fn ", "private static ")
             .replace("fn ", "public static ")
@@ -448,18 +454,44 @@ fn main() -> io::Result<()> {
             .replace("println!", "System.out.println")
             .replace("format!", "MessageFormat.format")
             .replace("args!", "args")
-            .replace("_class", "} class")
-            .replace("_construct", "public")
+            .replace("_construct ", "public ")
+            .replace("_class ", "public class ")
             .replace("_catch;", "catch(Exception e) { e.printStackTrace(); }")
             .replace("|>", "pipe")
-            .replace("=]", "{")
-            .replace("[=", "}")
             .replace("$.", "this.")
-            .replace("l>", "->"),
-        imports = imported,
-        adit = aditlibs,
-        libraries = libs,
-    );
+            .replace("l>", "->");
+    }
+
+    if file_contents.contains("#using pure") {
+        use_pure = true;
+        println!("WARNING: Using pure");
+    }
+
+    // }
+
+    // TRANSPARSING {
+
+    let self_dund = format!("var _self = new {}();", namef);
+
+    if use_pure {
+        let to_write: String = format!(
+            "{imports}\n{libraries}\nclass ExFn {{\n{adit}\n}}\n{code}\n\n\n",
+            name = namef,
+            code = file_contents,
+            imports = imported,
+            adit = aditlibs,
+            libraries = libs,
+        );
+    } else {
+        let to_write: String = format!(
+            "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{code}\n\n\n}}",
+            name = namef,
+            code = file_contents,
+            imports = imported,
+            adit = aditlibs,
+            libraries = libs,
+        );
+    }
     match java_write.write_all(to_write.as_bytes()) {
         Err(why) => panic!("Could not write to {}: {}", display_source, why),
         Ok(_) => println!("Successfully wrote to {}", display_source),
@@ -521,7 +553,9 @@ fn main() -> io::Result<()> {
 
             println!("JAVA failed and stderr was:\n{}", s);
         }
-        remove_file("Command.cmd").expect("Command file delete failed");
+        if cleanup_mode.contains("-cmd") {
+            remove_file("Command.cmd").expect("Command file delete failed");
+        }
     } else {
         let cmd: String = format!(
             "java {}\nread -rsp $'Press enter to continue...\n'\nexit",
@@ -553,7 +587,9 @@ fn main() -> io::Result<()> {
 
             println!("JAVA failed and stderr was:\n{}", s);
         }
-        remove_file("Command.sh").expect("Command file delete failed");
+        if cleanup_mode.contains("-cmd") {
+            remove_file("Command.sh").expect("Command file delete failed");
+        }
     }
 
     // }
@@ -622,6 +658,10 @@ fn main() -> io::Result<()> {
 
     if usepp {
         remove_file("Pipe.class").expect("Pipe delete failed");
+    }
+
+    if use_pure {
+        remove_file("ExFn.class").expect("ExFn delete failed");
     }
 
     // }

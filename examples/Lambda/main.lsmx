@@ -1,6 +1,6 @@
 
 fn main() { 
-    Function func = () -> {
+    Function func = (empty) -> {
             String str = "";
             int number = in_int (
                 "Please enter a number: "
@@ -12,7 +12,7 @@ fn main() {
 
     println! ("\n" +
         func
-        .call()
+        .call(null)
         .toString()
     );
 }

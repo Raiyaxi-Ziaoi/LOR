@@ -1,11 +1,12 @@
-<img src="https://i.imgur.com/lRzzpEU.png"></img>
+<img src="https://raw.githubusercontent.com/Raiyaxi-Ziaoi/Resources/main/bismillah.png?token=GHSAT0AAAAAABXCMKG533RUMQ4V6F5TPBJWYYH3CRQ
+"></img>
 
 # ALNOOR
 
 <div align="center"><h2>
-<img src="https://i.imgur.com/6YKWjdo.png"></img><br/><br/>
+<img src="https://raw.githubusercontent.com/Raiyaxi-Ziaoi/Resources/main/lor.png?token=GHSAT0AAAAAABXCMKG4MFPFRHNVBGHMF7HIYYH3HCQ"></img><br/><br/>
 My own programming language based on Java and with a transpiler made in Rust<br/><br/><a href="#">
-    <img src="https://i.imgur.com/p9RP9uK.png" width="50%"/>
+    <img src="https://raw.githubusercontent.com/Raiyaxi-Ziaoi/Resources/main/alnoorlogo.png?token=GHSAT0AAAAAABXCMKG4LPREAQPWSVJZFXMSYYH3HNQ" width="50%"/>
 </a><br/><br/>Made by Raiyaxi Ziaoi
 </h2></div>
 <br/>

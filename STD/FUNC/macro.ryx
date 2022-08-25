@@ -30,72 +30,62 @@ class Macro {
             "SUB", 
             "MUL", 
             "DIV", 
-            "STS",
-            "STR",
             "JMP",
-			"RIF",
-			"SIF",
+			"IF?",
             "INP"
         };
         this.functions = new MacroFunction[] {
-            (tokens, stack, registers) -> {
+            (tokens, stack, registers) -> { // REG
                 registers.add("0");
             },
-            (tokens, stack, registers) -> {
-                registers.set(Integer.parseInt(tokens[1]), tokens[2]);
+            (tokens, stack, registers) -> { // SET
+                register.set(Integer.parseInt(tokens[1]), tokens[2]);
             },
-            (tokens, stack, registers) -> {
-                System.out.println(registers.get(Integer.parseInt(tokens[1])));
+            (tokens, stack, registers) -> { // OUT
+                if (!tokens[1].startsWith("$")) System.out.println(tokens[1]);
+                else System.out.println(registers.get(Integer.parseInt(tokens[1].substring(1))));
             },
-            (tokens, stack, registers) -> {
+            (tokens, stack, registers) -> { // EXT
                 closed = true;
             },
-            (tokens, stack, registers) -> {
-                stack.add(tokens[1]);
+            (tokens, stack, registers) -> { // PSH
+                if (!tokens[1].startsWith("$")) stack.add(tokens[1]);
+                else stack.add(registers.get(Integer.parseInt(tokens[1])));
             },
-            (tokens, stack, registers) -> {
-                stack.add(Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) + Integer.parseInt(stack.get(stack.size() - 2))));
-                stack.remove(stack.size() - 2);
-                stack.remove(stack.size() - 3);
+            (tokens, stack, registers) -> { // ADD
+                String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) + Integer.parseInt(stack.get(stack.size() - 2)));
+                stack.pop(stack.size() - 1);
+                stack.pop(stack.size() - 1);
+                stack.add(result);
             },
-            (tokens, stack, registers) -> {
-                stack.add(Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) - Integer.parseInt(stack.get(stack.size() - 2))));
-                stack.remove(stack.size() - 2);
-                stack.remove(stack.size() - 3);
+            (tokens, stack, registers) -> { // SUB
+                String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) - Integer.parseInt(stack.get(stack.size() - 2)));
+                stack.pop(stack.size() - 1);
+                stack.pop(stack.size() - 1);
+                stack.add(result);
             },
-            (tokens, stack, registers) -> {
-                stack.add(Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) * Integer.parseInt(stack.get(stack.size() - 2))));
-                stack.remove(stack.size() - 2);
-                stack.remove(stack.size() - 3);
+            (tokens, stack, registers) -> { // MUL
+                String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) * Integer.parseInt(stack.get(stack.size() - 2)));
+                stack.pop(stack.size() - 1);
+                stack.pop(stack.size() - 1);
+                stack.add(result);
             },
-            (tokens, stack, registers) -> {
-                stack.add(Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) / Integer.parseInt(stack.get(stack.size() - 2))));
-                stack.remove(stack.size() - 2);
-                stack.remove(stack.size() - 3);
+            (tokens, stack, registers) -> { // DIV
+                String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) / Integer.parseInt(stack.get(stack.size() - 2)));
+                stack.pop(stack.size() - 1);
+                stack.pop(stack.size() - 1);
+                stack.add(result);
             },
-            (tokens, stack, registers) -> {
-                registers.set(Integer.parseInt(tokens[1]), stack.get(stack.size() - 1));
-                stack.remove(stack.size() - 1);
-            },
-            (tokens, stack, registers) -> {
-                stack.add(register.get(Integer.toString(token[1])))
-            },
-            (tokens, stack, registers) -> {
+            (tokens, stack, registers) -> { // JMP
                 k = gotos.get(token[1]);
             },
-			(tokens, stack, registers) -> {
-                if (registers.get(Integer.parseInt(token[1])) == "1") {
-					k = gotos.get(token[2]);
-				}
+            (tokens, stack, registers) -> { // IF?
+                if (!tokens[1].startsWith("$")) if (registers.get(Integer.parseInt(tokens[1].substring(1))) == 1) k = gotos.get(token[2]); 
+                else if (stack.get(stack.size() - 1) == 1) k = gotos.get(token[2]); 
             },
-			(tokens, stack, registers) -> {
-                if (stack.get(stack.size() - 1) == "1") {
-					k = gotos.get(token[2]);
-				}
+            (tokens, stack, registers) -> { // INP
+                registers.set(Integer.parseInt(tokens[1]), new Scanner(System.in).nextLine());
             },
-            (tokens, stack, registers) -> {
-                registers.add(new Scanner(System.in).nextLine());
-            }
         };
     }
 

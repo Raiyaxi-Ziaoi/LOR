@@ -1,29 +1,45 @@
-
 class LGraph extends JPanel {
-    
-    private double[] points;
-    private int width, height;
-    private frame = new JFrame();
-
-    public LGraph(double[] points, int width, int height) {
-        this.points = points;
-        this.width = width;
-        this.height = height;
-    }
-
-    public void paintComponent(Graphics g) {
-        for (double d : points) g.drawLine(points, points, points, points);
-    }
-    
-    public static void display() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBackground(Color.white);
-        frame.setSize(width, height);
-        frame.add(new LGraph(points, width, height));
-        frame.setVisible(true);
-    }
-
-    public static dispose() {
-        frame.dispose();
-    }
+	
+	private int[] xPoints, yPoints;
+	private int width, height;
+	private Color axes;
+	
+	private JFrame frame = new JFrame();
+	
+	public LGraph(int[] xPoints, int[] yPoints, int width, int height, Color axes) {
+		this.xPoints = xPoints;
+		this.yPoints = yPoints;
+		this.width = width;
+		this.height = height;
+		this.axes = axes;
+	}
+	
+	public void paint(Graphics g) {
+		Graphics2D g2d = (Graphics2D)g;
+		
+		g2d.setColor(axes);
+		g2d.setStroke(new BasicStroke(2));
+		g2d.setRenderingHint(
+			    RenderingHints.KEY_ANTIALIASING,
+			    RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.drawLine(width / 2, 0, width / 2, height);
+		g2d.drawLine(0, height / 2, width, height / 2);
+		
+		g2d.translate(width / 2, height / 2);
+		g2d.rotate(Math.toRadians(270));
+		g2d.drawPolyline(yPoints, xPoints, xPoints.length);
+	}
+		
+	public void draw() {
+		frame.setSize(width, height);
+		frame.setLocationRelativeTo(null);
+	    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    frame.setResizable(false);
+	    frame.getContentPane().add(new LGraph(xPoints, yPoints, width, height, axes));
+	    frame.setVisible(true);
+	}
+	
+	public void dispose() {
+		frame.dispose();
+	}
 }

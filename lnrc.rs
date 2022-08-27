@@ -23,6 +23,7 @@ fn main() -> io::Result<()> {
     let mut skip: bool = false;
 
     // OTHER ARGS {
+
     if cleanup_mode == "-v" || cleanup_mode == "--version" {
         println!(
             "{}",
@@ -66,54 +67,8 @@ fn main() -> io::Result<()> {
 
         std::process::abort();
         // }
-    } else if cleanup_mode == "-innit_default"
-        || cleanup_mode == "-init-default"
-        || cleanup_mode == "-id"
-    {
-        fs::create_dir(source_file)?;
-
-        let formatted_config_path = format!("{}/config.vn", source_file);
-
-        // CONFIG {
-        let path_config: &Path = Path::new(&formatted_config_path);
-        let display_config = path_config.display();
-
-        let mut file_config: File = match File::create(format!("{}/config.vn", source_file)) {
-            Err(why) => panic!("Could not create {}: {}", display_config, why),
-            Ok(_file_config) => _file_config,
-        };
-
-        let config: String = "CORE.OUT".to_string();
-
-        match file_config.write_all(config.as_bytes()) {
-            Err(why) => panic!("Could not write to {}: {}", display_config, why),
-            Ok(_) => println!("Successfully wrote to {}", display_config),
-        }
-
-        // }
-
-        // SOURCE {
-
-        let formatted_source_path = format!("{}/main.lsmx", source_file);
-
-        let path_source: &Path = Path::new(&formatted_source_path);
-        let display_source = path_source.display();
-
-        let mut file_source: File = match File::create(format!("{}/main.lsmx", source_file)) {
-            Err(why) => panic!("Could not create {}: {}", display_source, why),
-            Ok(_file_source) => _file_source,
-        };
-
-        let source: String = "fn main() {\n    println(\"Hello World\");\n}".to_string();
-
-        match file_source.write_all(source.as_bytes()) {
-            Err(why) => panic!("Could not write to {}: {}", display_source, why),
-            Ok(_) => println!("Successfully wrote to {}", display_source),
-        }
-
-        std::process::abort();
-        // }
     }
+
     // }
 
     let import_path: &String = &command_line_arguments[3];
@@ -288,9 +243,9 @@ fn main() -> io::Result<()> {
                     aditlibs.push_str(&datetimelib);
                     let str: String = "\nimport java.text.DateFormat;\nimport java.text.ParseException;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;".to_string();
                     imported.push_str(&str);
-                } else if import == "STD.IO.OUT" {
+                } else if import == "STD.IO.ARRAYS" {
                     let outlib: String =
-                        read_to_string("STD/IO/out.ryx").expect("STD.IO.OUT Library Missing");
+                        read_to_string("STD/IO/arrays.ryx").expect("STD.IO.ARRAYS Library Missing");
                     aditlibs.push_str(&outlib);
                 } else if import == "STD.STAT.REGEX" {
                     let rgxlib: String = read_to_string("STD/STAT/regex.ryx")
@@ -300,6 +255,10 @@ fn main() -> io::Result<()> {
                         "\nimport java.util.regex.Matcher;\nimport java.util.regex.Pattern;"
                             .to_string();
                     imported.push_str(&str);
+                } else if import == "STD.STAT.SORT" {
+                    let srtlib: String =
+                        read_to_string("STD/STAT/sort.ryx").expect("STD.STAT.SORT Library Missing");
+                    aditlibs.push_str(&srtlib);
                 } else if import == "STD.FUNC.SHELL" {
                     let shelllib: String = read_to_string("STD/FUNC/shell.ryx")
                         .expect("STD.FUNC.SHELL Library Missing");

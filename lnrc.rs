@@ -397,6 +397,8 @@ fn main() -> io::Result<()> {
     // PREPROCESSING {
 
     let mut use_pure = false;
+    let mut use_c = false;
+
     let use_template = command_line_arguments.len() > 4;
 
     if file_contents.contains("#using pure") {
@@ -457,6 +459,7 @@ fn main() -> io::Result<()> {
             .replace("l>", "->")
             .replace("#using pure", "");
     } else if file_contents.contains("#using c") {
+        use_c = true;
         file_contents = file_contents
             .replace("#using c", "")
             .replace("#using ", "#include ");
@@ -490,8 +493,8 @@ fn main() -> io::Result<()> {
                 ext = ext,
             );
         }
-    } else {
-        let template: &String = &command_line_arguments[1];
+    } else if !use_c {
+        let template: &String = &command_line_arguments[4];
         to_write = template
             .replace("[name]", namef)
             .replace("[code]", file_contents)

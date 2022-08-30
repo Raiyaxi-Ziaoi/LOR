@@ -397,6 +397,7 @@ fn main() -> io::Result<()> {
     // PREPROCESSING {
 
     let mut use_pure = false;
+    let use_template = command_line_arguments.len() > 4;
 
     if file_contents.contains("#using pure") {
         use_pure = true;
@@ -405,55 +406,62 @@ fn main() -> io::Result<()> {
 
     let self_dund = format!("var _self = new {}();", namef);
 
-    file_contents = file_contents
-        .replace("fn main()", "public static void main(String[] args)")
-        .replace("_fn ", "private static ")
-        .replace("fn ", "public static ")
-        .replace("ret ", "return ")
-        .replace("bool ", "boolean ")
-        .replace("_match ", "switch ")
-        .replace("elif ", "else if ")
-        .replace("const ", "final ")
-        .replace("#define ", "private static ")
-        .replace("new_self!", &self_dund)
-        .replace("exit!", "System.exit(0);")
-        .replace("abort!", "System.exit(1);")
-        .replace("print!", "System.out.print")
-        .replace("println!", "System.out.println")
-        .replace("format!", "MessageFormat.format")
-        .replace("args!", "args")
-        .replace("_construct ", "public ")
-        .replace("_class ", "public class ")
-        .replace("_catch;", "catch(Exception e) { e.printStackTrace(); }")
-        .replace("|>", "pipe")
-        .replace("$.", "this.")
-        .replace("l>", "->")
-        .replace("#using pure", "");
+    if file_contents.contains("#using pure") {
+        file_contents = file_contents
+            .replace("fn main()", "public static void main(String[] args)")
+            .replace("_fn ", "private static ")
+            .replace("fn ", "public static ")
+            .replace("ret ", "return ")
+            .replace("bool ", "boolean ")
+            .replace("_match ", "switch ")
+            .replace("elif ", "else if ")
+            .replace("const ", "final ")
+            .replace("#define ", "private static ")
+            .replace("new_self!", &self_dund)
+            .replace("exit!", "System.exit(0);")
+            .replace("abort!", "System.exit(1);")
+            .replace("print!", "System.out.print")
+            .replace("println!", "System.out.println")
+            .replace("format!", "MessageFormat.format")
+            .replace("args!", "args")
+            .replace("_construct ", "public ")
+            .replace("_class ", "public class ")
+            .replace("_catch;", "catch(Exception e) { e.printStackTrace(); }")
+            .replace("|>", "pipe")
+            .replace("$.", "this.")
+            .replace("l>", "->")
+            .replace("#using pure", "");
 
-    ext = ext
-        .replace("fn main()", "public static void main(String[] args)")
-        .replace("_fn ", "private static ")
-        .replace("fn ", "public static ")
-        .replace("ret ", "return ")
-        .replace("bool ", "boolean ")
-        .replace("_match ", "switch ")
-        .replace("elif ", "else if ")
-        .replace("const ", "final ")
-        .replace("#define ", "private static ")
-        .replace("new_self!", &self_dund)
-        .replace("exit!", "System.exit(0);")
-        .replace("abort!", "System.exit(1);")
-        .replace("print!", "System.out.print")
-        .replace("println!", "System.out.println")
-        .replace("format!", "MessageFormat.format")
-        .replace("args!", "args")
-        .replace("_construct ", "public ")
-        .replace("_class ", "public class ")
-        .replace("_catch;", "catch(Exception e) { e.printStackTrace(); }")
-        .replace("|>", "pipe")
-        .replace("$.", "this.")
-        .replace("l>", "->")
-        .replace("#using pure", "");
+        ext = ext
+            .replace("fn main()", "public static void main(String[] args)")
+            .replace("_fn ", "private static ")
+            .replace("fn ", "public static ")
+            .replace("ret ", "return ")
+            .replace("bool ", "boolean ")
+            .replace("_match ", "switch ")
+            .replace("elif ", "else if ")
+            .replace("const ", "final ")
+            .replace("#define ", "private static ")
+            .replace("new_self!", &self_dund)
+            .replace("exit!", "System.exit(0);")
+            .replace("abort!", "System.exit(1);")
+            .replace("print!", "System.out.print")
+            .replace("println!", "System.out.println")
+            .replace("format!", "MessageFormat.format")
+            .replace("args!", "args")
+            .replace("_construct ", "public ")
+            .replace("_class ", "public class ")
+            .replace("_catch;", "catch(Exception e) { e.printStackTrace(); }")
+            .replace("|>", "pipe")
+            .replace("$.", "this.")
+            .replace("l>", "->")
+            .replace("#using pure", "");
+    } else if file_contents.contains("#using c") {
+        file_contents = file_contents
+            .replace("#using c", "")
+            .replace("#using ", "#include ");
+        ext = ext.replace("#using c", "").replace("#using ", "#include ");
+    }
 
     // }
 
@@ -461,25 +469,36 @@ fn main() -> io::Result<()> {
 
     let to_write: String;
 
-    if use_pure {
-        to_write = format!(
-            "{imports}\n{libraries}\nclass ExFn {{\n{adit}\n{ext}\n}}\n{code}\n\n\n",
-            code = file_contents,
-            imports = imported,
-            adit = aditlibs,
-            libraries = libs,
-            ext = ext,
-        );
+    if !use_template {
+        if use_pure {
+            to_write = format!(
+                "{imports}\n{libraries}\nclass ExFn {{\n{adit}\n{ext}\n}}\n{code}\n\n\n",
+                code = file_contents,
+                imports = imported,
+                adit = aditlibs,
+                libraries = libs,
+                ext = ext,
+            );
+        } else {
+            to_write = format!(
+                "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{ext}\n{code}\n\n\n}}",
+                name = namef,
+                code = file_contents,
+                imports = imported,
+                adit = aditlibs,
+                libraries = libs,
+                ext = ext,
+            );
+        }
     } else {
-        to_write = format!(
-            "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{ext}\n{code}\n\n\n}}",
-            name = namef,
-            code = file_contents,
-            imports = imported,
-            adit = aditlibs,
-            libraries = libs,
-            ext = ext,
-        );
+        let template: &String = &command_line_arguments[1];
+        to_write = template
+            .replace("[name]", namef)
+            .replace("[code]", file_contents)
+            .replace("[imports]", imported)
+            .replace("[adit]", aditlibs)
+            .replace("[libraries]", libs)
+            .replace("[ext]", ext);
     }
     match java_write.write_all(to_write.as_bytes()) {
         Err(why) => panic!("Could not write to {}: {}", display_source, why),
@@ -488,100 +507,102 @@ fn main() -> io::Result<()> {
 
     // }
 
-    // COMPILATION {
+    if !use_template {
+        // COMPILATION {
 
-    let output_class = Command::new("javac") // TO .class
-        .arg(javaf)
-        .output()
-        .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
-
-    if output_class.status.success() {
-        let output_java = Command::new("jar") // TO .jar
-            .args(["cvfm", &jarf, "Manifest.txt", &classf])
+        let output_class = Command::new("javac") // TO .class
+            .arg(javaf)
             .output()
             .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
 
-        if output_java.status.success() {
-            println!("JAR succeeded\n");
+        if output_class.status.success() {
+            let output_java = Command::new("jar") // TO .jar
+                .args(["cvfm", &jarf, "Manifest.txt", &classf])
+                .output()
+                .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
+
+            if output_java.status.success() {
+                println!("JAR succeeded\n");
+            } else {
+                let s = String::from_utf8_lossy(&output_java.stderr);
+
+                println!("JAR failed and stderr was:\n{}", s);
+            }
         } else {
-            let s = String::from_utf8_lossy(&output_java.stderr);
+            let s = String::from_utf8_lossy(&output_class.stderr);
 
-            println!("JAR failed and stderr was:\n{}", s);
+            println!("JAVAC failed and stderr was:\n{}", s);
         }
-    } else {
-        let s = String::from_utf8_lossy(&output_class.stderr);
 
-        println!("JAVAC failed and stderr was:\n{}", s);
+        let os: &str = env::consts::OS;
+
+        if os == "windows" {
+            let cmd: String = format!("@echo off\njava {}\npause>nul\nexit", namef);
+            let cmd_path: &Path = Path::new("Command.cmd"); // CREATE Command.cmd
+            let display_cmd = cmd_path.display();
+
+            let mut file_command: File = match File::create(&cmd_path) {
+                Err(why) => panic!("Could not create {}: {}", display_cmd, why),
+                Ok(file_command) => file_command,
+            };
+
+            match file_command.write_all(cmd.as_bytes()) {
+                Err(why) => panic!("Could not write to {}: {}", display_cmd, why),
+                Ok(_) => println!("Successfully wrote to {}", display_cmd),
+            }
+
+            let output_run = Command::new("cmd") // START Command.cmd
+                .args(["/C", "start Command.cmd"])
+                .output()
+                .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
+            if output_run.status.success() {
+                println!("JAVA succeeded");
+            } else {
+                let s = String::from_utf8_lossy(&output_run.stderr);
+
+                println!("JAVA failed and stderr was:\n{}", s);
+            }
+            if cleanup_mode.contains("-cmd") {
+                remove_file("Command.cmd").expect("Command file delete failed");
+            }
+        } else {
+            let cmd: String = format!(
+                "java {}\nread -rsp $'Press enter to continue...\n'\nexit",
+                namef
+            );
+            let cmd_path: &Path = Path::new("Command.sh"); // CREATE Command.sh
+            let display_cmd = cmd_path.display();
+
+            let mut file_command: File = match File::create(&cmd_path) {
+                Err(why) => panic!("Could not create {}: {}", display_cmd, why),
+                Ok(file_command) => file_command,
+            };
+
+            match file_command.write_all(cmd.as_bytes()) {
+                Err(why) => panic!("Could not write to {}: {}", display_cmd, why),
+                Ok(_) => println!("Successfully wrote to {}", display_cmd),
+            }
+
+            let output_run = Command::new("./") // START Command.sh
+                .arg("Command.sh")
+                .output()
+                .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
+            if output_run.status.success() {
+                let s = String::from_utf8_lossy(&output_run.stdout);
+
+                println!("JAVA succeeded and stdout was:\n{}", s);
+            } else {
+                let s = String::from_utf8_lossy(&output_run.stderr);
+
+                println!("JAVA failed and stderr was:\n{}", s);
+            }
+            if cleanup_mode.contains("-cmd") {
+                remove_file("Command.sh").expect("Command file delete failed");
+            }
+        }
+
+        // }
     }
-
-    let os: &str = env::consts::OS;
-
-    if os == "windows" {
-        let cmd: String = format!("@echo off\njava {}\npause>nul\nexit", namef);
-        let cmd_path: &Path = Path::new("Command.cmd"); // CREATE Command.cmd
-        let display_cmd = cmd_path.display();
-
-        let mut file_command: File = match File::create(&cmd_path) {
-            Err(why) => panic!("Could not create {}: {}", display_cmd, why),
-            Ok(file_command) => file_command,
-        };
-
-        match file_command.write_all(cmd.as_bytes()) {
-            Err(why) => panic!("Could not write to {}: {}", display_cmd, why),
-            Ok(_) => println!("Successfully wrote to {}", display_cmd),
-        }
-
-        let output_run = Command::new("cmd") // START Command.cmd
-            .args(["/C", "start Command.cmd"])
-            .output()
-            .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
-        if output_run.status.success() {
-            println!("JAVA succeeded");
-        } else {
-            let s = String::from_utf8_lossy(&output_run.stderr);
-
-            println!("JAVA failed and stderr was:\n{}", s);
-        }
-        if cleanup_mode.contains("-cmd") {
-            remove_file("Command.cmd").expect("Command file delete failed");
-        }
-    } else {
-        let cmd: String = format!(
-            "java {}\nread -rsp $'Press enter to continue...\n'\nexit",
-            namef
-        );
-        let cmd_path: &Path = Path::new("Command.sh"); // CREATE Command.sh
-        let display_cmd = cmd_path.display();
-
-        let mut file_command: File = match File::create(&cmd_path) {
-            Err(why) => panic!("Could not create {}: {}", display_cmd, why),
-            Ok(file_command) => file_command,
-        };
-
-        match file_command.write_all(cmd.as_bytes()) {
-            Err(why) => panic!("Could not write to {}: {}", display_cmd, why),
-            Ok(_) => println!("Successfully wrote to {}", display_cmd),
-        }
-
-        let output_run = Command::new("./") // START Command.sh
-            .arg("Command.sh")
-            .output()
-            .unwrap_or_else(|e| panic!("Failed to execute process: {}", e));
-        if output_run.status.success() {
-            let s = String::from_utf8_lossy(&output_run.stdout);
-
-            println!("JAVA succeeded and stdout was:\n{}", s);
-        } else {
-            let s = String::from_utf8_lossy(&output_run.stderr);
-
-            println!("JAVA failed and stderr was:\n{}", s);
-        }
-        if cleanup_mode.contains("-cmd") {
-            remove_file("Command.sh").expect("Command file delete failed");
-        }
-    }
-
-    // }
 
     // COMAND LINE ARGS {}
 
@@ -592,7 +613,9 @@ fn main() -> io::Result<()> {
     if first_cleanup_mode[1] == "a" {
         remove_file("Manifest.txt").expect("Manifest delete failed");
         remove_file(javaf).expect("Java delete failed");
-        remove_file(classf).expect("Class delete failed");
+        if cleanup_mode.contains("-cmd") {
+            remove_file(classf).expect("Class delete failed");
+        }
     } else if first_cleanup_mode[1] == "m" {
         remove_file("Manifest.txt").expect("Manifest delete failed");
     } else if first_cleanup_mode[1] == "c" {

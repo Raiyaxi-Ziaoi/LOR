@@ -11,7 +11,7 @@ My own programming language based on Java and with a transpiler made in Rust<br/
 </h2></div>
 <br/>
 <div align="center"><h2>
-ALNOOR Contributers: <br/><br/>EdwardElric (😎), <br/><br/>Lissomix (Co-founder, Same soul), <br/><br/>Lewis (Based), <br/><br/>Nizzi (Chad, IRL contributer), <br/><br/>Oven (Co-founder, IRL contributer), <br/><br/>Raiyaxi (Me lmao)<br/>
+ALNOOR Contributers: <br/><br/>EdwardElric (😎), <br/><br/>Lissomix (Co-founder, Same soul), <br/><br/>Lewis (Based), <br/><br/>Nizzi (Chad, IRL contributer), <br/><br/>Oven (Co-founder, IRL contributer), <br/><br/>Raiyaxi (Me lmao), x80 (C wizard)<br/>
 </h2></div>
 <br/>
 You must have the JVM and the Rust compiler installed.

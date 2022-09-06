@@ -185,53 +185,53 @@ fn main() -> io::Result<()> {
                 if import == "None" {
                     break;
                 } else if import == "STD.IO.STR" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_str.ryx").expect("STD.IO.STR Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_str.ryx")
+                        .expect("STD.IO.STR Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.IO.INT" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_int.ryx").expect("STD.IO.INT Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_int.ryx")
+                        .expect("STD.IO.INT Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.IO.FLOAT" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_flo.ryx").expect("STD.IO.FLOAT Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_flo.ryx")
+                        .expect("STD.IO.FLOAT Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.IO.BYTE" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_byt.ryx").expect("STD.IO.BYTE Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_byt.ryx")
+                        .expect("STD.IO.BYTE Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.IO.SHORT" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_sho.ryx").expect("STD.IO.SHORT Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_sho.ryx")
+                        .expect("STD.IO.SHORT Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.IO.BOOL" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_boo.ryx").expect("STD.IO.BOOL Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_boo.ryx")
+                        .expect("STD.IO.BOOL Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.IO.CHAR" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_cha.ryx").expect("STD.IO.CHAR Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_cha.ryx")
+                        .expect("STD.IO.CHAR Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.IO.DOUBLE" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_dou.ryx").expect("STD.IO.DOUBLE Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_dou.ryx")
+                        .expect("STD.IO.DOUBLE Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.IO.LONG" {
-                    let inlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/in_lon.ryx").expect("STD.IO.LONG Library Missing");
+                    let inlib: String = read_to_string("STD/ALNOOR_J/IO/in_lon.ryx")
+                        .expect("STD.IO.LONG Library Missing");
                     aditlibs.push_str(&inlib);
                     usescan = true;
                 } else if import == "STD.STAT.CASE" {
-                    let caselib: String =
-                        read_to_string("STD/ALNOOR_J/STAT/case.ryx").expect("STD.STAT.CASE Library Missing");
+                    let caselib: String = read_to_string("STD/ALNOOR_J/STAT/case.ryx")
+                        .expect("STD.STAT.CASE Library Missing");
                     aditlibs.push_str(&caselib);
                 } else if import == "STD.FUNC.SLEEP" {
                     let waitlib: String = read_to_string("STD/ALNOOR_J/FUNC/sleep.ryx")
@@ -244,8 +244,8 @@ fn main() -> io::Result<()> {
                     let str: String = "\nimport java.text.DateFormat;\nimport java.text.ParseException;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;".to_string();
                     imported.push_str(&str);
                 } else if import == "STD.IO.ARRAYS" {
-                    let outlib: String =
-                        read_to_string("STD/ALNOOR_J/IO/arrays.ryx").expect("STD.IO.ARRAYS Library Missing");
+                    let outlib: String = read_to_string("STD/ALNOOR_J/IO/arrays.ryx")
+                        .expect("STD.IO.ARRAYS Library Missing");
                     aditlibs.push_str(&outlib);
                 } else if import == "STD.STAT.REGEX" {
                     let rgxlib: String = read_to_string("STD/ALNOOR_J/STAT/regex.ryx")
@@ -256,8 +256,8 @@ fn main() -> io::Result<()> {
                             .to_string();
                     imported.push_str(&str);
                 } else if import == "STD.STAT.SORT" {
-                    let srtlib: String =
-                        read_to_string("STD/ALNOOR_J/STAT/sort.ryx").expect("STD.STAT.SORT Library Missing");
+                    let srtlib: String = read_to_string("STD/ALNOOR_J/STAT/sort.ryx")
+                        .expect("STD.STAT.SORT Library Missing");
                     aditlibs.push_str(&srtlib);
                 } else if import == "STD.FUNC.SHELL" {
                     let shelllib: String = read_to_string("STD/ALNOOR_J/FUNC/shell.ryx")
@@ -266,14 +266,14 @@ fn main() -> io::Result<()> {
                     let str: String = "\nimport java.lang.Process;\nimport java.io.InputStream;\nimport java.util.Scanner;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;".to_string();
                     imported.push_str(&str);
                 } else if import == "STD.IO.FILEIO" {
-                    let fileiolib: String =
-                        read_to_string("STD/ALNOOR_J/IO/fileio.ryx").expect("STD.IO.FILEIO Library Missing");
+                    let fileiolib: String = read_to_string("STD/ALNOOR_J/IO/fileio.ryx")
+                        .expect("STD.IO.FILEIO Library Missing");
                     aditlibs.push_str(&fileiolib);
                     let str: String = "\nimport java.io.File;\nimport java.io.FileReader;\nimport java.io.BufferedReader;\nimport java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.nio.file.StandardOpenOption;\nimport java.nio.file.Paths;".to_string();
                     imported.push_str(&str);
                 } else if import == "STD.MATH.HASH" {
-                    let hashlib: String =
-                        read_to_string("STD/ALNOOR_J/MATH/hash.ryx").expect("STD.MATH.HASH Library Missing");
+                    let hashlib: String = read_to_string("STD/ALNOOR_J/MATH/hash.ryx")
+                        .expect("STD.MATH.HASH Library Missing");
                     aditlibs.push_str(&hashlib);
                 } else if import == "STD.IO.FORMAT" {
                     let str: String = "\nimport java.text.MessageFormat;".to_string();
@@ -298,15 +298,15 @@ fn main() -> io::Result<()> {
                     usescan = true;
                 } else if import == "STD.FUNC.PIPE" {
                     usepp = true;
-                    let pplib: String =
-                        read_to_string("STD/ALNOOR_J/FUNC/pipe.ryx").expect("STD.FUNC.PIPE Library Missing");
+                    let pplib: String = read_to_string("STD/ALNOOR_J/FUNC/pipe.ryx")
+                        .expect("STD.FUNC.PIPE Library Missing");
                     libs.push_str(&pplib);
                     let str: String = "\nimport java.util.function.BiFunction;\nimport java.util.function.Function;".to_string();
                     imported.push_str(&str);
                 } else if import == "STD.STAT.DESK" {
                     usedsk = true;
-                    let desklib: String =
-                        read_to_string("STD/ALNOOR_J/STAT/desk.ryx").expect("STD.STAT.DESK Library Missing");
+                    let desklib: String = read_to_string("STD/ALNOOR_J/STAT/desk.ryx")
+                        .expect("STD.STAT.DESK Library Missing");
                     libs.push_str(&desklib);
                     let str: String = "\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.List;".to_string();
                     imported.push_str(&str);
@@ -474,12 +474,8 @@ fn main() -> io::Result<()> {
             libraries = libs,
             ext = ext,
         );
-    } else if {
-        to_write = format!(
-            "{libs}\n{code}",
-            code = file_contents,
-            libraries = libs,
-        );
+    } else if use_c {
+        to_write = format!("{libs}\n{code}", code = file_contents, libraries = libs,);
     } else {
         to_write = format!(
             "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{ext}\n{code}\n\n\n}}",

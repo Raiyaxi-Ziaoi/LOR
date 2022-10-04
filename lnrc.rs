@@ -408,6 +408,20 @@ fn main() -> io::Result<()> {
 
     let self_dund = format!("var _self = new {}();", namef);
 
+    if file_contents.contains("#using arabic") {
+        file_contents = file_contents
+            .replace("بينما", "while")
+            .replace("لو", "if")
+            .replace("اخر", "else")
+            .replace("قال", "println!");
+
+        ext = ext
+            .replace("بينما", "while")
+            .replace("لو", "if")
+            .replace("اخر", "else")
+            .replace("قال", "println!");
+    }
+
     if !use_c {
         file_contents = file_contents
             .replace("fn main()", "public static void main(String[] args)")
@@ -457,6 +471,7 @@ fn main() -> io::Result<()> {
             .replace("|>", "pipe")
             .replace("$.", "this.")
             .replace("l>", "->");
+    } else if use_c {
     }
 
     // }

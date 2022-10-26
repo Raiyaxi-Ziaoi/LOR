@@ -1,0 +1,4 @@
+
+interface ComprehensionFn<I, O> {
+    O run(I[] x, int n);
+}

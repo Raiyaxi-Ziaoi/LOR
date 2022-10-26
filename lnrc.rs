@@ -169,15 +169,7 @@ fn main() -> io::Result<()> {
     let mut libs: String = "".to_owned();
     let mut ext: String = "".to_owned();
 
-    let mut uselmd: bool = false;
-    let mut usedsk: bool = false;
     let mut usescan: bool = false;
-    let mut useequ: bool = false;
-    let mut uselg: bool = false;
-    let mut usebg: bool = false;
-    let mut usesg: bool = false;
-    let mut usemp: bool = false;
-    let mut usepp: bool = false;
 
     if !skip {
         for import in to_import {
@@ -283,12 +275,10 @@ fn main() -> io::Result<()> {
                         .expect("STD.FUNC.RELAY Library Missing");
                     aditlibs.push_str(&relaylib);
                 } else if import == "STD.FUNC.LAMBDA" {
-                    uselmd = true;
                     let lmdlib: String = read_to_string("STD/ALNOOR_J/FUNC/lambda.ryx")
                         .expect("STD.FUNC.LAMBDA Library Missing");
                     libs.push_str(&lmdlib);
                 } else if import == "STD.FUNC.MACRO" {
-                    usemp = true;
                     let mplib: String = read_to_string("STD/ALNOOR_J/FUNC/macro.ryx")
                         .expect("STD.FUNC.MACRO Library Missing");
                     libs.push_str(&mplib);
@@ -297,21 +287,25 @@ fn main() -> io::Result<()> {
                     imported.push_str(&str);
                     usescan = true;
                 } else if import == "STD.FUNC.PIPE" {
-                    usepp = true;
                     let pplib: String = read_to_string("STD/ALNOOR_J/FUNC/pipe.ryx")
                         .expect("STD.FUNC.PIPE Library Missing");
                     libs.push_str(&pplib);
                     let str: String = "\nimport java.util.function.BiFunction;\nimport java.util.function.Function;".to_string();
                     imported.push_str(&str);
+                } else if import == "STD.FUNC.COMPREHENSION" {
+                    let compresslib: String = read_to_string("STD/ALNOOR_J/FUNC/compress.ryx")
+                        .expect("STD.FUNC.COMPREHENSION Library Missing");
+                    let compresshlib: String = read_to_string("STD/ALNOOR_J/FUNC/compressh.ryx")
+                        .expect("STD.FUNC.COMPREHENSION Library Missing");
+                    aditlibs.push_str(&compresslib);
+                    libs.push_str(&compresshlib);
                 } else if import == "STD.STAT.DESK" {
-                    usedsk = true;
                     let desklib: String = read_to_string("STD/ALNOOR_J/STAT/desk.ryx")
                         .expect("STD.STAT.DESK Library Missing");
                     libs.push_str(&desklib);
                     let str: String = "\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.List;".to_string();
                     imported.push_str(&str);
                 } else if import == "STD.STAT.LGRAPH" {
-                    uselg = true;
                     let lglib: String = read_to_string("STD/ALNOOR_J/STAT/lgraph.ryx")
                         .expect("STD.STAT.LGRAPH Library Missing");
                     libs.push_str(&lglib);
@@ -319,14 +313,12 @@ fn main() -> io::Result<()> {
                         "\nimport java.awt.BasicStroke;\nimport java.awt.Color;\nimport java.awt.Graphics;\nimport java.awt.Graphics2D;\nimport java.awt.RenderingHints;\nimport java.util.Arrays;\nimport javax.swing.JFrame;\nimport javax.swing.JPanel;".to_string();
                     imported.push_str(&str);
                 } else if import == "STD.STAT.BGRAPH" {
-                    usebg = true;
                     let bglib: String = read_to_string("STD/ALNOOR_J/STAT/bgraph.ryx")
                         .expect("STD.STAT.BGRAPH Library Missing");
                     libs.push_str(&bglib);
                     let str: String = "\nimport java.awt.Color;\nimport java.awt.Dimension;\nimport java.awt.Font;\nimport java.awt.FontMetrics;\nimport java.awt.Graphics;\nimport javax.swing.JFrame;\nimport javax.swing.JPanel;".to_string();
                     imported.push_str(&str);
                 } else if import == "STD.STAT.SGRAPH" {
-                    usesg = true;
                     let sglib: String = read_to_string("STD/ALNOOR_J/STAT/sgraph.ryx")
                         .expect("STD.STAT.SGRAPH Library Missing");
                     libs.push_str(&sglib);
@@ -339,7 +331,6 @@ fn main() -> io::Result<()> {
                     let str: String =
                         "\nimport java.util.ArrayList;\nimport java.util.HashMap;".to_string();
                     imported.push_str(&str);
-                    useequ = true;
                 } else if import == "STD.MATH.SQRT" {
                     let sqrtlib: String = read_to_string("STD/ALNOOR_J/MATH/sqrts.ryx")
                         .expect("STD.MATH.SQRT Library Missing");
@@ -471,8 +462,7 @@ fn main() -> io::Result<()> {
             .replace("|>", "pipe")
             .replace("$.", "this.")
             .replace("l>", "->");
-    } else if use_c {
-    }
+    } else if use_c {}
 
     // }
 
@@ -490,7 +480,7 @@ fn main() -> io::Result<()> {
             ext = ext,
         );
     } else if use_c {
-        to_write = format!("{libs}\n{code}", code = file_contents, libraries = libs,);
+        to_write = format!("{libraries}\n{code}", code = file_contents, libraries = libs);
     } else {
         to_write = format!(
             "{imports}\n{libraries}\npublic class {name} {{\n{adit}\n{ext}\n{code}\n\n\n}}",
@@ -634,54 +624,8 @@ fn main() -> io::Result<()> {
     } else if first_cleanup_mode[1] == "jm" || first_cleanup_mode[1] == "mj" {
         remove_file(javaf).expect("Java delete failed");
         remove_file("Manifest.txt").expect("Manifest delete failed");
-    } else if first_cleanup_mode[1] == "n" {
-    } else {
+    } else if first_cleanup_mode[1] == "n" {} else {
         panic!("Invalid cleanup mode!");
-    }
-
-    // }
-
-    // Delete class files {
-
-    if uselmd {
-        remove_file("Void.class").expect("VOID delete failed");
-        remove_file("Function.class").expect("FUNCTION delete failed");
-    }
-
-    if usedsk {
-        remove_file("Desk.class").expect("DESK delete failed");
-    }
-
-    if useequ {
-        remove_file("Equ.class").expect("Equ delete failed");
-        remove_file("Equ$MathFunction.class").expect("EquMathFunction delete failed");
-        remove_file("Equ$MathParsingExeption.class").expect("EquMathParsingExeption delete failed");
-    }
-
-    if uselg {
-        remove_file("LGraph.class").expect("LGraph delete failed");
-        remove_file("LGraph$1.class").expect("LGraph$1 delete failed");
-    }
-
-    if usebg {
-        remove_file("BGraph.class").expect("BGraph delete failed");
-    }
-
-    if usesg {
-        remove_file("SGraph.class").expect("SGraph delete failed");
-    }
-
-    if usemp {
-        remove_file("MacroFunction.class").expect("MacroFunction delete failed");
-        remove_file("Macro.class").expect("Macro delete failed");
-    }
-
-    if usepp {
-        remove_file("Pipe.class").expect("Pipe delete failed");
-    }
-
-    if use_pure {
-        remove_file("ExFn.class").expect("ExFn delete failed");
     }
 
     // }

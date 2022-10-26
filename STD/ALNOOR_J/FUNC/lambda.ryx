@@ -2,7 +2,14 @@ interface Function<X> {
     X call(X[] x);
 }
 
-
-interface Void<X> {
+interface Process<X> {
     void call(X[] x);
+}
+
+interface Execute {
+    void call();
+}
+
+interface Blank<X> {
+    X call();
 }

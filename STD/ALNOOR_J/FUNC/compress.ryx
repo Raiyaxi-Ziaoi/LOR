@@ -1,0 +1,12 @@
+
+private static <T> T[] comprehension(T[] list, ComprehensionFn fn) {
+    int i = 0;
+    T[] toRet = new T[list.length];
+
+    for (T t : list) {
+        toRet[i] = fn.run(t, i);
+        i++;
+    } 
+
+    return toRet;
+}

@@ -1,9 +1,9 @@
 interface Function<X> {
-    X call(X[] x);
+    X call(X... x);
 }
 
 interface Process<X> {
-    void call(X[] x);
+    void call(X... x);
 }
 
 interface Execute {

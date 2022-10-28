@@ -1,12 +1,10 @@
-
 interface MacroFunction {
     void call(String[] tokens, ArrayList<String> stack, ArrayList<String> registers);
 }
 
 class Macro {
 
-    private String[] keywords;
-    private MacroFunction[] functions;
+    private HashMap<String, MacroFunction> syntax;
     private ArrayList<String> stack = new ArrayList<String>();
     private ArrayList<String> registers = new ArrayList<String>();
 	private HashMap<String, Integer> gotos = new HashMap<String, Integer>();
@@ -14,79 +12,64 @@ class Macro {
 
     private int k = 0;
 
-    public Macro(String[] keywords, MacroFunction[] functions) {  
-        this.keywords = keywords;
-        this.functions = functions; 
+    public Macro(HashMap<String, MacroFunction> syntax) {  
+        this.syntax = syntax;
     }  
 
     public Macro() {
-        this.keywords = new String[] {
-            "REG",
-            "SET", 
-            "OUT", 
-            "EXT", 
-            "PSH", 
-            "ADD", 
-            "SUB", 
-            "MUL", 
-            "DIV", 
-            "JMP",
-			"IF?",
-            "INP"
-        };
-        this.functions = new MacroFunction[] {
-            (tokens, stack, registers) -> { // REG
-                registers.add("0");
-            },
-            (tokens, stack, registers) -> { // SET
-                register.set(Integer.parseInt(tokens[1]), tokens[2]);
-            },
-            (tokens, stack, registers) -> { // OUT
-                if (!tokens[1].startsWith("$")) System.out.println(tokens[1]);
-                else System.out.println(registers.get(Integer.parseInt(tokens[1].substring(1))));
-            },
-            (tokens, stack, registers) -> { // EXT
-                closed = true;
-            },
-            (tokens, stack, registers) -> { // PSH
-                if (!tokens[1].startsWith("$")) stack.add(tokens[1]);
-                else stack.add(registers.get(Integer.parseInt(tokens[1])));
-            },
-            (tokens, stack, registers) -> { // ADD
-                String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) + Integer.parseInt(stack.get(stack.size() - 2)));
-                stack.pop(stack.size() - 1);
-                stack.pop(stack.size() - 1);
-                stack.add(result);
-            },
-            (tokens, stack, registers) -> { // SUB
-                String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) - Integer.parseInt(stack.get(stack.size() - 2)));
-                stack.pop(stack.size() - 1);
-                stack.pop(stack.size() - 1);
-                stack.add(result);
-            },
-            (tokens, stack, registers) -> { // MUL
-                String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) * Integer.parseInt(stack.get(stack.size() - 2)));
-                stack.pop(stack.size() - 1);
-                stack.pop(stack.size() - 1);
-                stack.add(result);
-            },
-            (tokens, stack, registers) -> { // DIV
-                String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) / Integer.parseInt(stack.get(stack.size() - 2)));
-                stack.pop(stack.size() - 1);
-                stack.pop(stack.size() - 1);
-                stack.add(result);
-            },
-            (tokens, stack, registers) -> { // JMP
-                k = gotos.get(token[1]);
-            },
-            (tokens, stack, registers) -> { // IF?
-                if (!tokens[1].startsWith("$")) if (registers.get(Integer.parseInt(tokens[1].substring(1))) == 1) k = gotos.get(token[2]); 
-                else if (stack.get(stack.size() - 1) == 1) k = gotos.get(token[2]); 
-            },
-            (tokens, stack, registers) -> { // INP
-                registers.set(Integer.parseInt(tokens[1]), new Scanner(System.in).nextLine());
-            },
-        };
+        this.syntax = new HashMap<String, MacroFunction>();
+        
+        syntax.put("REG", (tokens, stack, registers) -> { // REG
+            registers.add("0");
+        });
+        syntax.put("SET", (tokens, stack, registers) -> { // SET
+            registers.set(Integer.parseInt(tokens[1]), tokens[2]);
+        });
+        syntax.put("OUT", (tokens, stack, registers) -> { // OUT
+            if (!tokens[1].startsWith("$")) System.out.println(tokens[1]);
+            else System.out.println(registers.get(Integer.parseInt(tokens[1].substring(1))));
+        });
+        syntax.put("EXT", (tokens, stack, registers) -> { // EXT
+            closed = true;
+        });
+        syntax.put("PSH", (tokens, stack, registers) -> { // PSH
+            if (!tokens[1].startsWith("$")) stack.add(tokens[1]);
+            else stack.add(registers.get(Integer.parseInt(tokens[1])));
+        });
+        syntax.put("ADD", (tokens, stack, registers) -> { // ADD
+            String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) + Integer.parseInt(stack.get(stack.size() - 2)));
+            stack.remove(stack.size() - 1);
+            stack.remove(stack.size() - 1);
+            stack.add(result);
+        });
+        syntax.put("SUB", (tokens, stack, registers) -> { // SUB
+            String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) - Integer.parseInt(stack.get(stack.size() - 2)));
+            stack.remove(stack.size() - 1);
+            stack.remove(stack.size() - 1);
+            stack.add(result);
+        });
+        syntax.put("MUL", (tokens, stack, registers) -> { // MUL
+            String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) * Integer.parseInt(stack.get(stack.size() - 2)));
+            stack.remove(stack.size() - 1);
+            stack.remove(stack.size() - 1);
+            stack.add(result);
+        });
+        syntax.put("DIV", (tokens, stack, registers) -> { // DIV
+            String result = Integer.toString(Integer.parseInt(stack.get(stack.size() - 1)) / Integer.parseInt(stack.get(stack.size() - 2)));
+            stack.remove(stack.size() - 1);
+            stack.remove(stack.size() - 1);
+            stack.add(result);
+        });
+        syntax.put("JMP", (tokens, stack, registers) -> { // JMP
+            k = gotos.get(tokens[1]);
+        });
+        syntax.put("IF?", (tokens, stack, registers) -> { // IF?
+            if (!tokens[1].startsWith("$")) if (registers.get(Integer.parseInt(tokens[1].substring(1))) == "1") k = gotos.get(tokens[2]); 
+            else if (stack.get(stack.size() - 1) == "1") k = gotos.get(tokens[2]); 
+        });
+        syntax.put("INP", (tokens, stack, registers) -> { // INP
+            registers.set(Integer.parseInt(tokens[1]), new Scanner(System.in).nextLine());
+        });
     }
 
     public ArrayList<String> getStack() {
@@ -122,7 +105,7 @@ class Macro {
                     tokens[j] = tokens[j].trim().replace("\n", "").replace("\"", "");
                 }
 				if (tokens[0].equals("MRK")) {
-					gotos.put(token[1], k);
+					gotos.put(tokens[1], k);
 				}
             }
             for (k = 0; k < program.length; k++) {
@@ -132,9 +115,9 @@ class Macro {
                     tokens[j] = tokens[j].trim().replace("\n", "").replace("\"", "");
                 }
 
-                for (int i = 0; i < keywords.length; i++) {
-                    if (tokens[0].trim().equals(keywords[i])) {
-                        functions[i].call(tokens, stack, registers);
+                for (int i = 0; i < syntax.keySet().toArray().length; i++) {
+                    if (tokens[0].trim().equals(syntax.keySet().toArray()[i])) {
+                        ((MacroFunction) syntax.values().toArray()[i]).call(tokens, stack, registers);
                     }
                 }
             }
@@ -151,9 +134,9 @@ class Macro {
                 tokens[j] = tokens[j].trim().replace("\n", "").replace("\"", "");
             }
 
-            for (int i = 0; i < keywords.length; i++) {
-                if (tokens[0].trim().equals(keywords[i])) {
-                    functions[i].call(tokens, stack, registers);
+            for (int i = 0; i < syntax.keySet().toArray().length; i++) {
+                if (tokens[0].trim().equals(syntax.keySet().toArray()[i])) {
+                    ((MacroFunction) syntax.values().toArray()[i]).call(tokens, stack, registers);
                 }
             }
         } else {

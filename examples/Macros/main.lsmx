@@ -1,12 +1,11 @@
-#def String[] keywords = {"HELLOWORLD"};
-#def String[] program = {"HELLOWORLD"};
-#def MacroFunction[] functions = new MacroFunction[1];
+#define HashMap<String, MacroFunction> syntax = new HashMap<String, MacroFunction>();
+#define String[] program = {"HELLOWORLD"};
 
 fn main() {
-    functions[0] = (tokens, stack, registers) l> {
+    syntax.put("HELLOWORLD", (tokens, stack, registers) l> {
         println!("Hello world!");
-    };
+    });
 
-    var macro = new Macro(keywords, functions);
+    var macro = new Macro(syntax);
     macro.parse(program);
 }

@@ -1,10 +1,37 @@
 
 _fn int start() {
     Function<Object> function = (Object... in) l> {
-        if ((char)in[2] == '+') ret format!("{0} {1} {2} = {3}", in[0], in[2], in[1], (int)in[0] + (int)in[1]);
-        else if ((char)in[2] == '-') ret format!("{0} {1} {2} = {3}", in[0], in[2], in[1], (int)in[0] - (int)in[1]);
-        else if ((char)in[2] == '*') ret format!("{0} {1} {2} = {3}", in[0], in[2], in[1], (int)in[0] * (int)in[1]);
-        else if ((char)in[2] == '/') ret format!("{0} {1} {2} = {3}", in[0], in[2], in[1], (int)in[0] / (int)in[1]);        
+        int x = (int)in[0], y = (int)in[1];
+        char op = (char)in[2];
+
+        if (op == '+') {
+            ret format! (
+                "\n{0} {1} {2} = {3}", 
+                x, op, y, 
+                x + y
+            );
+        }
+        else if ((char)in[2] == '-') {
+            ret format! (
+                "\n{0} {1} {2} = {3}", 
+                x, op, y, 
+                x - y
+            );
+        }
+        else if ((char)in[2] == '*') {
+            ret format! (
+                "\n{0} {1} {2} = {3}", 
+                x, op, y, 
+                x * y
+            );
+        }
+        else if ((char)in[2] == '/') {
+            ret format! (
+                "\n{0} {1} {2} = {3}", 
+                x, op, y, 
+                x / y
+            );
+        }        
         ret "\nUnknown operation";
     };
 
@@ -27,7 +54,7 @@ _fn int start() {
 }
 
 fn main() {
-    exit (
+    System.exit (
         start()
     );
 }

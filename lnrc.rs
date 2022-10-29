@@ -404,13 +404,15 @@ fn main() -> io::Result<()> {
             .replace("بينما", "while")
             .replace("لو", "if")
             .replace("اخر", "else")
-            .replace("قال", "println!");
+            .replace("قال", "println!")
+            .replace("#using arabic", "");
 
         ext = ext
             .replace("بينما", "while")
             .replace("لو", "if")
             .replace("اخر", "else")
-            .replace("قال", "println!");
+            .replace("قال", "println!")
+            .replace("#using arabic", "");
     }
 
     if !use_c {

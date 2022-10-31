@@ -10,22 +10,19 @@ _fn int start() {
                 x, op, y, 
                 x + y
             );
-        }
-        else if ((char)in[2] == '-') {
+        } elif (op == '-') {
             ret format! (
                 "\n{0} {1} {2} = {3}", 
                 x, op, y, 
                 x - y
             );
-        }
-        else if ((char)in[2] == '*') {
+        } elif (op == '*') {
             ret format! (
                 "\n{0} {1} {2} = {3}", 
                 x, op, y, 
                 x * y
             );
-        }
-        else if ((char)in[2] == '/') {
+        } elif (op == '/') {
             ret format! (
                 "\n{0} {1} {2} = {3}", 
                 x, op, y, 

@@ -10,9 +10,10 @@ My own programming language based on Java and with a transpiler made in Rust<br/
 </h2></div>
 <br/>
 <div align="center"><h2>
+ALNOOR Contributers: <br/><br/>
 EdwardElric (😎), MK ($> OUT, $MK => 'Chad'), x80 (C Wizard) <br/><br/>
 Nizzi (Akhi, IRL contributer), Oven (Akhi, IRL contributer) <br/><br/>
-Raiyaxi (Zur-e Qalam, Shemshar w Qaazi), Lissomix (Co-founder, Same soul)<br/><br/>
+Raiyaxi (Zur-e Qalam, Shemshir w Qaazi), Lissomix (Co-founder, همان روح)<br/><br/>
 </h2></div>
 <br/>
 You must have the JVM and the Rust compiler installed.

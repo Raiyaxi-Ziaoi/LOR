@@ -6,14 +6,7 @@
 <img src="https://raw.githubusercontent.com/Raiyaxi-Ziaoi/Resources/main/lor.png?token=GHSAT0AAAAAABXCMKG4MFPFRHNVBGHMF7HIYYH3HCQ"></img><br/><br/>
 My own programming language based on Java and with a transpiler made in Rust<br/><br/><a href="#">
     <img src="https://raw.githubusercontent.com/Raiyaxi-Ziaoi/Resources/main/alnoorlogo.png?token=GHSAT0AAAAAABXCMKG4LPREAQPWSVJZFXMSYYH3HNQ" width="50%"/>
-</a><br/><br/>Made by Raiyaxi Ziaoi
-</h2></div>
-<br/>
-<div align="center"><h2>
-ALNOOR Contributers: <br/><br/>
-EdwardElric (😎), MK, x80 (C Wizard) <br/><br/>
-Nizzi (Akhi, IRL contributer), Oven (Akhi, IRL contributer) <br/><br/>
-Raiyaxi, Lissomix (Co-founder, همان روح)<br/><br/>
+</a><br/><br/>Made by Abu Hurayrah
 </h2></div>
 <br/>
 You must have the JVM and the Rust compiler installed.
